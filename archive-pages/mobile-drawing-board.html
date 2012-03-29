@@ -1,0 +1,106 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+	<title>My Page</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css" />
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    $(document).bind("mobileinit", function () {
+                    $.mobile.loadingMessage = false;
+                    
+                     
+                 
+                });
+    </script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>My Title</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<p>
+            <a href="#search" data-rel="dialog">Search</a><br />
+            <a href="#menubar" data-rel="dialog">Menu bar</a>
+        
+        
+        </p>		
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+<div data-role="page" id="search">
+
+    <div data-role="header">
+		<h2>Search</h2>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<p>Hello world</p>		
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+<div data-role="page" id="menubar">
+
+    <div data-role="header">
+		<h2><span class="mobile-hide">Site</span> menu</h2>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+
+<h2><span class="mobile-hide">Site</span> menu</h2>
+<ul class="mb-menu" data-role="listview">
+<li><h3>Section 1</h3>
+<ul>
+    <li><a href="#">Item 1.1</a></li>
+    <li><a href="#">Item 1.2</a></li>
+    <li><a href="#">Item 1.3</a></li>
+    <li><a href="#">Item 1.4</a></li>
+    <li><a href="#">Item 1.5</a></li>
+    <li><a href="#">Item 1.6</a></li>
+    <li><a href="#">Item 1.7</a></li>
+    <li><a href="#">Item 1.8</a></li>
+</ul>
+</li>
+<li>Section 2
+
+<ul><li>Section 2.1
+        <ul>
+            <li><a href="#">Item 2.1.1</a></li>
+            <li><a href="#">Item 2.1.2</a></li>
+            <li><a href="#">Item 2.1.3</a></li>
+            <li><a href="#">Item 2.1.4</a></li>
+            <li><a href="#">Item 2.1.5</a></li>
+            <li><a href="#">Item 2.1.6</a></li>
+        </ul>
+    </li>
+    <li>Section 2.2
+        <ul>
+            <li><a href="#">Item 2.2.1</a></li>
+            <li><a href="#">Item 2.2.2</a></li>
+            <li><a href="#">Item 2.2.3</a></li>
+            <li><a href="#">Item 2.2.4</a></li>
+            <li><a href="#">Item 2.2.5</a></li>
+            <li><a href="#">Item 2.2.6</a></li>
+            <li><a href="#">Item 2.2.7</a></li>
+            <li><a href="#">Item 2.2.8</a></li>
+        </ul>
+    </li>
+</ul>
+</li>
+
+
+</ul>
+	
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+</body>
+</html>

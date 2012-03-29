@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html class="ui-mobile-rendering">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery Mobile Docs - Lists Overview</title>
+<link rel="stylesheet"  href="http://jquerymobile.com/test/css/themes/default/jquery.mobile.css" />
+<link rel="stylesheet" href="http://jquerymobile.com/test/docs/_assets/css/jqm-docs.css"/>
+<script src="http://jquerymobile.com/test/js/jquery.js"></script>
+<script src="http://jquerymobile.com/test/docs/_assets/js/jqm-docs.js"></script>
+<script src="http://jquerymobile.com/test/js/jquery.mobile.js"></script>
+<style>
+/** chad overrides **/
+.cn-left-col-default{border:1px solid #999;margin:10px;border-radius:5px;box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);}
+.cn-left-col-default .ui-navbar h3{font-size: 1em;box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);}
+.cn-left-col-default .ui-navbar h3 a{border-top:none;border-left:none;border-right:none;}
+.cn-left-col-default .ui-navbar  h3 .ui-btn-text+.ui-icon{top:25%;}
+.sub-menu .ui-navbar{padding:0 25px;}
+.cn-left-col-default .ui-navbar h3 a{margin:0;}
+.cn-left-col-default .ui-navbar .ui-btn-inner{padding:0.6em 30px 0.6em 10px; white-space:normal;text-align:left;}
+.sub-menu .ui-navbar  .ui-btn{margin:5px 0;border-radius:5px;border-width:2px;}
+.cn-left-col-default .ui-navbar .ui-btn-text+.ui-icon{left:auto !important;top:50%;right:10px;}
+.sub-menu .ui-btn-text+.ui-icon{top:10%;}
+.ui-navbar+.ui-listview a.ui-link-inherit{padding-left:30px; white-space:normal;}
+</style>
+</head>
+<body>
+
+  <div data-role="header" data-theme="a">
+    <h1>Lists</h1>
+  </div>
+  <!-- /header -->
+  <!-- /footer -->
+  
+  <div class="cn-left-col-default"  data-inset="true">
+    <section>
+      <div  data-role="navbar">
+        <h3 data-role="listview"><a href="#" class="ui-link" data-icon="arrow-r"  data-theme="b">Section 2.1</a></h3>
+      </div>
+      <ul data-role="listview" >
+        <li><a href="#">Item 2.1a</a></li>
+        <li><a href="#">Item 2.1b</a></li>
+        <li><a href="#">Item 2.1c</a></li>
+      </ul>
+    </section>
+    <section>
+    	<div  data-role="navbar">
+        <h3 data-role="listview"><a href="#" class="ui-link" data-icon="arrow-r"  data-theme="b">Section 2.2 (current section example)</a></h3>
+      </div>
+      <ul data-role="listview" >
+        <li><a href="#" class="">Item 2.2a</a></li>
+        <li><a href="#" class="ui-link">Item 2.2b</a></li>
+        <li><a href="#" class="ui-link">Item 2.2c</a></li>
+      </ul>
+    </section>
+    <section>
+       <div  data-role="navbar">
+        <h3 data-role="listview"><a href="#" class="ui-link" data-icon="arrow-r"  data-theme="b">Section 2.3</a></h3>
+		</div>
+      <ul data-role="listview" >
+        <li><a href="#" class="ui-link">Item 2.3a</a></li>
+        <li><a href="#" class="ui-link">Item 2.3b</a></li>
+        <li><a class="nav-current ui-link" href="#">Item 2.3b (current item example)</a></li>
+      </ul>
+    </section>
+    <section>
+       <div  data-role="navbar">
+        <h3 data-role="listview"><a href="#" class="ui-link" data-icon="arrow-r"  data-theme="b">Section 2.4</a></h3>
+		</div>
+      <ul data-role="listview">
+        <li><a href="#" class="ui-link">Item 2.4a</a></li>
+        <li  class="sub-menu"><a href="1.html" class="ui-link">Item 2.4b</a>
+          <div  data-role="navbar" > <a href="2.html" class="ui-link"  data-icon="arrow-r">Item 2.4bi</a> <a class="nav-current ui-link" href="3.html"  data-icon="arrow-r">Item 2.4bii (current sub-item example)</a> <a href="4.html" class="ui-link"  data-icon="arrow-r">Item 2.4biii</a> </div>
+        </li>
+        <li><a href="#" class="ui-link">Item 2.4c</a></li>
+      </ul>
+    </section>
+  </div>
+  </div>
+
+</body>
+</html>
