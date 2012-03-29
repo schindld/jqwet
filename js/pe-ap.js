@@ -150,7 +150,7 @@
         @returns : regex fu mobile identification -> returns true/false per type or any
         */
         mobile: function () {
-            return (document.documentElement.clientWidth < 767) ? true : false;
+            return (document.documentElement.clientWidth < 767 && !( $.browser.msie && $.browser.version < 10 ) ) ? true : false;
         }(),
 /*
         @property: pagecontainer
