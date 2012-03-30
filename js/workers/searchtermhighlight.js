@@ -23,7 +23,7 @@
             //    multiMatch: (PE.language == "eng") ? ' matches found' : ' correspondances trouvées'
             //}
             var terms = (typeof passed === "string" ) ? settings.passed : settings.passed.terms ;
-            form = $('<form class="wet-boew-termSearch"><label for="term">' + pe.dic.get('%') + '</label> <input type="text" id="term" name="term" value="' + terms + '" role="textbox" aria-multiline="false" />&#160;<span class="matches-found" role="status" aria-live="polite" aria-relevant="additions text"></span></form>');
+            form = $('<form class="wet-boew-termSearch"><label for="term">' + pe.dic.get('%search-for-terms') + '</label> <input type="text" id="term" name="term" value="' + terms + '" role="textbox" aria-multiline="false" />&#160;<span class="matches-found" role="status" aria-live="polite" aria-relevant="additions text"></span></form>');
             $elm.before(form);
             // Event handling
             form.on("change keypress click", "input", function (event) {
