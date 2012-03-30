@@ -6,22 +6,33 @@
 /*
  * pe, a progressive javascript library agnostic framework
  */
-(function ($) {
-    
-    
-    
-     /** pe object **/
-    
+(function ($) { /** pe object **/
     var pe = (typeof window.pe !== "undefined" && window.pe !== null) ? window.pe : {
         fn: {}
     };
-    
     var _pe = { /* global object init properties */
 /*
         @property - pe.language
         @returns - page language, defaults to fra is not available
         */
         language: ($("html").attr("lang") ? ($("html").attr("lang").indexOf("en") === 0 ? "eng" : "fra") : $("meta[name='dc.language'], meta[name='dcterms.language']").attr("content")),
+        /*
+        @property - pe.doctype
+        @returns - detect the doctype of the document (loosely)
+        */
+        html5: function () {
+            var res = false, re = /\s+(X?HTML)\s+([\d\.]+)\s*([^\/]+)*\//gi;
+            /*********************************************
+             Just check for internet explorer.
+             **********************************************/
+            if (typeof document.namespaces !== "undefined") {
+                res = (document.all[0].nodeType === 8) ? re.test(document.all[0].nodeValue) : false;
+            }
+            else {
+                res = (document.doctype !== null) ? re.test(document.doctype.publicId) : false;
+            }
+            return (res) ? false : true;
+        }(),
 /*
         @property - pe.ie
         @returns - ie major number if browser is IE, 0 if not
@@ -36,7 +47,6 @@
             pe.add.language(pe.language);
             // mobile test
             if (pe.mobile) {
-                
                 pe.add._load(['http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js']);
                 // lets init some variables for use in various transformations
                 // raw variable running on the dom
@@ -89,10 +99,8 @@
                 // jquery mobile has loaded
                 $(document).on("mobileinit", function () {
                     //$.mobile.loadingMessage = false;
-                
                     $.mobile.ajaxEnabled = false;
                     $.mobile.pushStateEnabled = false;
-                    
                     search_elm.remove();
                     $('#cn-psnb :header').remove();
                     _list.show();
@@ -100,7 +108,7 @@
                 // preprocessing before mobile page is enhanced
                 $(document).on("pageinit", function () {
                     // add some language
-                    $('.ui-page #cn-cols a[href*="#"]').each(function () {
+                  /**  $('.ui-page #cn-cols a[href*="#"]').each(function () {
                         var _elm = $(this);
                         if (_elm.attr('href').indexOf('#') > 0) {
                             // this is a external anchor
@@ -119,7 +127,7 @@
                                 if ($target.length == 1) $.mobile.silentScroll($target.offset().top);
                             });
                         }
-                    });
+                    }); **/
                 });
             }
             // add the css
@@ -150,7 +158,7 @@
         @returns : regex fu mobile identification -> returns true/false per type or any
         */
         mobile: function () {
-            return (document.documentElement.clientWidth < 767 && !( $.browser.msie && $.browser.version < 10 ) ) ? true : false;
+            return (document.documentElement.clientWidth < 767 && !($.browser.msie && $.browser.version < 10)) ? true : false;
         }(),
 /*
         @property: pagecontainer
@@ -158,6 +166,13 @@
         */
         pagecontainer: function () {
             return $('#cn-body-inner-3col,#cn-body-inner-2col,#cn-body-inner-1col').add('body').eq(0);
+        },
+/*
+        @property: parameter
+        @returns : discovers parameters via a few methods for the node
+        */
+        parameter: function (key, jqElm) {
+            return (pe.html5)  ? jqElm.data(key) : jqElm.attr('class').replace('/.*'+key+'-([a-z0-9_]+).*/i', "$1");
         },
 /*
         @function to bind a function to a resize event
@@ -503,6 +518,7 @@
         @todo: pass an element as the context for the recursion
         */
         dance: function () {
+            console.log(pe.html5);
             // global plugins
             var settings = (typeof wet_boew_properties !== 'undefined' && wet_boew_properties !== null) ? wet_boew_properties : false;
             // page specific plugins

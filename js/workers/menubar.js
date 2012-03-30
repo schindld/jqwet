@@ -10,7 +10,7 @@
         type: 'plugin',
         depends: ['resize', 'equalheights', 'hoverintent', 'outside'],
         _exec: function (elm) {
-            console.log('executing menu code');
+            
 /*
           @notes: the mega menu will use custom events to better manage its events.
           .: Events :.
