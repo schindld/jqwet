@@ -7,7 +7,7 @@
 <meta charset="utf-8" />
 <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
 www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions -->
-<title>Canada Revenue Agency</title>
+<title>Individuals and families</title>
 
 <link rel="shortcut icon" href="../../fip-pcim/images/favicon.ico" />
 <meta name="dcterms.description" content="English description / Description en anglais" />
@@ -23,13 +23,22 @@ www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions -->
 
 <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="../../css/core.css" /><![endif]-->
-<link rel="stylesheet" type="text/css" href="../../css/core.css" media="screen and (min-width:768px)" />
+<link rel="stylesheet" type="text/css" href="../../css/core.css" media="print and (min-width:768px), screen and (min-width:768px)" />
 <link href="../../grids/css/util.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="../../css/mobile.css" media="screen and (max-width:767px)" />
 <link rel="stylesheet" type="text/css" href="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css" media="screen and (max-width:767px)" />
 
 
 <!-- CustomScriptsCSSStart -->
+<style>
+#cn-site-title a:first-child{float:right;margin:0;width:24px;}
+#cn-site-title a{float:left;margin:0;width:90%;}
+#cn-site-title p:after{clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;}
+</style>
 <!-- CustomScriptsCSSEnd -->
 </head>
 
@@ -55,7 +64,9 @@ www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions -->
 
 <div id="cn-banner" role="banner"><div id="cn-banner-inner">
 <div id="cn-wmms"><div id="cn-wmms-inner"><div id="fip-pcim-wmms" title="Symbol of the Government of Canada"><img src="../../fip-pcim/images/wmms.gif" width="126" height="30"  alt="Symbol of the Government of Canada" /></div></div></div>
-<div id="cn-site-title"><p id="cn-site-title-inner"><a href="index.html">Canada Revenue Agency</a></p></div>
+<div id="cn-site-title"><p id="cn-site-title-inner"><a href="index.html" data-role="button" data-icon="home"  data-iconpos="notext" data-theme="b" class="mobile-pe mobile-show">Home</a> <a href="index.html">Canada Revenue Agency</a></p>
+   
+</div>
 
 <section role="search"><div id="cn-search-box"><h2>Search</h2>
 <form action="#" method="post"><div id="cn-search-box-inner">
@@ -213,7 +224,7 @@ www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions -->
 <!-- MainContentStart -->
 <h1 id="cn-cont" data-role="header">Individuals and families</h1>
 <div data-role="content">
-
+<p><a href="businesses.html#test-anchor">test-anchor</a></p>
 
 </div>
 <dl id="cn-doc-dates" role="contentinfo">

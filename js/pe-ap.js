@@ -518,7 +518,7 @@
         @todo: pass an element as the context for the recursion
         */
         dance: function () {
-            console.log(pe.html5);
+            //console.log(pe.html5);
             // global plugins
             var settings = (typeof wet_boew_properties !== 'undefined' && wet_boew_properties !== null) ? wet_boew_properties : false;
             // page specific plugins

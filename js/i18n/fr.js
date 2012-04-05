@@ -66,6 +66,8 @@
             "%play": "Jouer",
             "%stop": "Pause",
             "%close": "Fermer",
+            "%next" : "Prochaine",
+            "%previous" : "Précedent",
             "%rewind": "Reculer ",
             "%fast-forward": "Avancer ",
             "%mute": {

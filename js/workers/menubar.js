@@ -1,5 +1,5 @@
 /*
- * Zebra stripping functionality for block level elements
+ * menubar plugin - port v1.3
  */
 (function ($) {
     
