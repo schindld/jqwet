@@ -67,9 +67,9 @@
             "%play": "Play",
             "%stop": "Pause",
             "%close": "Close",
-            "%next" : "Next",
-            "%previous" : "Previousprécedent",
             "%rewind": "Rewind ",
+            "%next" : "Next",
+            "%previous" : "Previous",
             "%fast-forward": "Fast forward ",
             "%mute": {
                 "enable": "Mute",

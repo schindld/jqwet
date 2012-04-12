@@ -16,19 +16,19 @@
         @returns - page language, defaults to fra is not available
         */
         language: ($("html").attr("lang") ? ($("html").attr("lang").indexOf("en") === 0 ? "eng" : "fra") : $("meta[name='dc.language'], meta[name='dcterms.language']").attr("content")),
-        /*
+/*
         @property - pe.doctype
         @returns - detect the doctype of the document (loosely)
         */
         html5: function () {
-            var res = false, re = /\s+(X?HTML)\s+([\d\.]+)\s*([^\/]+)*\//gi;
+            var res = false,
+                re = /\s+(X?HTML)\s+([\d\.]+)\s*([^\/]+)*\//gi;
             /*********************************************
              Just check for internet explorer.
              **********************************************/
             if (typeof document.namespaces !== "undefined") {
                 res = (document.all[0].nodeType === 8) ? re.test(document.all[0].nodeValue) : false;
-            }
-            else {
+            } else {
                 res = (document.doctype !== null) ? re.test(document.doctype.publicId) : false;
             }
             return (res) ? false : true;
@@ -108,26 +108,26 @@
                 // preprocessing before mobile page is enhanced
                 $(document).on("pageinit", function () {
                     // add some language
-                  /**  $('.ui-page #cn-cols a[href*="#"]').each(function () {
-                        var _elm = $(this);
-                        if (_elm.attr('href').indexOf('#') > 0) {
-                            // this is a external anchor
-                            _elm.unbind('click').unbind('vclick').on('click vclick', function (e) {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                $.mobile.changePage(pe.url(_elm.attr('href')).removehash());
-                            });
-                            // _elm.attr('href', pe.url(_elm.attr('href')).hashtoparam());
-                        } else {
-                            // this is inpage anchor
-                            _elm.unbind('click').unbind('vclick').on('click vclick', function (e) {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                var $target = $(this).parents('.ui-page').find($(this).attr('href')).eq(0);
-                                if ($target.length == 1) $.mobile.silentScroll($target.offset().top);
-                            });
-                        }
-                    }); **/
+                    /**  $('.ui-page #cn-cols a[href*="#"]').each(function () {
+                     var _elm = $(this);
+                     if (_elm.attr('href').indexOf('#') > 0) {
+                     // this is a external anchor
+                     _elm.unbind('click').unbind('vclick').on('click vclick', function (e) {
+                     e.stopPropagation();
+                     e.preventDefault();
+                     $.mobile.changePage(pe.url(_elm.attr('href')).removehash());
+                     });
+                     // _elm.attr('href', pe.url(_elm.attr('href')).hashtoparam());
+                     } else {
+                     // this is inpage anchor
+                     _elm.unbind('click').unbind('vclick').on('click vclick', function (e) {
+                     e.stopPropagation();
+                     e.preventDefault();
+                     var $target = $(this).parents('.ui-page').find($(this).attr('href')).eq(0);
+                     if ($target.length == 1) $.mobile.silentScroll($target.offset().top);
+                     });
+                     }
+                     }); **/
                 });
             }
             // add the css
@@ -172,7 +172,7 @@
         @returns : discovers parameters via a few methods for the node
         */
         parameter: function (key, jqElm) {
-            return (pe.html5)  ? jqElm.data(key) : jqElm.attr('class').replace('/.*'+key+'-([a-z0-9_]+).*/i', "$1");
+            return (pe.html5) ? jqElm.data(key) : jqElm.attr('class').replace('/.*' + key + '-([a-z0-9_]+).*/i', "$1");
         },
 /*
         @function to bind a function to a resize event
@@ -230,6 +230,7 @@
                 pe.add.js(fn_obj.depends, function () {
                     exec(elm);
                 });
+                delete fn_obj.depends;
             } else {
                 // execute function since it has no depends and we can safely execute
                 exec(elm);

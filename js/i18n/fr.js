@@ -66,9 +66,9 @@
             "%play": "Jouer",
             "%stop": "Pause",
             "%close": "Fermer",
+            "%rewind": "Reculer ",
             "%next" : "Prochaine",
             "%previous" : "Précedent",
-            "%rewind": "Reculer ",
             "%fast-forward": "Avancer ",
             "%mute": {
                 "enable": "Activer le mode muet",
