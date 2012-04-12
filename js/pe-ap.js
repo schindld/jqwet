@@ -145,7 +145,8 @@
             on: function () {
                 // lets bind a scan function to the drones property
                 $(document).on('wet-boew-dependency-loaded', function () {
-                    //console.log('[pe-event] dependency-loaded ' + ' [functions to check] ' + pe.depends.on.length);
+                    
+                    
                     for (var i = 0; i < pe.depends.on.length; i++) {
                         pe.depends.on[i](i);
                     }
@@ -405,11 +406,15 @@
             return {
                 head: document.getElementsByTagName('head'),
                 liblocation: document.getElementById('progressive').src.replace(/pe-ap.(dev.)?js.*$/i, ""),
+                staged : [],
 /*
                  @function: load - a loading algorthim borrowed from labjs. Thank you!
                  */
                 _load: function (js) {
                     var head = pe.add.head;
+                    // - lets prevent double loading of dependencies
+                    if ($.inArray(js,this.staged) > -1 ) return this;
+                    // - now lets bind the events
                     setTimeout(function () {
                         if ("item" in head) { // check if ref is still a live node list
                             if (!head[0]) { // append_to node not yet ready
@@ -434,6 +439,7 @@
                         scriptElem.src = js;
                         head.insertBefore(scriptElem, head.firstChild);
                     }, 0);
+                    this.staged[this.staged.length] = js;
                     return this;
                 },
 /*
@@ -482,13 +488,16 @@
                 js: function (js, fn) {
                     js = pe.add.depends(js); // lets translate this to an array
                     for (var i = 0; i < js.length; i++) {
+                        
                         if (!pe.depends.is(js[i])) pe.add._load(js[i]);
                     }
                     // now create the binding for dependencies
                     pe.depends.on[pe.depends.on.length] = function (index) {
                         var execute = true;
                         for (var i = 0; i < js.length; i++) {
+                           // console.log('{pe.depends.on call} need ' +js[i] + ' loaded : ' + pe.depends.is(js[i]));
                             if (!pe.depends.is(js[i])) {
+                                
                                 execute = false;
                             }
                         }
