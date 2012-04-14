@@ -33,6 +33,7 @@
             }
             return (res) ? false : true;
         }(),
+        
 /*
         @property - pe.ie
         @returns - ie major number if browser is IE, 0 if not
@@ -45,6 +46,8 @@
         _init: function () {
             // get the localization files
             pe.add.language(pe.language);
+            // add polyfills if nessecary;
+            pe.polyfills();
             // mobile test
             if (pe.mobile) {
                 pe.add._load(['http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js']);
@@ -397,6 +400,42 @@
                     return date.getFullYear() + "-" + pe.string.pad(date.getMonth() + 1, 2, "0") + "-" + pe.string.pad(date.getDate() + 1, 2, "0");
                 }
             }
+        },
+        /*
+                @function : pe.polyfills
+                @params : a init function to load required polyfills, @TODO: set up a single loader method to streamline
+                */
+        polyfills: function () {
+            var lib = pe.add.liblocation;
+            // modernizer test for detailsummary support
+            var detail = (function (doc) { var el = doc.createElement('details'), fake, root, diff;
+                if (!('open' in el)) {
+                    return false;
+                }
+                root = doc.body || (function () {
+                    var de = doc.documentElement;
+                    fake = true;
+                    return de.insertBefore(doc.createElement('body'), de.firstElementChild || de.firstChild);
+                }());
+                el.innerHTML = '<summary>a</summary>b';
+                el.style.display = 'block';
+                root.appendChild(el);
+                diff = el.offsetHeight;
+                el.open = true;
+                diff = diff != el.offsetHeight;
+                root.removeChild(el);
+                if (fake) {
+                    root.parentNode.removeChild(root);
+                }
+                return diff;
+            }(document));
+                        
+            // localstorage
+            if (!window.localStorage) pe.add._load(lib + 'polyfills/localstorage.js');
+            // process
+            if (!('position' in document.createElement('progress'))) pe.add._load(lib + 'polyfills/progress.js');
+            // detail + summary
+            if (!detail) pe.add._load(lib + 'polyfills/detailsummary.js');
         },
 /*
         @function : pe.add
