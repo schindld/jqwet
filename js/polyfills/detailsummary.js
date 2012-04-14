@@ -121,4 +121,5 @@
         };
         details.support = isDetailsSupported;
     }
+    $('details').details();
 }(document, jQuery));
