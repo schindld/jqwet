@@ -476,7 +476,8 @@
                             $(document).trigger('wet-boew-dependency-loaded');
                         };
                         scriptElem.src = js;
-                        head.insertBefore(scriptElem, head.firstChild);
+                        //head.insertBefore(scriptElem, head.firstChild);
+                        $(scriptElem).insertBefore($(head.firstChild));
                     }, 0);
                     this.staged[this.staged.length] = js;
                     return this;
