@@ -477,7 +477,7 @@
                         };
                         scriptElem.src = js;
                         //head.insertBefore(scriptElem, head.firstChild);
-                        $(scriptElem).appendTo($(head)); // bug in IE7 and IE8 head append http://www.fraggednation.com/blog/IE7-IE8-Strikes-again-JQuery-append-workaround-494
+                        if (pe.ie > 0 && pe.ie < 9 ) { $(scriptElem).appendTo($(head)); } else { head.insertBefore(scriptElem, head.firstChild); } // bug in IE7 and IE8 head append http://www.fraggednation.com/blog/IE7-IE8-Strikes-again-JQuery-append-workaround-494
                     }, 0);
                     this.staged[this.staged.length] = js;
                     return this;
