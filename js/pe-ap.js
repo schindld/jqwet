@@ -443,7 +443,7 @@
         */
         add: (function () {
             return {
-                head: document.getElementsByTagName('head'),
+                head: document.head || document.getElementsByTagName("head"),
                 liblocation: document.getElementById('progressive').src.replace(/pe-ap.(dev.)?js.*$/i, ""),
                 staged : [],
 /*
