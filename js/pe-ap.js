@@ -498,7 +498,7 @@
                     var styleElement;
                     styleElement = document.createElement('link');
                     pe.add.set(styleElement, 'type', 'text/css').set(styleElement, 'rel', 'stylesheet').set(styleElement, 'href', css);
-                    pe.add.head[0].appendChild(styleElement);
+                    pe.add.head.appendChild(styleElement);
                     return this;
                 },
 /*
@@ -558,7 +558,7 @@
                     var styleElement;
                     styleElement = document.createElement('meta');
                     pe.add.set(styleElement, 'name', name).set(styleElement, 'content', content);
-                    pe.add.head[0].appendChild(styleElement);
+                    pe.add.head.appendChild(styleElement);
                     return this;
                 }
             };
