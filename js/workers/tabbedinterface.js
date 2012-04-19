@@ -73,26 +73,6 @@
 				$(this).attr("aria-selected", "true");
 				return $("#" + $(this).attr("href").substring(1)).attr("aria-hidden", "false");
 			});
-			$this.keyup(function (evt) {
-				if (evt.ctrlKey && (evt.which === 37 || evt.which === 38)) { // ctrl+left or ctrl+up
-					selectPrev($tabs, $panels, opts);
-					if (evt.stopPropagation) {
-						return evt.stopImmediatePropagation();
-					} else {
-						return (evt.cancelBubble = true);
-					}
-				}
-			});
-			$this.keyup(function (evt) {
-				if (evt.ctrlKey && (evt.which === 39 || evt.which === 40)) { // ctrl+right or ctrl+down
-					selectNext($tabs, $panels, opts);
-					if (evt.stopPropagation) {
-						return evt.stopImmediatePropagation();
-					} else {
-						return (evt.cancelBubble = true);
-					}
-				}
-			});
 			$nav.find("li a").bind("focus", function () {
 				return $(this).click();
 			});
@@ -102,6 +82,11 @@
 						return $(this).is("." + opts.tabActiveClass);
 					});
 					$current.attr("tabindex", "0");
+					if (e.stopPropagation) {
+						e.stopImmediatePropagation();
+					} else {
+						e.cancelBubble = true;
+					}
 					return setTimeout(function () {
 						return $current.focus();
 					}, 0);

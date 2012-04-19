@@ -181,7 +181,6 @@ table.wet-boew-zebra td{border:1px solid #ccc;vertical-align:top;padding:5px 10p
 .tabs-style-7 .tabs li.tabs-toggle{display:block;float:left;position:relative;left:10px;top:10px;height:auto;width:auto;border:none;background-color:transparent;}
 .tabs-style-7 li.tabs-toggle a:active,.tabs-style-7 li.tabs-toggle a:hover{background-color:#ddd !important;}
 .tabs-style-7 .tabs li.tabs-toggle a{display:inline;height:auto;margin:0;min-width:48px;text-align:center;}
-.tabs-style-7 .tabs-toggle a:active,.tabs-style-7 .tabs-toggle a:focus{background-repeat:no-repeat !important;background-position:-1px 0 !important;}
 .tabs-style-7 .tabs-panel a:hover,.tabs-style-7 .tabs-panel a:focus,.tabs-style-7 .tabs-panel a:active{color: #295376 !important;}
 /*** 1200px ***/
 @media only screen and (min-width:1200px) {
