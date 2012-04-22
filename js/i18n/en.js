@@ -7,16 +7,20 @@
     };
     _pe.dic = {
         get: function (key, state, mixin) {
-            if (typeof mixin !== "undefined" && mixin !== null) {
-                return this.ind[key][state].replace('[MIXIN]', mixin);
-            } else {
-                return this.ind[key];
-            }
-            if (typeof state !== "undefined" && state !== null) {
-                return this.ind[key][state];
-            } else {
-                return this.ind[key];
-            }
+			var truthiness = (typeof key === "string" && key !== "") | // eg. 000 or 001 ie. 0 or 1
+				(typeof state === "string" && state !== "")<<1 | // eg. 000 or 010 ie. 0 or 2
+				(typeof mixin === "string" && mixin !== "")<<2; // eg. 000 or 100 ie. 0 or 4
+			switch (truthiness) {
+				case 1: // only key was provided.
+					return this.ind[key];
+				case 3: // key and state were provided.
+					return this.ind[key][state];
+				case 7: // key, state, and mixin were provided.
+					return this.ind[key][state].replace('[MIXIN]', mixin);
+				default:
+					return "";
+					
+			}
         },
 /*
       @dictionary function : pe.dic.ago()
