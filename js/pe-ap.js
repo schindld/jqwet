@@ -50,7 +50,7 @@
             pe.polyfills();
             // mobile test
             if (pe.mobile) {
-                pe.add._load(['http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js']);
+                pe.add._load([pe.add.liblocation + '../jquery.mobile/jquery.mobile.min.js']);
                 // lets init some variables for use in various transformations
                 // raw variable running on the dom
                 // @TODO: optimize the dom manipulation routines - there is alot of DOM additions that should be keep as a document frag and replaced with .innerHTML as the end. // jsperf - 342% increase
