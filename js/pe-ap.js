@@ -6,21 +6,29 @@
 /*
  * pe, a progressive javascript library agnostic framework
  */
-(function ($) { /** pe object **/
-    var pe = (typeof window.pe !== "undefined" && window.pe !== null) ? window.pe : {
+(function ($) {
+	var pe, _pe;
+	/**
+	 * pe object
+	 * @namespace pe
+	 * @version 1.3
+	 */
+    pe = (typeof window.pe !== "undefined" && window.pe !== null) ? window.pe : {
         fn: {}
     };
-    var _pe = { /* global object init properties */
-/*
-        @property - pe.language
-        @returns - page language, defaults to fra is not available
-        */
+    _pe = { /** Global object init properties */
+		/**
+		 * @memberof pe
+         * @type {string} Page language, defaults to fra if not available
+         */
         language: ($("html").attr("lang") ? ($("html").attr("lang").indexOf("en") === 0 ? "eng" : "fra") : $("meta[name='dc.language'], meta[name='dcterms.language']").attr("content")),
-/*
-        @property - pe.doctype
-        @returns - detect the doctype of the document (loosely)
-        */
-        html5: function () {
+		/**
+		 * Detects the doctype of the document (loosely)
+         * @function
+		 * @memberof pe
+         * @returns {boolean} 
+         */
+        html5: (function () {
             var res = false,
                 re = /\s+(X?HTML)\s+([\d\.]+)\s*([^\/]+)*\//gi;
             /*********************************************
@@ -32,17 +40,18 @@
                 res = (document.doctype !== null) ? re.test(document.doctype.publicId) : false;
             }
             return (res) ? false : true;
-        }(),
-        
-/*
-        @property - pe.ie
-        @returns - ie major number if browser is IE, 0 if not
-        */
+        }()),
+		/**
+         * @memberof pe
+         * @type {number} - IE major number if browser is IE, 0 otherwise
+         */
         ie: $.browser.msie ? $.browser.version : 0,
-/*
-        @function - pe._init, a private function to preprocessing for pe.
-        @returns - void
-        */
+		/**
+		 * A private function for initializing for pe.
+         * @function
+		 * @memberof pe
+         * @returns {void}
+         */
         _init: function () {
             // get the localization files
             pe.add.language(pe.language);
@@ -50,19 +59,19 @@
             pe.polyfills();
             // mobile test
             if (pe.mobile) {
-                pe.add._load([pe.add.liblocation + '../jquery.mobile/jquery.mobile.min.js']);
+				var mb_dialogue, sub, search_elm, s_dialogue, _list;
                 // lets init some variables for use in various transformations
                 // raw variable running on the dom
                 // @TODO: optimize the dom manipulation routines - there is alot of DOM additions that should be keep as a document frag and replaced with .innerHTML as the end. // jsperf - 342% increase
                 // lets transform the menu to a dialog box
-                var mb_dialogue = '<div data-role="page" id="jqmobile-wet-boew-menubar"><div data-role="header">';
+                mb_dialogue = '<div data-role="page" id="jqmobile-wet-boew-menubar"><div data-role="header">';
                 mb_dialogue += "<h2>" + $('#cn-psnb > :header').html() + '</h2></div>';
                 //mb_dialogue.append($('<div data-role="header"></div>').append($('#cn-psnb > :header').clone()));
                 mb_dialogue += '<div data-role="content" data-inset="true">';
                 mb_dialogue += '<p id="jqm-mb-location-text"></p>';
                 if ($('#cn-left-col').length > 0) {
                     // we have a submenu
-                    var sub = $('#cn-left-col .cn-left-col-default').html().replace(/<section>/gi, "").replace(/<\/section>/gi, "");
+                    sub = $('#cn-left-col .cn-left-col-default').html().replace(/<section>/gi, "").replace(/<\/section>/gi, "");
                     // lets work on the menu shift
                     /** sub = sub.replace(/<ul\b[^>]*"sub-nav"[^>]*>([\s\S]*?)<\/ul>/gmi, function(m, child){
                      var _internal = child;
@@ -75,7 +84,7 @@
                     //sub = sub.replace(/<\/a>\s+<ul(.*?)>(.*?)<\/ul>/gmi, "</a><div data-role=\"navbar\">$2</div>");
                     //console.log(sub);
                     mb_dialogue += sub;
-                };
+                }
                 mb_dialogue += '<h2>' + $('#cn-psnb').find(':header').eq(0).html() + '</h2>';
                 mb_dialogue += '<ul data-role="listview" data-inset="true" data-theme=\"a\">';
                 // top menu this is more than likely going to happen
@@ -90,14 +99,14 @@
                 $('#cn-psnb-inner').remove();
                 $('#cn-psnb :header').wrapInner('<a href="#jqmobile-wet-boew-menubar" data-rel="dialog"></a>');
                 // :: Search box transform lets transform the search box to a dialogue box
-                var search_elm = $('#cn-search-box');
-                var s_dialogue = $('<div data-role="page" id="jqmobile-wet-boew-search"></div>');
+                search_elm = $('#cn-search-box');
+                s_dialogue = $('<div data-role="page" id="jqmobile-wet-boew-search"></div>');
                 s_dialogue.append($('<div data-role="header"></div>').append(search_elm.find(':header').clone())).append($('<div data-role="content"></div>').append(search_elm.find('form').clone()));
                 pe.pagecontainer().append(s_dialogue);
                 search_elm.find('form').remove();
                 search_elm.find(':header').wrapInner('<a href="#jqmobile-wet-boew-search" data-rel="dialog"></a>');
                 // lets see if we can change these to navbars
-                var _list = $('<ul></ul>').hide().append('<li><a data-rel="dialog" data-theme="b" data-icon="search" href="' + search_elm.find(':header a').attr('href') + '">' + search_elm.find(':header a').text() + "</a></li>").append('<li><a data-rel="dialog" data-theme="b"  data-icon="grid" href="' + $('#cn-psnb > :header').find('a').attr('href') + '">' + $('#cn-psnb > :header').find('a').text() + "</a></li>");
+                _list = $('<ul></ul>').hide().append('<li><a data-rel="dialog" data-theme="b" data-icon="search" href="' + search_elm.find(':header a').attr('href') + '">' + search_elm.find(':header a').text() + "</a></li>").append('<li><a data-rel="dialog" data-theme="b"  data-icon="grid" href="' + $('#cn-psnb > :header').find('a').attr('href') + '">' + $('#cn-psnb > :header').find('a').text() + "</a></li>");
                 $('#cn-site-title').after($('<div data-role="navbar" data-iconpos="right"></div>').append(_list));
                 // jquery mobile has loaded
                 $(document).on("mobileinit", function () {
@@ -134,101 +143,245 @@
                 });
             }
             // add the css
-            pe.add.css('' + pe.add.liblocation + 'javascript.css');
+            pe.add.css(pe.add.liblocation + 'javascript.css');
         },
-        /* properties */
+        /**
+		 * @namespace pe.depends
+		 */
         depends: {
-            _ind: [],
-            is: function (index) {
-                return -1 != $.inArray(index, pe.depends._ind);
+            /**
+			 * Internal list for tracking dependencies.
+			 * @memberof pe.depends
+			 * @type {string[]}
+			 */
+			_ind: [],
+			/**
+			 * Checks if a dependency exists in the depends object.
+			 * @memberof pe.depends
+			 * @function
+			 * @param {string} name The name of the dependency
+			 * @return {number} The index of given dependency in the depends object. -1 if not found.
+			 */
+            is: function (name) {
+                return -1 !== $.inArray(name, pe.depends._ind);
             },
+			/**
+			 * Adds a dependency to the depends object.
+			 * @memberof pe.depends
+			 * @function
+			 * @param {string} drone The name of the dependency
+			 * @return {void}
+			 */
             put: function (drone) {
                 pe.depends._ind[pe.depends._ind.length] = drone;
             },
-            on: function () {
+			/**
+			 * Binds a listener for the wet-boew-dependecy-loaded event.
+			 * @memberof pe.depends
+			 * @function
+			 * @return {Array} An empty array.
+			 */
+            on: (function () {
                 // lets bind a scan function to the drones property
                 $(document).on('wet-boew-dependency-loaded', function () {
-                    
-                    
-                    for (var i = 0; i < pe.depends.on.length; i++) {
+                    var i, d;
+                    for (i = 0, d = pe.depends.on.length; i < d; i++) {
                         pe.depends.on[i](i);
                     }
                 });
                 return []; // overwrite property to become a simple array
-            }()
+            }())
         },
-/*
-        @property: mobile
-        @returns : regex fu mobile identification -> returns true/false per type or any
-        */
-        mobile: function () {
-            return (document.documentElement.clientWidth < 767 && !($.browser.msie && $.browser.version < 10)) ? true : false;
-        }(),
-/*
-        @property: pagecontainer
-        @returns : the pe aware page query to append items to
-        */
-        pagecontainer: function () {
+		/**
+		 * Mobile identification
+		 * @memberof pe
+		 * @type {boolean} true if browser is not IE < 9 and browser window size is less than 767px wide.
+		 */
+        mobile: (function () {
+            return (document.documentElement.clientWidth < 767 && !($.browser.msie && $.browser.version < 9)) ? true : false;
+        }()),
+		/**
+		 * The pe aware page query to append items to
+		 * @memberof pe
+		 * @function
+		 * @return {jQuery object}
+		 */
+		pagecontainer: function () {
             return $('#cn-body-inner-3col,#cn-body-inner-2col,#cn-body-inner-1col').add('body').eq(0);
         },
-/*
-        @property: parameter
-        @returns : discovers parameters via a few methods for the node
-        */
-        parameter: function (key, jqElm) {
+        /**
+		 * Internal function that discovers parameters for the element against which a plugin will run.
+		 * @memberof pe
+		 * @function
+		 * @param {string} key The parameter to look for.
+		 * @param {jQuery object} jqElm The element to look for the parameter on.
+		 * @return {string} The value of the parameter asked for.
+		 */
+		parameter: function (key, jqElm) {
             return (pe.html5) ? jqElm.data(key) : jqElm.attr('class').replace('/.*' + key + '-([a-z0-9_]+).*/i', "$1");
         },
-/*
-        @function to bind a function to a resize event
-        */
-        resize: function (fn) {
+        /**
+		 * Initializes the Resize dependency, and attaches a given function to various resize events.
+		 * @memberof pe
+		 * @function
+		 * @param {function} fn The function to run when a resize event fires.
+		 * @return {void}
+		 */
+		resize: function (fn) {
             ResizeEvents.initialise(); // ensure resize function initialized
             ResizeEvents.eventElement.bind("x-text-resize x-zoom-resize x-window-resize", function () {
                 fn();
             });
             return;
         },
-/*
-        @property - pe.url
-        @returns - pe.properties helper function for developers
-        */
-        url: function (uri) {
+        /**
+		 * URL swiss-army knife helper function for developers.
+		 * @memberof pe
+		 * @see pe.url
+		 * @function pe.url(1)
+		 * @param {string} uri A relative or absolute URL to manipulate.
+		 */
+		url: function (uri) {
             var a;
             a = document.createElement('a');
             a.href = uri;
             return {
-                source: uri,
-                protocol: a.protocol.replace(':', ''),
-                host: a.hostname,
-                port: a.port,
-                query: a.search,
-                params: (function () {
+				/**
+				 * @namespace pe.url
+				 */
+				/**
+				 * The original URL converted to an absolute URL.
+				 * @memberof pe.url
+				 * @type {string}
+				 */
+				source: uri,
+                /**
+				 * The protocol of the URL. eg. http or https
+				 * @memberof pe.url
+				 * @type {string}
+				 */
+				protocol: a.protocol.replace(':', ''),
+                /**
+				 * The full host name of the URL.
+				 * @memberof pe.url
+				 * @type {string}
+				 * @example
+				 * pe.url('http://www.canada.ca/index.html').host
+				 *    returns "www.canada.ca"
+				 */
+				host: a.hostname,
+                /**
+				 * The port of the URL.
+				 * @memberof pe.url
+				 * @type {string} If no port is specified, this will return "80".
+				 */
+				port: a.port === '0' ? '80' : a.port,
+                /**
+				 * The query string part of the URL.
+				 * @memberof pe.url
+				 * @type {string}
+				 * @see #params
+				 * @example
+				 * pe.url('http://www.canada.ca?a=1&b=2').query
+				 *    returns "?a=1&b=2"
+				 */
+				query: a.search,
+                /**
+				 * A collection of the parameters of the query string part of the URL.
+				 * @memberof pe.url
+				 * @type {object (key/value map of strings)}
+				 * @see #query
+				 * @example
+				 * pe.url('http://www.canada.ca?a=1&b=2').params
+				 *    returns
+				 *       {
+				 *          a: "1",
+				 *          b: "2"
+				 *       }
+				 */
+				params: (function () {
                     var key, ret, s, seg, _i, _len;
                     ret = {};
                     seg = a.search.replace(/^\?/, '').split('&');
                     for (_i = 0, _len = seg.length; _i < _len; _i++) {
                         key = seg[_i];
-                        if (!key) continue;
-                        s = key.split('=');
-                        ret[s[0]] = s[1];
+                        if (key) {
+							s = key.split('=');
+							ret[s[0]] = s[1];
+						}
                     }
                     return ret;
-                })(),
-                file: a.pathname.match(/\/([^\/?#]+)$/i) ? a.pathname.match(/\/([^\/?#]+)$/i)[1] : '',
-                hash: a.hash.replace('#', ''),
-                path: a.pathname.replace(/^([^\/])/, '/$1'),
-                relative: a.href.match(/tps?:\/\/[^\/]+(.+)/) ? a.href.match(/tps?:\/\/[^\/]+(.+)/)[1] : '',
-                segments: a.pathname.replace(/^\//, '').split('/'),
-                removehash: function () {
-                    return a.replace(/#([A-Za-z0-9-_]+)/, "");
+                }()),
+                /**
+				 * The file name, if any, of the URL.
+				 * @memberof pe.url
+				 * @type {string}
+				 * @example
+				 *    pe.url('http://www.canada.gc.ca/aboutcanada-ausujetcanada/hist/menu-eng.html').file
+				 *       returns "menu-eng.html"
+				 */
+				file: a.pathname.match(/\/([^\/?#]+)$/i) ? a.pathname.match(/\/([^\/?#]+)$/i)[1] : '',
+                /**
+				 * The anchor of the URL.
+				 * @memberof pe.url
+				 * @type {string}
+				 * @example
+				 *    pe.url('http://www.canada.ca#cn-centre-col-inner').hash
+				 *       returns "cn-centre-col-inner"
+				 */
+				hash: a.hash.replace('#', ''),
+                /**
+				 * The path of the URL.
+				 * @memberof pe.url
+				 * @type {string}
+				 * @example
+				 *    pe.url('http://www.canada.gc.ca/aboutcanada-ausujetcanada/hist/menu-eng.html').path
+				 *       returns "/aboutcanada-ausujetcanada/hist/menu-eng.html"
+				 */
+				path: a.pathname.replace(/^([^\/])/, '/$1'),
+                /**
+				 * The relative path of the URL.
+				 * @memberof pe.url
+				 * @type {string}
+				 * @example
+				 *    pe.url('http://www.canada.gc.ca/aboutcanada-ausujetcanada/hist/menu-eng.html').relative
+				 *       returns "/aboutcanada-ausujetcanada/hist/menu-eng.html"
+				 */
+				relative: a.href.match(/tps?:\/\/[^\/]+(.+)/) ? a.href.match(/tps?:\/\/[^\/]+(.+)/)[1] : '',
+                /**
+				 * The path of the URL broken up into an array.
+				 * @memberof pe.url
+				 * @type {string[]}
+				 * @example
+				 *    pe.url('http://www.canada.gc.ca/aboutcanada-ausujetcanada/hist/menu-eng.html').segments
+				 *       returns ["aboutcanada-ausujetcanada", "hist", "menu-eng.html"]
+				 */
+				segments: a.pathname.replace(/^\//, '').split('/'),
+                /**
+				 * The URL minus the anchor.
+				 * @memberof pe.url
+				 * @type {string}
+				 * @function
+				 * @example
+				 *    pe.url('http://www.canada.gc.ca/aboutcanada-ausujetcanada/hist/menu-eng.html#cn-centre-col-inner').removehash()
+				 *       returns "http://www.canada.gc.ca/aboutcanada-ausujetcanada/hist/menu-eng.html"
+				 *    pe.url( pe.url('http://www.canada.gc.ca/aboutcanada-ausujetcanada/hist/menu-eng.html#cn-centre-col-inner').removehash() ).relative
+				 *       returns "/aboutcanada-ausujetcanada/hist/menu-eng.html"
+				 */
+				removehash: function () {
+                    return this.source.replace(/#([A-Za-z0-9-_]+)/, "");
                 }
             };
         },
-/*
-        @function : _execute -> internal method to bind a plugin to a code block
-        @returns : void
-        */
-        _execute: function (fn_obj, elm) {
+        /**
+		 * Internal method to bind a plugin to a code block
+		 * @memberof pe
+		 * @function
+		 * @param {function} fn_obj The plugin to run the _exec method of.
+		 * @param {jQuery object} elm The jQuery object(s) to run the plugin against.
+		 * @return {void}
+		 */
+		_execute: function (fn_obj, elm) {
             var exec = (fn_obj.hasOwnProperty('_exec')) ? fn_obj._exec : fn_obj.exec;
             if (fn_obj.hasOwnProperty('depends')) {
                 pe.add.js(fn_obj.depends, function () {
@@ -241,100 +394,121 @@
             }
             return;
         },
-/*
-        @function: pe.cssenabled
-        @returns: returns true false
-        */
+		/**
+		 * @memberof pe
+         * @function
+         * @return {boolean}
+         */
         cssenabled: function () {
             return $('link').get(0).disabled;
         },
-/*
-        @function: pe.limit
-        @returns: returns a class-based set limit count on plugins (0 if none found which means the plugin default )
-        */
-        limit: function (elm) {
+        /**
+		 * Returns a class-based set limit on plugin instances
+		 * @memberof pe
+		 * @function
+		 * @param {DOM object} elm The element to search for a class of the form blimit-5
+		 * @return {number} 0 if none found, which means the plugin default
+		 */
+		limit: function (elm) {
             var count;
             count = $(elm).attr("class").match(/\blimit-\d+/);
-            if (!count) return 0;
-            return count[0].replace(/limit-/i, "");
+            if (!count) {
+				return 0;
+			}
+            return Number(count[0].replace(/limit-/i, ""));
         },
-/*
-        @function: pe.focus -  a generic function to focus elements in the DOM in a screen reader compatible way / selector or object
-        @returns: the jQuery reference for the element
-        */
-        focus: function (elm) {
+        /**
+		 * A generic function to focus elements in the DOM in a screen reader compatible way / selector or object.
+		 * @memberof pe
+		 * @function
+		 * @param {jQuery object | DOM object} elm The element to recieve focus.
+		 * @return {jQuery object | DOM object} elm For chainability.
+		 */
+		focus: function (elm) {
             setTimeout(function () {
-                return elm.focus();
+                return (typeof elm.jquery !== undefined ? elm.focus() : $(elm).focus());
             }, 0);
             return elm;
         },
-/*
-    @property : string handler
-    @returns : a set of string specific helper functions
-    */
+        /**
+		 * @namespace pe.string
+		 */
         string: {
-/*
-      @function : pe.string.ify.clean(text)
-      @returns : modified text with htmlified text into a HTML links ( mailto, anchors, etc )
-      @credits : Dustin Diaz | http://www.dustindiaz.com/basement/ify.html
-      @license : public BSD
-      */
+			/*
+			@returns : modified text with htmlified text into a HTML links ( mailto, anchors, etc )
+			@credits : Dustin Diaz | http://www.dustindiaz.com/basement/ify.html
+			@license : public BSD
+			*/
             ify: (function () {
                 return {
                     "link": function (t) {
-                        return t.replace(/[a-z]+:\/\/[a-z0-9-_]+\.[a-z0-9-_@:~%&\?\+#\/.=]+[^:\.,\)\s*$]/ig, function (m) {
-                            var _ref;
-                            return '<a href="' + m + '">' + ((_ref = m.length > 25) != null ? _ref : m.substr(0, 24) + {
-                                '...': m
-                            }) + '</a>';
-                        });
-                    },
-                    "at": function (t) {
-                        return t.replace(/(^|[^\w]+)\@([a-zA-Z0-9_]{1,15}(\/[a-zA-Z0-9-_]+)*)/g, function (m, m1, m2) {
-                            return m1 + '@<a href="http://twitter.com/' + m2 + '">' + m2 + '</a>';
-                        });
-                    },
-                    "hash": function (t) {
-                        return t.replace(/(^|[^&\w'"]+)\#([a-zA-Z0-9_]+)/g, function (m, m1, m2) {
-                            return m1 + '#<a href="http://search.twitter.com/search?q=%23' + m2 + '">' + m2 + '</a>';
-                        });
-                    },
-                    "clean": function (tweet) {
-                        return this.hash(this.at(this.link(tweet)));
-                    }
+						return t.replace(/[a-z]+:\/\/[a-z0-9-_]+\.[a-z0-9-_@:~%&\?\+#\/.=]+[^:\.,\)\s*$]/ig, function (m) {
+							return '<a href="' + m + '">' + ((m.length > 25) ? m.substr(0, 24) + '...' : m) + '</a>';
+						});
+					},
+					"at": function (t) {
+						return t.replace(/(^|[^\w]+)\@([a-zA-Z0-9_]{1,15}(\/[a-zA-Z0-9-_]+)*)/g, function (m, m1, m2) {
+							return m1 + '@<a href="http://twitter.com/' + m2 + '">' + m2 + '</a>';
+						});
+					},
+					"hash": function (t) {
+						return t.replace(/(^|[^&\w'"]+)\#([a-zA-Z0-9_]+)/g, function (m, m1, m2) {
+							return m1 + '#<a href="http://search.twitter.com/search?q=%23' + m2 + '">' + m2 + '</a>';
+						});
+					},
+                    /**
+					 * Formats tweets for display on a webpage. Adds markup for links in the tweet. Adds markup for user names (@). Adds markup for topics (#).
+					 * @memberof pe.string
+					 * @function ify.clean
+					 * @param {string} tweet The tweet to format.
+					 * @return {string}
+					 * @example
+					 * pe.string.ify.clean('@ded the cdn url is http://cdn.enderjs.com')
+					 *    returns '@&lt;a href="http://twitter.com/ded"&gt;ded&lt;/a&gt; the cdn url is &lt;a href="http://cdn.enderjs.com"&gt;http://cdn.enderjs.com&lt;/a&gt;'
+					 *        ie. '@<a href="http://twitter.com/ded">ded</a> the cdn url is <a href="http://cdn.enderjs.com">http://cdn.enderjs.com</a>'
+					 */
+					"clean": function (tweet) {
+						return this.hash(this.at(this.link(tweet)));
+					}
                 };
-            })(),
-/*
-      @function : pe.string.pad(i, l, s)
-      @params : i - original string, l - leading padding required, s - padding character
-      @returns : pads numeric string with appropiate leading characters
-      */
+            }()),
+			/**
+			 * Left-pads a number with zeros.
+			 * @memberof pe.string
+			 * @function
+			 * @param {number} number The original number to pad.
+			 * @param {number} length The width of the resulting padded number, not the number of zeros to add to the front of the string.
+			 * @return {string} The padded string
+			 */
             pad: function (number, length) {
                 var str;
-                str = "" + number;
+                str = String(number);
                 while (str.length < length) {
                     str = "0" + str;
                 }
                 return str;
             }
         },
-/*
-    @property : date
-    @function : a suite of date related functions for easier parsing of dates
-    */
-        date: {
-/*
-      Converts the date in d to a date-object. The input can be:
-      a date object: returned without modification
-      an array      : Interpreted as [year,month,day]. NOTE: month is 0-11.
-      a number     : Interpreted as number of milliseconds
-                   since 1 Jan 1970 (a timestamp)
-      a string     : Any format supported by the javascript engine, like
-                   "YYYY/MM/DD", "MM/DD/YYYY", "Jan 31 2009" etc.
-      an object     : Interpreted as an object with year, month and date
-                  attributes.  **NOTE** month is 0-11.
-      */
-            convert: function (d) {
+        /**
+		 * A suite of date related functions for easier parsing of dates
+		 * @namespace pe.date
+		 */
+		date: {
+            /**
+			 * Converts the date to a date-object. The input can be: 
+			 * <ul>	
+			 * <li>a Date object:	returned without modification.</li>
+			 * <li>an array:		Interpreted as [year,month,day]. NOTE: month is 0-11.</li>
+			 * <li>a number:		Interpreted as number of milliseconds since 1 Jan 1970 (a timestamp).</li>
+			 * <li>a string:		Any format supported by the javascript engine, like "YYYY/MM/DD", "MM/DD/YYYY", "Jan 31 2009" etc.</li>
+			 * <li>an object:		Interpreted as an object with year, month and date attributes. **NOTE** month is 0-11.</li>
+			 * </ul>
+			 * @memberof pe.date
+			 * @function
+			 * @param {Date | number[] | number | string | object} d
+			 * @return {Date | NaN}
+			 */
+			convert: function (d) {
                 if (d.constructor === Date) {
                     return d;
                 } else {
@@ -357,105 +531,147 @@
                     }
                 }
             },
-/*
-      Compare two dates (could be of any type supported by the convert function above) and returns:
-       -1 : if a < b
-       0 : if a = b
-       1 : if a > b
-       NaN : if a or b is an illegal date
-       NOTE: The code inside isFinite does an assignment (=).
-      */
-            compare: function (a, b) {
+            /**
+			 * Compares two dates (input can be any type supported by the convert function). NOTE: This function uses pe.date.isFinite, and the code inside isFinite does an assignment (=).
+			 * @memberof pe.date
+			 * @function
+			 * @param {Date | number[] | number | string | object} a
+			 * @param {Date | number[] | number | string | object} b
+			 * @return {number | NaN}
+			 * @example returns
+			 * -1 if a < b
+			 * 0 if a = b
+			 * 1 if a > b
+			 * NaN if a or b is an illegal date
+			 */
+			compare: function (a, b) {
                 if (isFinite(a = this.convert(a).valueOf()) && isFinite(b = this.convert(b).valueOf())) {
                     return (a > b) - (a < b);
                 } else {
                     return NaN;
                 }
             },
-/*
-      Checks if date in d is between dates in start and end.
-       Returns a boolean or NaN:
-        true  : if d is between start and end (inclusive)
-        false : if d is before start or after end
-        NaN   : if one or more of the dates is illegal.
-      NOTE: The code inside isFinite does an assignment (=).
-      */
-            in_range: function (d, start, end) {
+            /**
+			 * Checks if date in d is between dates in start and end. NOTE: This function uses pe.date.isFinite, and the code inside isFinite does an assignment (=).
+			 * @memberof pe.date
+			 * @function
+			 * @param {Date | number[] | number | string | object} d
+			 * @param {Date | number[] | number | string | object} start
+			 * @param {Date | number[] | number | string | object} end
+			 * @return {boolean | NaN}
+			 */
+			in_range: function (d, start, end) {
                 if (isFinite(d = this.convert(d).valueOf()) && isFinite(start = this.convert(start).valueOf()) && isFinite(end = this.convert(end).valueOf())) {
                     return start <= d && d <= end;
                 } else {
                     return NaN;
                 }
             },
-/*
-            Cross browser safe way of translating a date to iso format
-
-            */
+			/**
+             * Cross-browser safe way of translating a date to iso format
+			 * @memberof pe.date
+			 * @function
+			 * @param {Date | number[] | number | string | object} d
+			 * @param {boolean} timepresent Optional. Whether to include the time in the result, or just the date. False if blank.
+			 * @return {string}
+			 * @example
+			 * pe.date.to_iso_format(new Date())
+			 *    returns "2012-04-27"
+			 * pe.date.to_iso_format(new Date(), true)
+			 *    returns "2012-04-27 13:46"
+             */
             to_iso_format: function (d, timepresent) {
                 var date;
                 date = this.convert(d);
                 if (timepresent) {
-                    return date.getFullYear() + "-" + pe.string.pad(date.getMonth() + 1, 2, "0") + "-" + pe.string.pad(date.getDate() + 1, 2, "0") + " " + pe.string.pad(date.getHours(), 2, "0") + ":" + pe.string.pad(date.getMinutes(), 2, "0");
+                    return date.getFullYear() + "-" + pe.string.pad(date.getMonth() + 1, 2, "0") + "-" + pe.string.pad(date.getDate(), 2, "0") + " " + pe.string.pad(date.getHours(), 2, "0") + ":" + pe.string.pad(date.getMinutes(), 2, "0");
                 } else {
-                    return date.getFullYear() + "-" + pe.string.pad(date.getMonth() + 1, 2, "0") + "-" + pe.string.pad(date.getDate() + 1, 2, "0");
+                    return date.getFullYear() + "-" + pe.string.pad(date.getMonth() + 1, 2, "0") + "-" + pe.string.pad(date.getDate(), 2, "0");
                 }
             }
         },
-        /*
-                @function : pe.polyfills
-                @params : a init function to load required polyfills, @TODO: set up a single loader method to streamline
-                */
-        polyfills: function () {
-            var lib = pe.add.liblocation;
-            // modernizer test for detailsummary support
-            var detail = (function (doc) { var el = doc.createElement('details'), fake, root, diff;
-                if (!('open' in el)) {
-                    return false;
-                }
-                root = doc.body || (function () {
-                    var de = doc.documentElement;
-                    fake = true;
-                    return de.insertBefore(doc.createElement('body'), de.firstElementChild || de.firstChild);
-                }());
-                el.innerHTML = '<summary>a</summary>b';
-                el.style.display = 'block';
-                root.appendChild(el);
-                diff = el.offsetHeight;
-                el.open = true;
-                diff = diff != el.offsetHeight;
-                root.removeChild(el);
-                if (fake) {
-                    root.parentNode.removeChild(root);
-                }
-                return diff;
-            }(document));
-                        
+        /**
+		 * A function to load required polyfills, @TODO: set up a single loader method to streamline
+		 * @memberof pe
+		 * @function
+		 * @return {void}
+		 */
+		polyfills: function () {
+            var lib = pe.add.liblocation,
+				// modernizer test for detailsummary support
+				detail = (function (doc) {
+					var el = doc.createElement('details'),
+						fake,
+						root,
+						diff;
+					if (!(el.hasOwnProperty('open'))) {
+						return false;
+					}
+					root = doc.body || (function () {
+						var de = doc.documentElement;
+						fake = true;
+						return de.insertBefore(doc.createElement('body'), de.firstElementChild || de.firstChild);
+					}());
+					el.innerHTML = '<summary>a</summary>b';
+					el.style.display = 'block';
+					root.appendChild(el);
+					diff = el.offsetHeight;
+					el.open = true;
+					diff = diff !== el.offsetHeight;
+					root.removeChild(el);
+					if (fake) {
+						root.parentNode.removeChild(root);
+					}
+					return diff;
+				}(document));
             // localstorage
-            if (!window.localStorage) pe.add._load(lib + 'polyfills/localstorage.js');
+            if (!window.localStorage) {
+				pe.add._load(lib + 'polyfills/localstorage.js');
+			}
             // process
-            if (!('position' in document.createElement('progress'))) pe.add._load(lib + 'polyfills/progress.js');
+            if (!(document.createElement('progress').hasOwnProperty('position'))) {
+				pe.add._load(lib + 'polyfills/progress.js');
+			}
             // detail + summary
-            if (!detail) pe.add._load(lib + 'polyfills/detailsummary.js');
+            if (!detail) {
+				pe.add._load(lib + 'polyfills/detailsummary.js');
+			}
         },
-/*
-        @function : pe.add
-        @params : a series of chainable methods to add elements to the head ( async )
-        */
-        add: (function () {
+        /**
+		 * A series of chainable methods to add elements to the head ( async )
+		 * @namespace pe.add
+		 */
+		add: (function () {
             return {
-                head: document.head || document.getElementsByTagName("head"),
-                liblocation: document.getElementById('progressive').src.replace(/pe-ap.(dev.)?js.*$/i, ""),
+                /**
+				 * A reference to the document's head element.
+				 * @memberof pe.add
+				 * @type {DOM object}
+				 */
+				head: document.head || document.getElementsByTagName("head"),
+                /**
+				 * The path to the root folder of the javascript files (same folder as pe-ap.js).
+				 * @memberof pe.add
+				 * @type {string}
+				 */
+				liblocation: document.getElementById('progressive').src.replace(/pe-ap.(dev.)?js.*$/i, ""),
                 staged : [],
-/*
-                 @function: load - a loading algorthim borrowed from labjs. Thank you!
-                 */
-                _load: function (js) {
+                /**
+				 * A loading algorthim borrowed from labjs. Thank you!
+				 * @memberof pe.add
+				 * @function
+				 * @param {string} js Path and filename of the javascript file to asynchronously load.
+				 * @return {object} A reference to pe.add
+				 */
+				_load: function (js) {
                     var head = pe.add.head;
                     // - lets prevent double loading of dependencies
-                    if ($.inArray(js,this.staged) > -1 ) return this;
+                    if ($.inArray(js, this.staged) > -1) {
+						return this;
+					}
                     // - now lets bind the events
                     setTimeout(function () {
-                        if ("item" in head) { // check if ref is still a live node list
+                        if (head.hasOwnProperty("item")) { // check if ref is still a live node list
                             if (!head[0]) { // append_to node not yet ready
                                 setTimeout(arguments.callee, 25);
                                 return;
@@ -477,67 +693,85 @@
                         };
                         scriptElem.src = js;
                         //head.insertBefore(scriptElem, head.firstChild);
-                        if (pe.ie > 0 && pe.ie < 9 ) { $(scriptElem).appendTo($(head)); } else { head.insertBefore(scriptElem, head.firstChild); } // bug in IE7 and IE8 head append http://www.fraggednation.com/blog/IE7-IE8-Strikes-again-JQuery-append-workaround-494
+                        if (pe.ie > 0 && pe.ie < 9) { $(scriptElem).appendTo($(head)); } else { head.insertBefore(scriptElem, head.firstChild); } // bug in IE7 and IE8 head append http://www.fraggednation.com/blog/IE7-IE8-Strikes-again-JQuery-append-workaround-494
                     }, 0);
                     this.staged[this.staged.length] = js;
                     return this;
                 },
-/*
-        @function : pe.add.set
-        @params : [ name, content ] -> sets element properties
-        */
-                set: function (elm, name, value) {
+                /**
+				 * Sets element attributes
+				 * @memberof pe.add
+				 * @function
+				 * @param {DOM object} elm The element to modify.
+				 * @param {string} name The name of the attribute to add or change.
+				 * @param {string} value The value of the attribute.
+				 * @return {object} A reference to pe.add
+				 */
+				set: function (elm, name, value) {
                     elm.setAttribute(name, value);
                     return this;
                 },
-/*
-        @function : pe.add.css
-        @params : [ url] -> add a stylesheet link to the head
-        */
-                css: function (css) {
+                /**
+				 * Adds a stylesheet link to the head.
+				 * @memberof pe.add
+				 * @function
+				 * @param {string} css The path and filename of the stylesheet to add to the page.
+				 * @return {object} A reference to pe.add
+				 */
+				css: function (css) {
                     var styleElement;
                     styleElement = document.createElement('link');
                     pe.add.set(styleElement, 'type', 'text/css').set(styleElement, 'rel', 'stylesheet').set(styleElement, 'href', css);
                     pe.add.head.appendChild(styleElement);
                     return this;
                 },
-/*
-        @function : pe.add.drones
-        @params : [ libraries] -> a completed library array
-        */
-                depends: function (d) {
-                    var lib = pe.add.liblocation;
-                    var c_d = $.map(d, function (a) {
-                        return (/^http(s)?/i.test(a)) ? a : lib + 'dependencies/' + a + '.js';
-                    });
+                /**
+				 * A completed library array.
+				 * @memberof pe.add
+				 * @function
+				 * @param {string | string[]} d The path and filename of the dependency OR just the name (minus the path and extension).
+				 * @return {string[]} NOTE: If d is a string, this returns a string array with 8 copies of the transformed string. If d is a string array, this returns a string array with just one entry; the transformed string.
+				 */
+				depends: function (d) {
+                    var lib = pe.add.liblocation,
+						c_d = $.map(d, function (a) {
+							return (/^http(s)?/i.test(a)) ? a : lib + 'dependencies/' + a + '.js';
+						});
                     return c_d;
                 },
-/*
-        @function : pe.add.language
-        @params : [ url] -> add a javascript link to the head
-        */
-                language: function (lang) {
-                    var url = "" + pe.add.liblocation + "i18n/" + lang.substring(0, 2) + ".js";
-                    // console.log('language load :: ' + url);
+                /**
+				 * Adds a javascript link for i18n to the head. It picks the file in pe.add.liblocation + "i18n/" whose prefix matches the page language.
+				 * @memberof pe.add
+				 * @function
+				 * @param {string} lang The two (iso 639-1) or three (iso 639-2) letter language code of the page.
+				 * @return {void}
+				 */
+				language: function (lang) {
+                    var url = pe.add.liblocation + "i18n/" + lang.substring(0, 2) + ".js";
                     pe.add._load(url);
                 },
-/*
-        @function : pe.add.js
-        @params : [ url] -> add a javascript link to the head
-        */
-                js: function (js, fn) {
+                /**
+				 * Adds a javascript link to the head.
+				 * @memberof pe.add
+				 * @function
+				 * @param {string} js The path and filename of the javascript file OR just the name (minus the path and extension).
+				 * @param {function} fn A callback to execute after the script is loaded.
+				 * @return {object} A reference to pe.add
+				 */
+				js: function (js, fn) {
+					var i;
                     js = pe.add.depends(js); // lets translate this to an array
-                    for (var i = 0; i < js.length; i++) {
-                        
-                        if (!pe.depends.is(js[i])) pe.add._load(js[i]);
+                    for (i = 0; i < js.length; i++) {
+                        if (!pe.depends.is(js[i])) {
+							pe.add._load(js[i]);
+						}
                     }
                     // now create the binding for dependencies
                     pe.depends.on[pe.depends.on.length] = function (index) {
                         var execute = true;
-                        for (var i = 0; i < js.length; i++) {
+                        for (i = 0; i < js.length; i++) {
                            // console.log('{pe.depends.on call} need ' +js[i] + ' loaded : ' + pe.depends.is(js[i]));
                             if (!pe.depends.is(js[i])) {
-                                
                                 execute = false;
                             }
                         }
@@ -550,11 +784,15 @@
                     $(document).trigger('wet-boew-dependency-loaded');
                     return this;
                 },
-/*
-        @function : pe.add.meta
-        @params : [ name, content ] -> add a metadata element to the head of the document
-        */
-                meta: function (name, content) {
+                /**
+				 * Adds a metadata element (with given name and content attributes) to the head of the document. NOTE: Use this in conjuntion with pe.add.set if you need other attributes set.
+				 * @memberof pe.add
+				 * @function
+				 * @param {string} name The value of the name attribute of the meta tag being created.
+				 * @param {string} content The value of the content attribute of the meta tag being created.
+				 * @return {object} A reference to pe.add
+				 */
+				meta: function (name, content) {
                     var styleElement;
                     styleElement = document.createElement('meta');
                     pe.add.set(styleElement, 'name', name).set(styleElement, 'content', content);
@@ -562,15 +800,18 @@
                     return this;
                 }
             };
-        })(),
-/*
-        @function : the main dance function
-        @todo: pass an element as the context for the recursion
-        */
-        dance: function () {
-            //console.log(pe.html5);
+        }()),
+        /**
+		 * Follows the _init function and i18n initialization.
+		 * @memberof pe
+		 * @function
+		 * @return {void}
+		 * @todo pass an element as the context for the recursion.
+		 */
+		dance: function () {
             // global plugins
-            var settings = (typeof wet_boew_properties !== 'undefined' && wet_boew_properties !== null) ? wet_boew_properties : false;
+            var i,
+				settings = (typeof wet_boew_properties !== 'undefined' && wet_boew_properties !== null) ? wet_boew_properties : false;
             // page specific plugins
             if (pe.mobile) {
                 //$('#jqm-mb-location-text').text(($('#cn-bc ol li a[href]').length > 0) ? pe.dic.get('%you-are-in') + $('#cn-bc ol li').last().prev('li').text() : pe.dic.get('%welcome-to'));
@@ -580,20 +821,24 @@
                 var _fcall, _node;
                 _node = $(this);
                 _fcall = _node.attr("class").replace(/^wet-boew-(\S*).*/i, "$1".toLowerCase());
-                if (pe.fn.hasOwnProperty(_fcall)) pe._execute(pe.fn[_fcall], _node);
+                if (pe.fn.hasOwnProperty(_fcall)) {
+					pe._execute(pe.fn[_fcall], _node);
+				}
                 // lets safeguard the execution to only functions we have
             });
             // globals
             if (settings) {
                 // loop throught globals adding functions
-                for (var i = 0; i < settings.globals.length; i++) {
+                for (i = 0; i < settings.globals.length; i++) {
                     pe._execute(pe.fn[settings.globals[i]], document);
                 }
             }
             $('html').removeClass('no-js').addClass('gcwu');
-            // console.log("[pe properties] mobile -> " + this.mobile);
+			if (pe.mobile) {
+				pe.add._load([pe.add.liblocation + '../jquery.mobile/jquery.mobile.min.js']);
+			}
         }
     }; /* window binding */
     window.pe = $.extend(true, pe, _pe);
     return window.pe;
-})(jQuery)._init();
+}(jQuery))._init();

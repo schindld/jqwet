@@ -26,8 +26,7 @@
 				}
 				$accordion.append($collapsible);
 			}
-			$this.replaceWith($accordion);			
-			pe.add._load('jquery.mobile/jquery.mobile.min.js');
+			$this.replaceWith($accordion);
 			return $this;
 		},
         _exec: function (elm) {
