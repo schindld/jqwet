@@ -9,12 +9,11 @@
         type: 'plugin',
         depends: ['easytabs', 'equalheights'],
 		mobile: function (elm) {
-			var $this, $tabs, $panels, $accordion, i, $collapsible;
-			$this = $(elm);
+			var $tabs, $panels, $accordion, i, $collapsible;
 			// Convert html elements and attributes into the format the jQuery mobile accordian plugin expects.
 			// Get the content out of the html structure tabbedinterface usually expects.
-			$tabs = $this.find(".tabs li > a");
-			$panels = $this.find(".tabs-panel").children();
+			$tabs = elm.find(".tabs li > a");
+			$panels = elm.find(".tabs-panel").children();
 			// Create the accordion structure to move the content to.
 			$accordion = $('<div data-role="collapsible-set"/>');
 			for (i = 0; i < $tabs.length; i++) {
@@ -26,30 +25,29 @@
 				}
 				$accordion.append($collapsible);
 			}
-			$this.replaceWith($accordion);
-			return $this;
+			elm.replaceWith($accordion);
+			return elm;
 		},
         _exec: function (elm) {
 			if (pe.mobile) {
 			console.log(this);
 				return _pe.fn.tabbedinterface.mobile(elm);
 			}
-			var $default_tab, $nav, $panels, $tabs, $this, $toggleButton, $toggleRow, cycle, opts, selectNext, selectPrev, start, stop, stopCycle, toggleCycle, $toggleRowPrev, $toggleRowNext, $toggleButtonPrev, $toggleButtonNext, prev, next;
-			$this = $(elm);
+			var $default_tab, $nav, $panels, $tabs, $toggleButton, $toggleRow, cycle, opts, selectNext, selectPrev, start, stop, stopCycle, toggleCycle, $toggleRowPrev, $toggleRowNext, $toggleButtonPrev, $toggleButtonNext, prev, next;
 			opts = {
 				panelActiveClass: "active",
 				tabActiveClass: "active",
-				defaultTab: (($this.find(".default").length) ? ".default" : "li:first-child"),
-				autoHeight: ($this.hasClass("auto-height-none") ? false : true),
-				cycle: ($this.hasClass("cycle-slow") ? 8000 : ($this.hasClass("cycle-fast") ? 2000 : ($this.hasClass("cycle") ? 6000 : false))),
-				carousel: (/style-carousel/i.test($this.attr('class'))) ? true : false,
-				autoPlay: ($this.hasClass("auto-play") ? true : false),
-				animate: ($this.hasClass("animate") || $this.hasClass("animate-slow") || $this.hasClass("animate-fast") ? true : false),
-				animationSpeed: ($this.hasClass("animate-slow") ? "slow" : ($this.hasClass("animate-fast") ? "fast" : "normal"))
+				defaultTab: ((elm.find(".default").length) ? ".default" : "li:first-child"),
+				autoHeight: (elm.hasClass("auto-height-none") ? false : true),
+				cycle: (elm.hasClass("cycle-slow") ? 8000 : (elm.hasClass("cycle-fast") ? 2000 : (elm.hasClass("cycle") ? 6000 : false))),
+				carousel: (/style-carousel/i.test(elm.attr('class'))) ? true : false,
+				autoPlay: (elm.hasClass("auto-play") ? true : false),
+				animate: (elm.hasClass("animate") || elm.hasClass("animate-slow") || elm.hasClass("animate-fast") ? true : false),
+				animationSpeed: (elm.hasClass("animate-slow") ? "slow" : (elm.hasClass("animate-fast") ? "fast" : "normal"))
 			};
-			$nav = $this.find(".tabs");
+			$nav = elm.find(".tabs");
 			$tabs = $nav.find("li > a");
-			$panels = $this.find(".tabs-panel").children();
+			$panels = elm.find(".tabs-panel").children();
 			$default_tab = ($nav.find(".default").length > 0 ? $nav.find(".default") : $nav.find("li:first-child"));
 			$nav.attr("role", "tablist");
 			$nav.find("li").each(function () {
@@ -151,9 +149,9 @@
 			};
 			if (opts.autoHeight) {
 				$panels.show();
-				$(".tabs-panel", $this).equalHeights(true);
+				$(".tabs-panel", elm).equalHeights(true);
 			}
-			$this.easytabs($.extend({}, opts, {cycle: false}));
+			elm.easytabs($.extend({}, opts, {cycle: false}));
 			if (opts.cycle) {
 				cycle = function ($tabs, $panels, opts) {
 					var $current, $pbar;
@@ -161,21 +159,21 @@
 						return $(this).is("." + opts.tabActiveClass);
 					});
 					$pbar = $current.siblings(".tabs-roller");
-					$this.find(".tabs-toggle").data("state", "started");
+					elm.find(".tabs-toggle").data("state", "started");
 					return $pbar.show().animate({
 						width: $current.parent().width()
 					}, opts.cycle - 200, "linear", function () {
 						$(this).width(0).hide();
 						selectNext($tabs, $panels, opts, true);
-						return $this.data("interval", setTimeout(function () {
+						return elm.data("interval", setTimeout(function () {
 							return cycle($tabs, $panels, opts);
 						}, 0));
 					});
 				};
 				stopCycle = function () {
-					clearTimeout($this.data("interval"));
-					$this.find(".tabs-roller").width(0).hide().stop();
-					$this.find(".tabs-toggle").data("state", "stopped");
+					clearTimeout(elm.data("interval"));
+					elm.find(".tabs-roller").width(0).hide().stop();
+					elm.find(".tabs-toggle").data("state", "stopped");
 					$toggleButton.removeClass(stop["class"]).addClass(start["class"]).html(start.text + "<span class='cn-invisible'>" + start["hidden-text"] + "</span>").attr("aria-pressed", false);
 					return $(".cn-invisible", $toggleButton).text(start["hidden-text"]);
 				};
@@ -210,7 +208,7 @@
 					selectNext($tabs, $panels, opts);
 				});
 				//End animation
-				$this.keydown(function (e) {
+				elm.keydown(function (e) {
 					if (e.which === 37 || e.which === 39) {
 						selectPrev($tabs, $panels, opts);
 						e.preventDefault();
@@ -258,7 +256,7 @@
 					stopCycle();
 				}
 			}
-			$this.find("a[href^=\"#\"]").each(function () {
+			elm.find("a[href^=\"#\"]").each(function () {
 				var anchor, hash;
 				hash = $(this).attr("href");
 				if (hash.length > 1) {
@@ -278,7 +276,7 @@
 					}
 				}
 			});
-			return $this.attr("class", $this.attr("class").replace(/\bwidget-style-/, "style-"));
+			return elm.attr("class", elm.attr("class").replace(/\bwidget-style-/, "style-"));
         } // end of exec
     };
     window.pe = _pe;
