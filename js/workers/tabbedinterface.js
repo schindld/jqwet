@@ -30,7 +30,6 @@
 		},
         _exec: function (elm) {
 			if (pe.mobile) {
-			console.log(this);
 				return _pe.fn.tabbedinterface.mobile(elm);
 			}
 			var $default_tab, $nav, $panels, $tabs, $toggleButton, $toggleRow, cycle, opts, selectNext, selectPrev, start, stop, stopCycle, toggleCycle, $toggleRowPrev, $toggleRowNext, $toggleButtonPrev, $toggleButtonNext, prev, next;

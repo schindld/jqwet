@@ -837,6 +837,9 @@
 			if (pe.mobile) {
 				pe.add._load([pe.add.liblocation + '../jquery.mobile/jquery.mobile.min.js']);
 			}
+			window.onresize = function () { // TODO: find a better way to switch back and forth between mobile and desktop modes.
+                window.location.href = window.location.href;
+            };
         }
     }; /* window binding */
     window.pe = $.extend(true, pe, _pe);
