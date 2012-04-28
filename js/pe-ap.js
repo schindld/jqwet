@@ -225,12 +225,13 @@
 		 * @memberof pe
 		 * @function
 		 * @param {function} fn The function to run when a resize event fires.
+		 * @param {jQuery object} elm The element to run the function on.
 		 * @return {void}
 		 */
-		resize: function (fn) {
+		resize: function (fn, elm) {
             ResizeEvents.initialise(); // ensure resize function initialized
-            ResizeEvents.eventElement.bind("x-text-resize x-zoom-resize x-window-resize", function () {
-                fn();
+            ResizeEvents.eventElement.bind("x-text-resize x-zoom-resize x-window-resize", {fn: fn, elm: elm}, function (e) {
+                e.data.fn(e.data.elm);
             });
             return;
         },
@@ -383,6 +384,9 @@
 		 */
 		_execute: function (fn_obj, elm) {
             var exec = (fn_obj.hasOwnProperty('_exec')) ? fn_obj._exec : fn_obj.exec;
+			if (fn_obj.hasOwnProperty('mobile')) {
+				pe.resize(fn_obj.resize, elm);
+			}
             if (fn_obj.hasOwnProperty('depends')) {
                 pe.add.js(fn_obj.depends, function () {
                     exec(elm);
