@@ -100,13 +100,13 @@
             $scope.on("focusoutside", function () {
                 return hideallsubmenus();
             });
-            $scope.on("keydown focus section-next section-previous item-next item-previous close", "li", function (e) {
+            $scope.on("keyup focus section-next section-previous item-next item-previous close", "li", function (e) {
                 var next, _elm, _id;
                 _elm = $(e.target);
                 _id = $.map(/\bknav-(\d+)-(\d+)/.exec(_elm.attr('class')), function (n, i) {
                     return parseInt(n);
                 });
-                if (e.type === "keydown") {
+                if (e.type === "keyup") {
                     if (!(e.ctrlKey || e.altKey || e.metaKey)) {
                         switch (e.keyCode) {
                         case 27:
@@ -177,7 +177,7 @@
             $scope.find('ul.mb-menu > li').find('a:eq(0)').each(function (index, value) {
                 var $childmenu, $elm;
                 $elm = $(value);
-                $elm.addClass("knav-" + index + "-0");
+                $elm.addClass("knav-" + index + "-0-0");
                 $childmenu = $elm.closest("li").find(".mb-sm");
                 if ($childmenu.size() > 0) {
                     $elm.attr("aria-haspopup", "true").addClass("mb-has-sm").wrapInner("<span class=\"expandicon\"><span class=\"sublink\"></span></span>");
@@ -190,10 +190,19 @@
                     });
 /* now recurse all focusable to be able to navigate
               */
-                    $childmenu.find("a").each(function (i, v) {
-                        $(this).addClass("knav-" + index + "-" + (i + 1));
+                    $childmenu.find("h4 a").each(function (i) {
+                        $(this).addClass("knav-" + index + "-" + (i + 1) + "-0");
+						$(this).parent().next("ul").find("a").each(function (j) {
+							$(this).addClass("knav-" + index + "-" + (i + 1) + "-" + (j + 1));
+							return;
+						});
                         return;
                     });
+					$childmenu.find("ul").not(function() {
+						return ($(this).prev("h4").length ? true : false);
+					}).find("a").each(function (i) {
+						$(this).addClass("knav-" + index + "-0-" + (i + 1));
+					});
                 }
                
             });
