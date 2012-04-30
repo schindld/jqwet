@@ -1,3 +1,7 @@
+/*!
+ * Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
+ * www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions
+ */
 /*
  * Dependencies for pe
  * - desktop will more than likely be more intensive in terms of capabilities
@@ -58,7 +62,8 @@
             // add polyfills if nessecary;
             pe.polyfills();
             // mobile test
-            if (pe.mobile) {
+            if (pe.mobilecheck()) {
+				pe.mobile = true;
 				var mb_dialogue, sub, search_elm, s_dialogue, _list;
                 // lets init some variables for use in various transformations
                 // raw variable running on the dom
@@ -197,9 +202,10 @@
 		 * @memberof pe
 		 * @type {boolean} true if browser is not IE < 9 and browser window size is less than 767px wide.
 		 */
-        mobile: (function () {
+		mobile: false,
+		mobilecheck: function () {
             return (document.documentElement.clientWidth < 767 && !($.browser.msie && $.browser.version < 9)) ? true : false;
-        }()),
+        },
 		/**
 		 * The pe aware page query to append items to
 		 * @memberof pe
@@ -838,7 +844,9 @@
 				pe.add._load([pe.add.liblocation + '../jquery.mobile/jquery.mobile.min.js']);
 			}
 			window.onresize = function () { // TODO: find a better way to switch back and forth between mobile and desktop modes.
-                window.location.href = window.location.href;
+				if (pe.mobile !== pe.mobilecheck()) {
+					window.location.href = window.location.href;
+				}
             };
         }
     }; /* window binding */
