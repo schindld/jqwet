@@ -80,12 +80,6 @@
           /*
            /// End of Functions ///
           */
-         /* define the menu type
-          */
-            type = {
-                megamenu: $scope.hasClass("mb-megamenu"),
-                hsubmenu: $scope.hasClass("mb-hsubmenu")
-            };
 /* establish bounderies
           */
             $menuBoundary = $scope.children("div");
