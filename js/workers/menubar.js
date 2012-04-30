@@ -165,6 +165,7 @@
 					level = !!_id[2] << 1 | !!_id[3];
 					switch (level) {
 					case 0: // top-level menu link has focus
+					case 1: // 3rd level menu link has focus, but the popup menu doesn't have sub-sections
 						next = $scope.find(".knav-" + (_id[1] - 1) + "-0-0");
 						if (next.length > 0) {
 							pe.focus(next);
@@ -172,16 +173,18 @@
 							pe.focus($scope.find('ul.mb-menu > li:last').find('a:eq(0)')); // wrap around at the top level
 						}
 						break;
-					case 1: // 3rd level menu link has focus, but the popup menu doesn't have sub-sections
-						pe.focus($scope.find(".knav-" + (_id[1]) + "-0-0"));
-						break;
 					case 2: // sub-section link has focus
 					case 3: // 3rd level link (child of a sub-section) has focus
 						next = $scope.find(".knav-" + (_id[1]) + "-" + (_id[2] - 1) + "-0");
-						if (next.length > 0) {
+						if (next.length > 0 && _id[2] > 1) {
 							pe.focus(next);
 						} else {
-							pe.focus($scope.find(".knav-" + (_id[1]) + "-" + (_id[2]) + "-0").nextAll(":last")); // wrap around at the sub-section level
+							next = $scope.find(".knav-" + (_id[1] - 1) + "-0-0"); // wrap around at the sub-section level
+							if (next.length > 0) {
+								pe.focus(next);
+							} else {
+								pe.focus($scope.find('ul.mb-menu > li:last').find('a:eq(0)')); // wrap around at the top level
+							}
 						}
 						break;
 					}
@@ -190,6 +193,7 @@
 					level = !!_id[2] << 1 | !!_id[3];
 					switch (level) {
 					case 0: // top-level menu link has focus
+					case 1: // 3rd level menu link has focus, but the popup menu doesn't have sub-sections
 						next = $scope.find(".knav-" + (_id[1] + 1) + "-0-0");
 						if (next.length > 0) {
 							pe.focus(next);
@@ -197,16 +201,18 @@
 							pe.focus($scope.find(".knav-0-0-0")); // wrap around at the top level
 						}
 						break;
-					case 1: // 3rd level menu link has focus, but the popup menu doesn't have sub-sections
-						pe.focus($scope.find(".knav-" + (_id[1]) + "-0-0"));
-						break;
 					case 2: // sub-section link has focus
 					case 3: // 3rd level link (child of a sub-section) has focus
 						next = $scope.find(".knav-" + (_id[1]) + "-" + (_id[2] + 1) + "-0");
 						if (next.length > 0) {
 							pe.focus(next);
 						} else {
-							pe.focus($scope.find(".knav-" + (_id[1]) + "-0-0")); // wrap around at the sub-section level
+							next = $scope.find(".knav-" + (_id[1] + 1) + "-0-0"); // wrap around at the sub-section level
+							if (next.length > 0) {
+								pe.focus(next);
+							} else {
+								pe.focus($scope.find(".knav-0-0-0")); // wrap around at the top level
+							}
 						}
 						break;
 					}
@@ -316,4 +322,5 @@
 	};
 	window.pe = _pe;
 	return _pe;
-}(jQuery));
+}
+	(jQuery));
