@@ -1,5 +1,9 @@
+/*!
+ * Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
+ * www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions
+ */
 /*
- * Zebra stripping functionality for block level elements
+ * Web feeds widget
  */
 (function($) {
 
