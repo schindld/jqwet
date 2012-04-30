@@ -1,3 +1,7 @@
+/*!
+ * Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
+ * www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions
+ */
 ﻿(function inspect(parent, depth) {
 	var console = this.console ? this.console : {
 			log: function() {}
