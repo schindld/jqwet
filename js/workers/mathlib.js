@@ -3,7 +3,7 @@
  * www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions
  */
 /*
- * Web archived top page banner
+ * Mathlib
  */
 (function ($) {
     var _pe = window.pe || {
@@ -17,11 +17,13 @@
                 var ns = "http://www.w3.org/1998/Math/MathML",
                     div = document.createElement("div");
                 div.style.position = "absolute";
+                div.style.color = "#fff";
                 var mfrac = div.appendChild(document.createElementNS(ns, "math")).appendChild(document.createElementNS(ns, "mfrac"));
                 mfrac.appendChild(document.createElementNS(ns, "mi")).appendChild(document.createTextNode("xx"));
                 mfrac.appendChild(document.createElementNS(ns, "mi")).appendChild(document.createTextNode("yy"));
                 document.body.appendChild(div);
                 hasMathML = div.offsetHeight > div.offsetWidth;
+                div.style.display = "none";
             }
             return hasMathML;
         })(),
