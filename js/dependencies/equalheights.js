@@ -14,18 +14,27 @@
 		Optional: to set min-height in px, pass a true argument: $(element).equalHeights(true);
  * Version: 2.0, 08.01.2008
 --------------------------------------------------------------------*/
-
 (function ($) {
 	$.fn.equalHeights = function (px) {
 		$(this).each(function () {
 			var currentTallest = 0;
 			$(this).children().each(function () {
-				if ($(this).height() > currentTallest) { currentTallest = $(this).height(); }
+				if ($(this).height() > currentTallest) {
+					currentTallest = $(this).height();
+				}
 			});
-			if (!px && typeof Number.prototype.pxToEm !== 'undefined') { currentTallest = currentTallest.pxToEm(); } //use ems unless px is specified
+			if (!px && typeof Number.prototype.pxToEm !== 'undefined') {
+				currentTallest = currentTallest.pxToEm();
+			} //use ems unless px is specified
 			// for ie6, set height since min-height isn't supported
-			if ($.browser.msie && $.browser.version === '6.0') { $(this).children().css({'height': currentTallest}); }
-			$(this).children().css({'min-height': currentTallest});
+			if ($.browser.msie && $.browser.version === '6.0') {
+				$(this).children().css({
+					'height': currentTallest
+				});
+			}
+			$(this).children().css({
+				'min-height': currentTallest
+			});
 		});
 		return this;
 	};

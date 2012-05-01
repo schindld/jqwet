@@ -17,7 +17,6 @@
 		// Don't include a mobile function if your plugin shouldn't run in mobile mode.
 		mobile: function (elm) {
 			// If applicaple, convert html elements and attributes into the format that jQuery mobile expects.
-			
 			return elm;
 		},
 		_exec: function (elm) {
@@ -25,9 +24,7 @@
 			if (pe.mobile) {
 				return _pe.fn.pluginName.mobile(elm);
 			}
-			var opts,
-				aVariable,
-				anotherVariable;
+			var opts, aVariable, anotherVariable;
 			opts = {
 				// This is an example from tabbedinterface, to show how to pass configuration parameters from the html element to the plugin.
 				// There are some simple examples here, along with some more complicated ones.
@@ -40,7 +37,6 @@
 				animationSpeed: (elm.hasClass("animate-slow") ? "slow" : (elm.hasClass("animate-fast") ? "fast" : "normal"))
 			};
 			// Do plugin stuff here...
-			
 			return elm;
 		} // end of exec
 	};

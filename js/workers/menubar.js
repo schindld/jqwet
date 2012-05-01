@@ -7,13 +7,13 @@
  */
 (function ($) {
 	var _pe = window.pe || {
-		fn : {}
+		fn: {}
 	};
 	/* local reference */
 	_pe.fn.menubar = {
-		type : 'plugin',
-		depends : ['resize', 'equalheights', 'hoverintent', 'outside'],
-		_exec : function (elm) {
+		type: 'plugin',
+		depends: ['resize', 'equalheights', 'hoverintent', 'outside'],
+		_exec: function (elm) {
 			/*
 			@notes: the mega menu will use custom events to better manage its events.
 			.: Events :.
@@ -23,25 +23,12 @@
 			 */
 			/* bind plugin scope element
 			 */
-			var $bcLinks,
-				$menu,
-				$menuBoundary,
-				$results,
-				$scope,
-				$vbrumbs,
-				correctheight,
-				gotosubmenu,
-				hideallsubmenus,
-				hidesubmenu,
-				i,
-				match,
-				showsubmenu;
+			var $bcLinks, $menu, $menuBoundary, $results, $scope, $vbrumbs, correctheight, gotosubmenu, hideallsubmenus, hidesubmenu, i, match, showsubmenu;
 			$scope = $(elm);
 			/* functions that would be nessecary for helpers
 			 */
 			showsubmenu = function (toplink) {
-				var _node,
-					_sm;
+				var _node, _sm;
 				_node = $(toplink).closest("li");
 				_node.addClass("mb-active");
 				hideallsubmenus();
@@ -55,8 +42,7 @@
 			/* action function to go to menu
 			 */
 			gotosubmenu = function (toplink) {
-				var _node,
-					_submenu;
+				var _node, _submenu;
 				showsubmenu(toplink);
 				_node = $(toplink);
 				_submenu = _node.closest("li").find(".mb-sm-open");
@@ -66,8 +52,7 @@
 			/* hidemenu worker function
 			 */
 			hidesubmenu = function (toplink) {
-				var _node,
-					_sm;
+				var _node, _sm;
 				_node = $(toplink);
 				_sm = _node.closest("li").removeClass("mb-active").find(".mb-sm-open");
 				_sm.attr("aria-expanded", "false").attr("aria-hidden", "true").toggleClass("mb-sm mb-sm-open").css("right", "auto");
@@ -86,8 +71,7 @@
 			/* function to correct the hieght of the menu on resize
 			 */
 			correctheight = function () {
-				var newouterheight,
-					_lastmenuli;
+				var newouterheight, _lastmenuli;
 				_lastmenuli = $menu.children("li:last");
 				newouterheight = (_lastmenuli.offset().top + _lastmenuli.outerHeight()) - $scope.offset().top;
 				return $scope.css("min-height", newouterheight);
@@ -119,10 +103,7 @@
 				$scope.trigger("focusoutside");
 			});
 			$scope.on("keydown focus section-next section-previous item-next item-previous close", "li", function (e) {
-				var next,
-					_elm,
-					_id,
-					level;
+				var next, _elm, _id, level;
 				_elm = $(e.target);
 				_id = $.map(/\bknav-(\d+)-(\d+)-(\d+)/.exec(_elm.attr('class')), function (n) {
 					return parseInt(n, 10);
@@ -130,23 +111,28 @@
 				if (e.type === "keydown") {
 					if (!(e.ctrlKey || e.altKey || e.metaKey)) {
 						switch (e.keyCode) {
-						case 27: // escape key
+						case 27:
+							// escape key
 							_elm.trigger('close');
 							e.preventDefault();
 							return false;
-						case 37: // left arrow
+						case 37:
+							// left arrow
 							_elm.trigger('section-previous');
 							e.preventDefault();
 							return false;
-						case 38: // up arrow
+						case 38:
+							// up arrow
 							_elm.trigger('item-previous');
 							e.preventDefault();
 							return false;
-						case 39: // right arrow
+						case 39:
+							// right arrow
 							_elm.trigger('section-next');
 							e.preventDefault();
 							return false;
-						case 40: // down arrow
+						case 40:
+							// down arrow
 							_elm.trigger('item-next');
 							e.preventDefault();
 							return false;
@@ -164,8 +150,10 @@
 				if (e.type === "section-previous") {
 					level = !!_id[2] << 1 | !!_id[3];
 					switch (level) {
-					case 0: // top-level menu link has focus
-					case 1: // 3rd level menu link has focus, but the popup menu doesn't have sub-sections
+					case 0:
+						// top-level menu link has focus
+					case 1:
+						// 3rd level menu link has focus, but the popup menu doesn't have sub-sections
 						next = $scope.find(".knav-" + (_id[1] - 1) + "-0-0");
 						if (next.length > 0) {
 							pe.focus(next);
@@ -173,8 +161,10 @@
 							pe.focus($scope.find('ul.mb-menu > li:last').find('a:eq(0)')); // wrap around at the top level
 						}
 						break;
-					case 2: // sub-section link has focus
-					case 3: // 3rd level link (child of a sub-section) has focus
+					case 2:
+						// sub-section link has focus
+					case 3:
+						// 3rd level link (child of a sub-section) has focus
 						next = $scope.find(".knav-" + (_id[1]) + "-" + (_id[2] - 1) + "-0");
 						if (next.length > 0 && _id[2] > 1) {
 							pe.focus(next);
@@ -192,8 +182,10 @@
 				if (e.type === "section-next") {
 					level = !!_id[2] << 1 | !!_id[3];
 					switch (level) {
-					case 0: // top-level menu link has focus
-					case 1: // 3rd level menu link has focus, but the popup menu doesn't have sub-sections
+					case 0:
+						// top-level menu link has focus
+					case 1:
+						// 3rd level menu link has focus, but the popup menu doesn't have sub-sections
 						next = $scope.find(".knav-" + (_id[1] + 1) + "-0-0");
 						if (next.length > 0) {
 							pe.focus(next);
@@ -201,8 +193,10 @@
 							pe.focus($scope.find(".knav-0-0-0")); // wrap around at the top level
 						}
 						break;
-					case 2: // sub-section link has focus
-					case 3: // 3rd level link (child of a sub-section) has focus
+					case 2:
+						// sub-section link has focus
+					case 3:
+						// 3rd level link (child of a sub-section) has focus
 						next = $scope.find(".knav-" + (_id[1]) + "-" + (_id[2] + 1) + "-0");
 						if (next.length > 0) {
 							pe.focus(next);
@@ -254,8 +248,7 @@
 			/* [Main] parse mega menu and establish all ARIA and Navigation classes
 			 */
 			$scope.find('ul.mb-menu > li').find('a:eq(0)').each(function (index, value) {
-				var $childmenu,
-					$elm;
+				var $childmenu, $elm;
 				$elm = $(value);
 				$elm.addClass("knav-" + index + "-0-0");
 				$childmenu = $elm.closest("li").find(".mb-sm");
@@ -323,4 +316,4 @@
 	window.pe = _pe;
 	return _pe;
 }
-	(jQuery));
+(jQuery));
