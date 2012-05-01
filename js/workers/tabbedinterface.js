@@ -6,14 +6,19 @@
  * tabbedinterface plugin - port v1.2
  */
 (function ($) {
-    var _pe = window.pe || {
-        fn: {}
-    }; /* local reference */
-    _pe.fn.tabbedinterface = {
-        type: 'plugin',
-        depends: ['easytabs', 'equalheights'],
-		mobile: function (elm) {
-			var $tabs, $panels, $accordion, i, $collapsible;
+	var _pe = window.pe || {
+		fn : {}
+	};
+	/* local reference */
+	_pe.fn.tabbedinterface = {
+		type : 'plugin',
+		depends : ['easytabs', 'equalheights'],
+		mobile : function (elm) {
+			var $tabs,
+				$panels,
+				$accordion,
+				i,
+				$collapsible;
 			// Convert html elements and attributes into the format the jQuery mobile accordian plugin expects.
 			// Get the content out of the html structure tabbedinterface usually expects.
 			$tabs = elm.find(".tabs li > a");
@@ -32,21 +37,40 @@
 			elm.replaceWith($accordion);
 			return elm;
 		},
-        _exec: function (elm) {
+		_exec : function (elm) {
 			if (pe.mobile) {
 				return _pe.fn.tabbedinterface.mobile(elm);
 			}
-			var $default_tab, $nav, $panels, $tabs, $toggleButton, $toggleRow, cycle, opts, selectNext, selectPrev, start, stop, stopCycle, toggleCycle, $toggleRowPrev, $toggleRowNext, $toggleButtonPrev, $toggleButtonNext, prev, next;
+			var $default_tab,
+				$nav,
+				$panels,
+				$tabs,
+				$toggleButton,
+				$toggleRow,
+				cycle,
+				opts,
+				selectNext,
+				selectPrev,
+				start,
+				stop,
+				stopCycle,
+				toggleCycle,
+				$toggleRowPrev,
+				$toggleRowNext,
+				$toggleButtonPrev,
+				$toggleButtonNext,
+				prev,
+				next;
 			opts = {
-				panelActiveClass: "active",
-				tabActiveClass: "active",
-				defaultTab: ((elm.find(".default").length) ? ".default" : "li:first-child"),
-				autoHeight: (elm.hasClass("auto-height-none") ? false : true),
-				cycle: (elm.hasClass("cycle-slow") ? 8000 : (elm.hasClass("cycle-fast") ? 2000 : (elm.hasClass("cycle") ? 6000 : false))),
-				carousel: (/style-carousel/i.test(elm.attr('class'))) ? true : false,
-				autoPlay: (elm.hasClass("auto-play") ? true : false),
-				animate: (elm.hasClass("animate") || elm.hasClass("animate-slow") || elm.hasClass("animate-fast") ? true : false),
-				animationSpeed: (elm.hasClass("animate-slow") ? "slow" : (elm.hasClass("animate-fast") ? "fast" : "normal"))
+				panelActiveClass : "active",
+				tabActiveClass : "active",
+				defaultTab : ((elm.find(".default").length) ? ".default" : "li:first-child"),
+				autoHeight : (elm.hasClass("auto-height-none") ? false : true),
+				cycle : (elm.hasClass("cycle-slow") ? 8000 : (elm.hasClass("cycle-fast") ? 2000 : (elm.hasClass("cycle") ? 6000 : false))),
+				carousel : (/style-carousel/i.test(elm.attr('class'))) ? true : false,
+				autoPlay : (elm.hasClass("auto-play") ? true : false),
+				animate : (elm.hasClass("animate") || elm.hasClass("animate-slow") || elm.hasClass("animate-fast") ? true : false),
+				animationSpeed : (elm.hasClass("animate-slow") ? "slow" : (elm.hasClass("animate-fast") ? "fast" : "normal"))
 			};
 			$nav = elm.find(".tabs");
 			$tabs = $nav.find("li > a");
@@ -79,8 +103,8 @@
 			$nav.find("li a").keyup(function (e) {
 				if (e.keyCode === 13 || e.keyCode === 32) {
 					var $current = $panels.filter(function () {
-						return $(this).is("." + opts.tabActiveClass);
-					});
+							return $(this).is("." + opts.tabActiveClass);
+						});
 					$current.attr("tabindex", "0");
 					if (e.stopPropagation) {
 						e.stopImmediatePropagation();
@@ -93,7 +117,9 @@
 				}
 			});
 			selectPrev = function ($tabs, $panels, opts, keepFocus) {
-				var $current, $prev, cycleButton;
+				var $current,
+					$prev,
+					cycleButton;
 				$current = $tabs.filter(function () {
 					return $(this).is("." + opts.tabActiveClass);
 				});
@@ -116,7 +142,9 @@
 				}
 			};
 			selectNext = function ($tabs, $panels, opts, keepFocus) {
-				var $current, $next, cycleButton;
+				var $current,
+					$next,
+					cycleButton;
 				$current = $tabs.filter(function () {
 					return $(this).is("." + opts.tabActiveClass);
 				});
@@ -154,17 +182,20 @@
 				$panels.show();
 				$(".tabs-panel", elm).equalHeights(true);
 			}
-			elm.easytabs($.extend({}, opts, {cycle: false}));
+			elm.easytabs($.extend({}, opts, {
+				cycle : false
+			}));
 			if (opts.cycle) {
 				cycle = function ($tabs, $panels, opts) {
-					var $current, $pbar;
+					var $current,
+						$pbar;
 					$current = $tabs.filter(function () {
 						return $(this).is("." + opts.tabActiveClass);
 					});
 					$pbar = $current.siblings(".tabs-roller");
 					elm.find(".tabs-toggle").data("state", "started");
 					return $pbar.show().animate({
-						width: $current.parent().width()
+						width : $current.parent().width()
 					}, opts.cycle - 200, "linear", function () {
 						$(this).width(0).hide();
 						selectNext($tabs, $panels, opts, true);
@@ -180,13 +211,13 @@
 					$toggleButton.removeClass(stop["class"]).addClass(start["class"]).html(start.text + "<span class='cn-invisible'>" + start["hidden-text"] + "</span>").attr("aria-pressed", false);
 					return $(".cn-invisible", $toggleButton).text(start["hidden-text"]);
 				};
-				// 
+				//
 				// creates a play/pause, prev/next buttons, and lets the user toggle the stateact as PREV button MB
 				$toggleRowPrev = $("<li class='tabs-toggle'>");
 				prev = {
-					"class": "tabs-prev",
-					"text": '&nbsp;&nbsp;&nbsp;',
-					"hidden-text": pe.dic.get('%previous')
+					"class" : "tabs-prev",
+					"text" : '&nbsp;&nbsp;&nbsp;',
+					"hidden-text" : pe.dic.get('%previous')
 				};
 				$toggleButtonPrev = $("<a class='" + prev["class"] + "' href='javascript:;' role='button' aria-pressed='true'>" + prev.text + "<span class='cn-invisible'>" + prev["hidden-text"] + "</span></a>");
 				$nav.append($toggleRowPrev.append($toggleButtonPrev));
@@ -197,12 +228,12 @@
 				//
 				//End PREV button
 				//Create duplicate of Play/pause button to act as NEXT button MB
-				//      
+				//
 				$toggleRowNext = $("<li class='tabs-toggle'>");
 				next = {
-					"class": "tabs-next",
-					"text": '&nbsp;&nbsp;&nbsp;',
-					"hidden-text": pe.dic.get('%next')
+					"class" : "tabs-next",
+					"text" : '&nbsp;&nbsp;&nbsp;',
+					"hidden-text" : pe.dic.get('%next')
 				};
 				$toggleButtonNext = $("<a class='" + next["class"] + "' href='javascript:;' role='button' aria-pressed='true'>" + next.text + "<span class='cn-invisible'>" + next["hidden-text"] + "</span></a>");
 				$nav.append($toggleRowNext.append($toggleButtonNext));
@@ -222,14 +253,14 @@
 				//
 				$toggleRow = $("<li class='tabs-toggle'>");
 				stop = {
-					"class": "tabs-stop",
-					text: pe.dic.get('%stop'),
-					"hidden-text": pe.dic.get('%tab-rotation', 'disable')
+					"class" : "tabs-stop",
+					text : pe.dic.get('%stop'),
+					"hidden-text" : pe.dic.get('%tab-rotation', 'disable')
 				};
 				start = {
-					"class": "tabs-start",
-					text: pe.dic.get('%play'),
-					"hidden-text": pe.dic.get('%tab-rotation', 'enable')
+					"class" : "tabs-start",
+					text : pe.dic.get('%play'),
+					"hidden-text" : pe.dic.get('%tab-rotation', 'enable')
 				};
 				$toggleButton = $("<a class='" + stop["class"] + "' href='javascript:;' role='button' aria-pressed='true'>" + stop.text + "<span class='cn-invisible'>" + stop["hidden-text"] + "</span></a>");
 				$nav.append($toggleRow.append($toggleButton));
@@ -260,14 +291,16 @@
 				}
 			}
 			elm.find("a[href^=\"#\"]").each(function () {
-				var anchor, hash;
+				var anchor,
+					hash;
 				hash = $(this).attr("href");
 				if (hash.length > 1) {
 					anchor = $(hash, $panels);
 					if (anchor.length) {
 						//console.log("anchor found:", anchor, ", for link:", $(this));
 						return $(this).click(function (e) {
-							var panel, panelId;
+							var panel,
+								panelId;
 							panel = anchor.parents("[role=\"tabpanel\"]:hidden");
 							if (panel) {
 								e.preventDefault();
@@ -280,8 +313,9 @@
 				}
 			});
 			return elm.attr("class", elm.attr("class").replace(/\bwidget-style-/, "style-"));
-        } // end of exec
-    };
-    window.pe = _pe;
-    return _pe;
-}(jQuery));
+		} // end of exec
+	};
+	window.pe = _pe;
+	return _pe;
+}
+	(jQuery));

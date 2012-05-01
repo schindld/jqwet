@@ -61,7 +61,6 @@
  */
 
 (function ($) {
-    
 	$.extend({
 		metadata : {
 			defaults : {
@@ -138,7 +137,7 @@
 			}
 		}
 	});
-	
+
 	/**
 	 * Returns the metadata object for the first member of the jQuery object.
 	 *
