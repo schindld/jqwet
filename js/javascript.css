@@ -12,7 +12,7 @@
 .wet-boew-widget .widget-title-dark{font-weight:700;font-size:100%;margin:0;margin-top:4px;padding:4px;background-color:#333!important;color:#fff!important;border-bottom:0}
 .wet-boew-widget .widget-title-attention{font-weight:700;font-size:100%;margin:0;padding:4px;margin-top:4px;background-color:#781a21!important;color:#fff!important;border-bottom:0}
 .wet-boew-widget ul{list-style-type:none!important;font-size:90%;min-height:50px;overflow:auto;background:#fff;border:1px solid #ccc;margin:0!important;padding:5px 2px 2px 5px!important}
-* html .wet-boew-widget ul{height:220px}.wet-boew-widget li{margin:0!important;padding:0 0 10px 0!important}.wet-boew-widget a.widget-notice{text-decoration:underline}
+* html .wet-boew-widget ul{height:220px}.wet-boew-widget li{margin:0!important;padding:0 0 10px 0!important;float:left}.wet-boew-widget li a img{margin-right:5px}.wet-boew-widget a.widget-notice{text-decoration:underline}
 .wet-boew-widget p.widget-lang{margin:0}.wet-boew-widget .widget-lang a,.wet-boew-widget .widget-lang a:visited,.wet-boew-widget .widget-lang a:hover{color:#000;font-weight:400;text-align:center;background:#fff;font-size:90%;float:right;border:1px solid #ccc;border-top:0;margin:0;padding:2px 4px!important}
 .wet-boew-widget .widget-add{background:#fff;padding:0 10px}
 .wet-boew-widget .widget-add p{text-align:center;margin:0}
@@ -20,7 +20,7 @@
 .wet-boew-widget .widget-add a:hover,.wet-boew-widget .widget-lang a:hover{color:#c00}
 .wet-boew-widget .widget-avatar{height:auto!important;width:auto!important;border:0;vertical-align:middle}
 .wet-boew-widget .widget-datestamp{font-size:90%}
-.wet-boew-widget .widget-datestamp-accent{font-size:90%;color:#781a21!important}
+.wet-boew-widget .widget-datestamp-accent{font-size:90%;color:#781a21!important;white-space:nowrap}
 .wet-boew-tooltip{z-index:21000;border:1px solid InfoText;background:InfoBackground;color:InfoText;font:message-box;padding:2px 4px;text-align:left;position:absolute;width:auto;height:auto}
 .wet-boew-zebra li.list-odd{background-color:#ddd!important;border:1px solid #ccc}
 .wet-boew-zebra li.list-even{background-color:#eee!important;border:1px solid #ccc}
