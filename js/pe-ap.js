@@ -845,7 +845,7 @@
 			}
 			window.onresize = function () { // TODO: find a better way to switch back and forth between mobile and desktop modes.
 				if (pe.mobile !== pe.mobilecheck()) {
-					window.location.href = window.location.href;
+					window.location.href = pe.url(window.location.href).removehash();
 				}
             };
         }
