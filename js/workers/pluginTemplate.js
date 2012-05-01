@@ -3,7 +3,7 @@
  * www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions
  */
 /*
- * Template for WET-BOEW v1.3.x plugins
+ * Template for WET-BOEW v3.x plugins
  */
 (function ($) {
     var _pe = window.pe || {
@@ -12,6 +12,7 @@
 	/* local reference */
     _pe.fn.pluginName = {
         type: 'plugin',
+        // This is an example from tabbed interface, to show how to call required libraries
         depends: ['easytabs', 'equalheights'],
 		// Don't include a mobile function if your plugin shouldn't run in mobile mode.
 		mobile: function (elm) {
