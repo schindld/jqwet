@@ -16,7 +16,7 @@
 
 (function( $ ) {
 
-    var	escapeable = /["\\\x00-\x1f\x7f-\x9f]/g,
+	var	escapeable = /["\\\x00-\x1f\x7f-\x9f]/g,
 		meta = {
 			'\b': '\\b',
 			'\t': '\\t',
