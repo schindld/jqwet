@@ -8,7 +8,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
-www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions -->
+		www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions -->
 		<title>Tabbed interface - Web Experience Toolkit (WET)</title>
 		<link rel="shortcut icon" href="../../fip-pcim/images/favicon.ico"/>
 		<meta name="dcterms.description" content="English description/Description en anglais"/>
@@ -28,6 +28,20 @@ www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions -->
 		<link rel="stylesheet" type="text/css" href="../../css/mobile.css" media="screen and (max-width:767px)"/>
 		<link rel="stylesheet" type="text/css" href="../../js/jquery.mobile/jquery.mobile.min.css" media="screen and (max-width:767px)"/>
 		<!-- CustomScriptsCSSStart -->
+<!--[if !IE]> -->
+<style type="text/css">
+	pre{border:1px solid #aaa;background:#eee;border-radius:1em;padding:0 1em;}
+	pre code{background:#eee;counter-reset:line;}
+	pre code .line:before{content:counter(line);display:inline-block;text-align:right;width:1.25em;padding-right:.5em;margin-right:.75em;margin-left:-1.1em;padding-left:.5em;background:#aaa;border-right:1px solid #333;border-left:1px solid #aaa;opacity:.5;}
+	pre code .line:first-child:before{border-top-left-radius:1em;border-top:1px solid #aaa;padding-top:1em;}
+	pre code .line:last-child:before{border-bottom-left-radius:1em;border-bottom:1px solid #aaa;padding-bottom:1em;}
+	pre code .line{counter-increment:line;white-space:pre-wrap;}
+	pre code .attr{color:#f66;}
+	pre code .str{color:#6c6;font-weight:bold;}
+	pre code .sym{color:#66f;font-weight:bold;}
+	pre code .req{border:1px dashed #f66;background:#ffe;}
+</style>
+<!-- <![endif]-->
 		<!-- CustomScriptsCSSEnd -->
 	</head>
 	<body>
@@ -429,18 +443,6 @@ www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions -->
 	&lt;/div&gt;
 &lt;/div&gt;</code></pre>
 <!--[if !IE]> -->
-<style type="text/css">
-	pre{border:1px solid #aaa;background:#eee;border-radius:1em;padding:0 1em;}
-	pre code{background:#eee;counter-reset:line;}
-	pre code .line:before{content:counter(line);display:inline-block;text-align:right;width:1.25em;padding-right:.5em;margin-right:.75em;margin-left:-1.1em;padding-left:.5em;background:#aaa;border-right:1px solid #333;border-left:1px solid #aaa;opacity:.5;}
-	pre code .line:first-child:before{border-top-left-radius:1em;border-top:1px solid #aaa;padding-top:1em;}
-	pre code .line:last-child:before{border-bottom-left-radius:1em;border-bottom:1px solid #aaa;padding-bottom:1em;}
-	pre code .line{counter-increment:line;white-space:pre-wrap;}
-	pre code .attr{color:#f66;}
-	pre code .str{color:#6c6;font-weight:bold;}
-	pre code .sym{color:#66f;font-weight:bold;}
-	pre code .req{border:1px dashed #f66;background:#ffe;}
-</style>
 <script type="text/javascript">
 jQuery("pre code").html(function(index,html){return html.replace(/(\s+)([\w\-]+=)/g,"$1<span class=\"attr\">$2</span>").replace(/(=\<\/span\>)(\"[\w\s\-#]*\")/g,"$1<span class=\"str\">$2</span>").replace(/(&lt;\/\w+|&gt;|&lt;\w+)/g,"<span class=\"sym\">$1</span>").replace(/(\")(wet-boew-tabbedinterface|tabs-panel|tabs)(\"|\s)/g,"$1<span class=\"req\" title=\"Required class\">$2</span>$3").replace(/^(.*)$/mg,"<span class=\"line\">$1</span>");});
 </script>
