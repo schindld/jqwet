@@ -209,7 +209,7 @@
 		};
 	};
 })(jQuery, document, "outside");
- * Copyright (c) 2010 "Cowboy" Ben Alman
+/* Copyright (c) 2010 "Cowboy" Ben Alman
  * Dual licensed under the MIT and GPL licenses.
  * http://benalman.com/about/license/
  */
