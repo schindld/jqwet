@@ -13,6 +13,8 @@ Cette composante utilise le cadre de JavaScript jQuery pour créer un plugiciel 
 * Approche d'amélioration progressive
 * Soutien pour Firefox, Opera, Safari, Chrome et IE 7+
 
+__Pour plus d'informations, visitez le site http://schindld.github.com/jqwet/__
+
 -------------------------------------------------------------------
 
 # JQuery integration project
@@ -29,3 +31,5 @@ This feature uses the jQuery JavaScript framework to create a plugin-based appro
 * Conforms to WCAG 2.0
 * Progressive enhancement approach
 * Supports Firefox, Opera, Safari, Chrome, and IE 7+
+
+__For more information, visit http://schindld.github.com/jqwet/__
