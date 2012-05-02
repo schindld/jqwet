@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Namespace: string</title>
+    <title>JSDoc: Namespace: depends</title>
     
     <script src="http://shjs.sourceforge.net/sh_main.min.js"> </script>
     <script src="http://shjs.sourceforge.net/lang/sh_javascript.min.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Namespace: string</h1>
+    <h1 class="page-title">Namespace: depends</h1>
     
     
 
@@ -27,7 +27,7 @@
     <h2>
         <span class="ancestors"><a href="pe.html">pe</a>.</span>
     
-    string
+    depends
     </h2>
     
 </header>  
@@ -59,7 +59,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>../../../schindld.jqwet/js/pe-ap.js, line 443</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>../../../js/pe-ap.js, line 155</li></ul></dd>
 	
     
     
@@ -85,6 +85,58 @@
     
     
     
+        <h3 class="subsection-title">Members</h3>
+        
+        <dl>
+            
+<dt>
+    <h4 class="name" id="_ind"><span class="type-signature">&lt;static> </span>_ind<span class="type-signature"> :string[]</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    <p class="description">
+        Internal list for tracking dependencies.
+    </p>
+    
+    
+    
+<dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>../../../js/pe-ap.js, line 164</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+</dd>
+
+        </dl>
+    
     
     
         <h3 class="subsection-title">Methods</h3>
@@ -92,7 +144,7 @@
         <dl>
             
 <dt>
-    <h4 class="name" id="ify.clean"><span class="type-signature">&lt;static> </span>ify.clean</h4>
+    <h4 class="name" id="is"><span class="type-signature">&lt;static> </span>is</h4>
     
     
 </dt>
@@ -100,7 +152,7 @@
     
     
     <p class="description">
-        Formats tweets for display on a webpage. Adds markup for links in the tweet. Adds markup for user names (@). Adds markup for topics (#).
+        Checks if a dependency exists in the depends object.
     </p>
     
     
@@ -132,7 +184,7 @@
 	
         <tr>
             
-                <td class="name"><code>tweet</code></td>
+                <td class="name"><code>name</code></td>
             
             
             <td class="type">
@@ -146,7 +198,7 @@
             
             
             
-            <td class="description last">The tweet to format.</td>
+            <td class="description last">The name of the dependency</td>
         </tr>
 	
 	
@@ -174,158 +226,7 @@
 	
 	
 	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>../../../schindld.jqwet/js/pe-ap.js, line 469</li></ul></dd>
-	
-    
-    
-	
-	
-	
-	
-</dl>
-
-    
-    
-    
-    
-    
-    
-    <h5>Returns:</h5>
-    
-            
-
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-		<span class="param-type">string</span> 
-		
-	</dd>
-</dl>
-
-        
-    
-    
-        <h5>Example</h5>
-        
-    <pre class="sh_javascript"><code>pe.string.ify.clean('@ded the cdn url is http://cdn.enderjs.com')
-   returns '@&lt;a href="http://twitter.com/ded"&gt;ded&lt;/a&gt; the cdn url is &lt;a href="http://cdn.enderjs.com"&gt;http://cdn.enderjs.com&lt;/a&gt;'
-       ie. '@<a href="http://twitter.com/ded">ded</a> the cdn url is <a href="http://cdn.enderjs.com">http://cdn.enderjs.com</a>'</code></pre>
-
-    
-</dd>
-
-        
-            
-<dt>
-    <h4 class="name" id="pad"><span class="type-signature">&lt;static> </span>pad</h4>
-    
-    
-</dt>
-<dd>
-    
-    
-    <p class="description">
-        Left-pads a number with zeros.
-    </p>
-    
-    
-    
-    
-    
-        <h5>Parameters:</h5>
-        
-
-<table class="params">
-    <thead>
-	<tr>
-		
-		<th>Name</th>
-		
-		
-		<th>Type</th>
-		
-		
-		
-		
-		
-		<th class="last">Description</th>
-	</tr>
-	</thead>
-	
-	<tbody>
-	
-	
-        <tr>
-            
-                <td class="name"><code>number</code></td>
-            
-            
-            <td class="type">
-            
-                        number
-                        
-                    
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">The original number to pad.</td>
-        </tr>
-	
-	
-	
-        <tr>
-            
-                <td class="name"><code>length</code></td>
-            
-            
-            <td class="type">
-            
-                        number
-                        
-                    
-            </td>
-            
-            
-            
-            
-            
-            <td class="description last">The width of the resulting padded number, not the number of zeros to add to the front of the string.</td>
-        </tr>
-	
-	
-	</tbody>
-</table>
-    
-    
-    
-<dl class="details">
-    
-        
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<dt class="tag-source">Source:</dt>
-	<dd class="tag-source"><ul class="dummy"><li>../../../schindld.jqwet/js/pe-ap.js, line 494</li></ul></dd>
+	<dd class="tag-source"><ul class="dummy"><li>../../../js/pe-ap.js, line 172</li></ul></dd>
 	
     
     
@@ -345,7 +246,7 @@
     
             
 <div class="param-desc">
-    The padded string
+    The index of given dependency in the depends object. -1 if not found.
 </div>
 
 
@@ -357,7 +258,211 @@
 	</dt>
 	<dd>
 		
-		<span class="param-type">string</span> 
+		<span class="param-type">number</span> 
+		
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="on"><span class="type-signature">&lt;static> </span>on</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Binds a listener for the wet-boew-dependecy-loaded event.
+    </p>
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>../../../js/pe-ap.js, line 191</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    An empty array.
+</div>
+
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+		<span class="param-type">Array</span> 
+		
+	</dd>
+</dl>
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="put"><span class="type-signature">&lt;static> </span>put</h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <p class="description">
+        Adds a dependency to the depends object.
+    </p>
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+		
+		<th>Type</th>
+		
+		
+		
+		
+		
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+	
+	
+        <tr>
+            
+                <td class="name"><code>drone</code></td>
+            
+            
+            <td class="type">
+            
+                        string
+                        
+                    
+            </td>
+            
+            
+            
+            
+            
+            <td class="description last">The name of the dependency</td>
+        </tr>
+	
+	
+	</tbody>
+</table>
+    
+    
+    
+<dl class="details">
+    
+        
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<dt class="tag-source">Source:</dt>
+	<dd class="tag-source"><ul class="dummy"><li>../../../js/pe-ap.js, line 182</li></ul></dd>
+	
+    
+    
+	
+	
+	
+	
+</dl>
+
+    
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+		<span class="param-type">void</span> 
 		
 	</dd>
 </dl>
@@ -387,7 +492,7 @@
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/micmath/jsdoc">JSDoc 3</a> on Wed May 02 2012 10:48:25 GMT-0400 (EDT)
+    Documentation generated by <a href="https://github.com/micmath/jsdoc">JSDoc 3</a> on Wed May 02 2012 14:29:59 GMT-0400 (EDT)
 </footer>
 
 <script> sh_highlightDocument(); </script>
