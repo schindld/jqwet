@@ -66,7 +66,7 @@
 			// mobile test
 			if (pe.mobilecheck()) {
 				pe.mobile = true;
-				var mb_dialogue, sub, search_elm, s_dialogue, _list;
+				var mb_dialogue, sub, search_elm, s_dialogue, _list, links, footer1, footer2, ul;
 				// lets init some variables for use in various transformations
 				// raw variable running on the dom
 				// @TODO: optimize the dom manipulation routines - there is alot of DOM additions that should be keep as a document frag and replaced with .innerHTML as the end. // jsperf - 342% increase
@@ -115,6 +115,24 @@
 				// lets see if we can change these to navbars
 				_list = $('<ul></ul>').hide().append('<li><a data-rel="dialog" data-theme="b" data-icon="search" href="' + search_elm.find(':header a').attr('href') + '">' + search_elm.find(':header a').text() + "</a></li>").append('<li><a data-rel="dialog" data-theme="b"  data-icon="grid" href="' + $('#cn-psnb > :header').find('a').attr('href') + '">' + $('#cn-psnb > :header').find('a').text() + "</a></li>");
 				$('#cn-site-title').after($('<div data-role="navbar" data-iconpos="right"></div>').append(_list));
+				// transform the footer into mobile nav bar
+				links = $('#cn-sft-inner a').attr("data-theme","b");
+				footer1 = $('<div data-role="navbar"><ul></ul></div>');
+				ul = footer1.children();
+				links.each(function() {
+					ul.append($('<li/>').append(this));
+				});
+				links = $('#cn-gcft-inner a').attr("data-theme","c");
+				footer2 = $('<div data-role="navbar"><ul></ul></div>');
+				ul = footer2.children();
+				links.each(function() {
+					if ($(this).parents('#cn-ft-ca').length) {
+						ul.append($('<li id="cn-ft-ca"/>').append(this));
+					} else {
+						ul.append($('<li/>').append(this));
+					}
+				});
+				$('#cn-foot').replaceWith(footer1.children().after(footer2).end());
 				// jquery mobile has loaded
 				$(document).on("mobileinit", function () {
 					//$.mobile.loadingMessage = false;
