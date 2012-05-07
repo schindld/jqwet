@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="jquery.core" default="build" basedir=".">
+    <description>Web Experience Toolkit</description>
+    
+    <property file="build.properties"/>
+    
+    <target name="build">
+        <echo level="info">
+---Building jQuery Integreation project---
+        </echo>
+        <ant dir="${src.dir}/js" antfile="build.xml" inheritAll="false"/>
+        
+        <echo level="info">
+---Building GCWU Theme---
+        </echo>
+        <ant dir="${src.dir}/theme-gcwu-fegc" antfile="build.xml" inheritAll="false"/>
+    </target>
+    
+    <target name="clean">
+        <delete>
+		<fileset dir="${build.dir}">
+			<exclude name="lib/*.*"/>
+		</fileset>
+	</delete>
+        <delete dir="${dist.dir}" />
+    </target>
+</project>
