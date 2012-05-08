@@ -59,6 +59,7 @@
 		 * @returns {void}
 		 */
 		_init: function () {
+			var mb_dialogue, sub, search_elm, s_dialogue, _list, links, footer1, footer2, ul, file, suffix;
 			// get the localization files
 			pe.add.language(pe.language);
 			// add polyfills if nessecary;
@@ -66,7 +67,6 @@
 			// mobile test
 			if (pe.mobilecheck()) {
 				pe.mobile = true;
-				var mb_dialogue,sub, search_elm, s_dialogue, _list, links, footer1, footer2, ul;
 				// lets init some variables for use in various transformations
 				// raw variable running on the dom
 				// @TODO: optimize the dom manipulation routines - there is alot of DOM additions that should be keep as a document frag and replaced with .innerHTML as the end. // jsperf - 342% increase
@@ -116,16 +116,16 @@
 				_list = $('<ul></ul>').hide().append('<li><a data-rel="dialog" data-theme="b" data-icon="search" href="' + search_elm.find(':header a').attr('href') + '">' + search_elm.find(':header a').text() + "</a></li>").append('<li><a data-rel="dialog" data-theme="b"  data-icon="grid" href="' + $('#cn-psnb > :header').find('a').attr('href') + '">' + $('#cn-psnb > :header').find('a').text() + "</a></li>");
 				$('#cn-site-title').after($('<div data-role="navbar" data-iconpos="right"></div>').append(_list));
 				// transform the footer into mobile nav bar
-				links = $('#cn-sft-inner a').attr("data-theme","b");
+				links = $('#cn-sft-inner a').attr("data-theme", "b");
 				footer1 = $('<div data-role="navbar"><ul></ul></div>');
 				ul = footer1.children();
-				links.each(function() {
+				links.each(function () {
 					ul.append($('<li/>').append(this));
 				});
-				links = $('#cn-gcft-inner a').attr("data-theme","c");
+				links = $('#cn-gcft-inner a').attr("data-theme", "c");
 				footer2 = $('<div data-role="navbar"><ul></ul></div>');
 				ul = footer2.children();
-				links.each(function() {
+				links.each(function () {
 					if ($(this).parents('#cn-ft-ca').length) {
 						ul.append($('<li id="cn-ft-ca"/>').append(this));
 					} else {
@@ -168,8 +168,8 @@
 				});
 			}
 			// add the css
-			var file = pe.url(document.getElementById('progressive').src).file;
-			var suffix = file.substr(file.length-7) == "-min.js"?"-min":"";
+			file = pe.url(document.getElementById('progressive').src).file;
+			suffix = file.substr(file.length - 7) === "-min.js" ? "-min" : "";
 			suffix = (pe.ie < 9 && pe.ie > 0 ? "-ie" : "") + suffix;
 			pe.add.css(pe.add.liblocation + 'css/pe-ap' + suffix + '.css');
 		},
@@ -211,15 +211,14 @@
 			 */
 			on: (function () {
 				// lets bind a scan function to the drones property
-				$(document).on('wet-boew-dependency-loaded', function (e) {
+				$(document).on('wet-boew-dependency-loaded', function () {
 					var i, d;
 					for (i = 0, d = pe.depends.on.length; i < d; i++) {
 						pe.depends.on[i](i);
 					}
 				});
 				return []; // overwrite property to become a simple array
-			}
-				())
+			}())
 		},
 		/**
 		 * Mobile identification
@@ -688,10 +687,10 @@
 				 * @memberof pe.add
 				 * @type {string}
 				 */
-				liblocation: (function(){
-                                    var url = document.getElementById('progressive').src
-                                    return url.substr(0,url.lastIndexOf("/")+1)
-                                })(),
+				liblocation: (function () {
+					var url = document.getElementById('progressive').src;
+					return url.substr(0, url.lastIndexOf("/") + 1);
+				}()),
 				staged: [],
 				/**
 				 * A loading algorthim borrowed from labjs. Thank you!
@@ -708,7 +707,7 @@
 					}
 					// - now lets bind the events
 					setTimeout(function () {
-						if (!typeof head.item === "undefined") { // check if ref is still a live node list
+						if (typeof head.item !== "undefined") { // check if ref is still a live node list
 							if (!head[0]) { // append_to node not yet ready
 								setTimeout(arguments.callee, 25);
 								return;
@@ -726,7 +725,7 @@
 							scriptdone = true;
 							// now add to dependency lis
 							pe.depends.put(js);
-							$(document).trigger({type:'wet-boew-dependency-loaded', js: js});
+							$(document).trigger({type: 'wet-boew-dependency-loaded', js: js});
 						};
 						scriptElem.src = js;
 						//head.insertBefore(scriptElem, head.firstChild);
@@ -760,9 +759,8 @@
 				 * @return {object} A reference to pe.add
 				 */
 				css: function (css) {
-					var head = pe.add.head;
-					var styleElement;
-					styleElement = document.createElement('link');
+					var head = pe.add.head,
+						styleElement = document.createElement('link');
 					pe.add.set(styleElement, 'rel', 'stylesheet').set(styleElement, 'href', css);
 					if (pe.ie > 0 && pe.ie < 9) {
 						$(styleElement).appendTo($(head)).attr("href", css);
