@@ -154,7 +154,10 @@
 				});
 			}
 			// add the css
-			pe.add.css(pe.add.liblocation + 'css/pe-ap-min.css');
+			var file = pe.url(document.getElementById('progressive').src).file;
+			var suffix = file.substr(file.length-4) == "-min"?"-min":"";
+			suffix = (pe.ie < 9 && pe.ie > 0 ? "-ie" : "") + suffix;
+			pe.add.css(pe.add.liblocation + 'css/pe-ap' + suffix + '.css');
 		},
 		/**
 		 * @namespace pe.depends
@@ -402,8 +405,8 @@
 		 * @return {void}
 		 */
 		_execute : function (fn_obj, elm) {
-			var exec = (fn_obj.hasOwnProperty('_exec')) ? fn_obj._exec : fn_obj.exec;
-			if (fn_obj.hasOwnProperty('depends')) {
+			var exec = (typeof fn_obj._exec !== "undefined") ? fn_obj._exec : fn_obj.exec;
+			if (typeof fn_obj.depends !== "undefined") {
 				pe.add.js(fn_obj.depends, function () {
 					exec(elm);
 				});
@@ -446,7 +449,7 @@
 		 */
 		focus : function (elm) {
 			setTimeout(function () {
-				return (typeof elm.jquery !== undefined ? elm.focus() : $(elm).focus());
+				return (typeof elm.jquery !== "undefined" ? elm.focus() : $(elm).focus());
 			}, 0);
 			return elm;
 		},
@@ -625,7 +628,7 @@
 						fake,
 						root,
 						diff;
-					if (!(el.hasOwnProperty('open'))) {
+					if (typeof el.open === "undefined") {
 						return false;
 					}
 					root = doc.body || (function () {
@@ -652,7 +655,7 @@
 				pe.add._load(lib + 'polyfills/localstorage.js');
 			}
 			// process
-			if (!(document.createElement('progress').hasOwnProperty('position'))) {
+			if (typeof document.createElement('progress').position === "undefined") {
 				pe.add._load(lib + 'polyfills/progress.js');
 			}
 			// detail + summary
@@ -697,7 +700,7 @@
 					}
 					// - now lets bind the events
 					setTimeout(function () {
-						if (head.hasOwnProperty("item")) { // check if ref is still a live node list
+						if (!typeof head.item === "undefined") { // check if ref is still a live node list
 							if (!head[0]) { // append_to node not yet ready
 								setTimeout(arguments.callee, 25);
 								return;
@@ -749,10 +752,15 @@
 				 * @return {object} A reference to pe.add
 				 */
 				css : function (css) {
+					var head = pe.add.head;
 					var styleElement;
 					styleElement = document.createElement('link');
-					pe.add.set(styleElement, 'type', 'text/css').set(styleElement, 'rel', 'stylesheet').set(styleElement, 'href', css);
-					pe.add.head.appendChild(styleElement);
+					pe.add.set(styleElement, 'rel', 'stylesheet').set(styleElement, 'href', css);
+					if (pe.ie > 0 && pe.ie < 9) {
+						$(styleElement).appendTo($(head)).attr("href", css);
+					} else {
+						head.insertBefore(styleElement, head.firstChild);
+					}
 					return this;
 				},
 				/**
@@ -854,7 +862,7 @@
 					_node;
 				_node = $(this);
 				_fcall = _node.attr("class").replace(/^wet-boew-(\S*).*/i, "$1".toLowerCase());
-				if (pe.fn.hasOwnProperty(_fcall)) {
+				if (typeof pe.fn[_fcall] !== "undefined") {
 					pe._execute(pe.fn[_fcall], _node);
 				}
 				// lets safeguard the execution to only functions we have

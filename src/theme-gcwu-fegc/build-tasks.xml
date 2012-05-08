@@ -19,7 +19,7 @@
     <path id="cssurlembed.classpath">
         <pathelement location="${cssurlembed.jar}" />
     </path>
-    <taskdef name="cssurlembed" classname="net.nczonline.web.cssembed.CSSEmbedAntTask">
+    <taskdef name="cssurlembed" classname="net.nczonline.web.cssembed.CSSEmbedTask">
             <classpath refid="cssurlembed.classpath" />
     </taskdef>
 </project>
