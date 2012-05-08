@@ -2,9 +2,9 @@
  * Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
  * www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions
  */
-/*
- * menubar plugin - port v1.3
- */
+ /*
+  * Menu bar plugin
+  */
 (function ($) {
 	var _pe = window.pe || {
 		fn : {}

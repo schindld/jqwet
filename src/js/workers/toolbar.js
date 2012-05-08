@@ -3,7 +3,7 @@
  * www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions
  */
 /*
- * Zebra stripping functionality for block level elements
+ * Floating toolbar
  */
 (function ($) {
     var _pe = window.pe || {

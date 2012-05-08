@@ -58,10 +58,10 @@
             "%top-of-page": "Haut de la page",
             "%you-are-in": "Vous êtes dans :",
             "%welcome-to": "Bienvenue à : " + $('#cn-site-title').text(),
-            "%archived-page": "Cette page Web a ï¿½tï¿½ archivï¿½e dans le Web.",
+            "%archived-page": "Cette page Web a été archivée dans le Web.",
             "%sub-menu-help": "(ouvrir le sous-menu avec la touche de la fleche descendante)",
             "%tab-rotation": {
-                "disable": "Arrï¿½ter la rotation d'onglets",
+                "disable": "Arrêter la rotation d'onglets",
                 "enable": "Lancer la rotation d'onglets"
             },
             "%search": "Recherche",
@@ -80,7 +80,7 @@
             "%fast-forward": "Avancer ",
             "%mute": {
                 "enable": "Activer le mode muet",
-                "disable": "DÃ©sactiver le mode muet"
+                "disable": "Désactiver le mode muet"
             },
             "%closed-caption": {
                 "disable": "Masquer le sous-titrage",
@@ -88,13 +88,13 @@
             },
             "%audio-description": {
                 "enable": "Activer l'audiodescription",
-                "disable": "DÃ©sactiver l'audiodescription"
+                "disable": "Désactiver l'audiodescription"
             },
-            "%progress-bar": "utilisez les touches GAUCHE ou DROITE pour avancer ou reculer le progrï¿½s des mï¿½dias",
-            "%no-video": "Votre navigateur ne semble pas avoir les capacitï¿½ nï¿½cessaires pour lire cette vidï¿½o, s'il vous plaï¿½t tï¿½lï¿½charger la vidï¿½o ci-dessous",
-            "%position": "Position actuelle : ",
-            "%duration": "Temps total : ",
-            "%buffered": "Mis en mï¿½moire-tampon : ",
+            "%progress-bar": "utilisez les touches GAUCHE ou DROITE pour avancer ou reculer le progrès des médias",
+            "%no-video": "Votre navigateur ne semble pas avoir les capacité nécessaires pour lire cette vidéo, s'il vous plaît télécharger la vidéo ci-dessous",
+            "%position": "Position actuelle&#160;: ",
+            "%duration": "Temps total&#160;: ",
+            "%buffered": "Mis en mémoire-tampon&#160;: ",
             "%minute-ago": "il ya une minute",
             "%couple-of-minutes": "il ya quelques minutes",
             "%minutes-ago": {
