@@ -15,7 +15,7 @@ body{-webkit-text-size-adjust:none;font-family:Helvetica, Arial, sans-serif;font
 #cn-site-title a{font-size:1.5em;color:#fff !important;text-shadow:0 1px 1px #044062;text-decoration:none;}
 #cn-foot{background:url(../fip-pcim/images/wmms.gif) #fff center bottom no-repeat;margin-bottom:10px;padding:5px 0 36px;}
 #cn-sft-inner #cn-ft-tctr{width:auto;float:none;}
-li#cn-ft-ca a{border:none;padding-left:0;padding-right:0;font-size:1.4em;font-weight:700;}
+li#cn-ft-ca a{padding-left:0;padding-right:0;font-size:1.35em;font-weight:700;}
 #cn-gcft li#cn-ft-ca{margin-right:0;float:left;}
 #cn-gcft li{width:50%;float:left;margin:10px 0;}
 #cn-gcft li#cn-ft-ca div{text-align:left;}
