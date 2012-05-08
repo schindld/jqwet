@@ -90,30 +90,6 @@
   text-align:center;
 }
 
-* html .archived {
-  margin-top:2px;
-  position:absolute;
-}
-
-* html .archived input {
-  margin-bottom:0;
-  margin-left:0;
-  margin-right:0;
-  margin-top:0;
-  padding-bottom:0;
-  padding-left:0;
-  padding-right:0;
-  padding-top:0;
-}
-
-* html .archived a:hover, * html .archived a:active, * html .archived a:focus {
-  color:#FFFFFF;
-}
-
 .archived {
-  display:none;
-}
-
-* html .archived {
   display:none;
 }

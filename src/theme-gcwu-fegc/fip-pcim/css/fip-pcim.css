@@ -3,9 +3,8 @@
  * Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
  * www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions
  */
-
 @media screen{
-		#cn-sig img,#cn-wmms img{position:absolute;clip:rect(1px, 1px, 1px, 1px);height:0 !important;width:0 !important;overflow:hidden !important;margin:0 !important;}
+	#cn-sig img,#cn-wmms img{position:absolute;clip:rect(1px, 1px, 1px, 1px);height:0 !important;width:0 !important;overflow:hidden !important;margin:0 !important;}
 	a:link{color:#295376;}
 	a:visited{color:#5a306b;}
 	#cn-body-inner-1col,#cn-body-inner-2col,#cn-body-inner-2col-right,#cn-body-inner-3col,#cn-head-inner{background:url(../images/background-withglow-andleaf.jpg) repeat-x center 3.08em #fff;}
@@ -80,7 +79,6 @@
 		#cn-search-submit{min-height: 22px;}
 	}
 }
-
 @media print{
 	#cn-sig img{position:absolute;top:10px;left:0;}
 	#cn-wmms img{position:absolute;top:0;right:0;}
@@ -99,7 +97,6 @@
 	#cn-bc li:before{content:" > ";}
 	#cn-bc li:first-child:before{content:"";}
 }
-
 @media print{
 	#cn-left-col,#cn-right-col,#cn-gcnb ul,#cn-search-box,#cn-psnb,#cn-foot{display:none;}
 	#cn-doc-dates{float:right;display:inline;}

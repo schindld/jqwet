@@ -18,14 +18,14 @@
 				parity;
 			if (elm.is('table')) {
 				$trs = (elm.children('tr').add(elm.children('tbody').children('tr'))).filter(function () {
-					return $(this).children('th').length === 0;
+					return $(this).children('td').length > 0;
 				});
 				// note: even/odd's indices start at 0
 				$trs.filter(':odd').addClass('table-even');
 				$trs.filter(':even').addClass('table-odd');
-				$trs.on('td', 'hover focusin focusout', function (e) {
+				$trs.on('hover focusin focusout', function (e) {
 					e.stopPropagation();
-					$(this).closest('tr').toggleClass('table-hover');
+					$(this).toggleClass('table-hover');
 				});
 			} else {
 				$lis = elm.children('li');

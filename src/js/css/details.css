@@ -22,7 +22,6 @@ summary:hover, summary:focus {
 /* Remember: by default (and probably most of the time), the contents of the <details> element are hidden. */
 
 /* Hide all direct descendants of every <details> element */
-/* Note that IE6 doesn’t support the child selector; we’ll work around that using jQuery later */
 details > * { 
     display: none; 
 }

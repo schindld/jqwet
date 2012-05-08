@@ -155,7 +155,7 @@
 			}
 			// add the css
 			var file = pe.url(document.getElementById('progressive').src).file;
-			var suffix = file.substr(file.length-4) == "-min"?"-min":"";
+			var suffix = file.substr(file.length-7) == "-min.js"?"-min":"";
 			suffix = (pe.ie < 9 && pe.ie > 0 ? "-ie" : "") + suffix;
 			pe.add.css(pe.add.liblocation + 'css/pe-ap' + suffix + '.css');
 		},

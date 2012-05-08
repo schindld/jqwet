@@ -16,6 +16,7 @@
 	#cn-doc-dates{margin:0;}
 	#cn-doc-dates dt,#cn-doc-dates dd{float:left;}
 	#cn-doc-dates dd{margin:0 0 0 10px;}
+	#cn-banner .ui-navbar,#jqmobile-wet-boew-menubar,#jqmobile-wet-boew-search,.ui-loader{display:none !important;}
 }
 
 @media screen{

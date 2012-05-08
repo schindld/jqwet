@@ -78,10 +78,10 @@
     background-color:#fff
 }
 
-*:first-child+html .wet-boew-toolbar{
+.ie7 .wet-boew-toolbar{
     width:140px
 }
 
-* html .wet-boew-toolbar .toolbar-top-page a,*:first-child+html .wet-boew-toolbar .toolbar-top-page a{
+.ie7 .wet-boew-toolbar .toolbar-top-page a{
     width:110px
 }
