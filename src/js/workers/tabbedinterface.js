@@ -3,7 +3,7 @@
  * www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions
  */
 /*
- * tabbedinterface plugin - port v1.2
+ * Tabbed interface plugin
  */
 (function ($) {
 	var _pe = window.pe || {

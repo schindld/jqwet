@@ -98,11 +98,11 @@
     filter:alpha(opacity=10);
 }
 
-.style-tabs-1 .tabs-panel>div.active,.style-tabs-2 .tabs-panel>div.active,.style-tabs-3 .tabs-panel>div.active,.style-tabs-4 .tabs-panel>div.active,.style-tabs-5 .tabs-panel>div.active,.style-tabs-6 .tabs-panel>div.active,.style-tabs-7 .tabs-panel>div.active,.style-tabs-4 .tabs-panel img,.style-tabs-5 .tabs-panel img{
+.style-tabs-1 .tabs-panel>div.active,.style-tabs-2 .tabs-panel>div.active,.style-tabs-3 .tabs-panel>div.active,.style-tabs-4 .tabs-panel>div.active,.style-tabs-5 .tabs-panel>div.active,.style-tabs-6 .tabs-panel>div.active,.style-tabs-4 .tabs-panel img,.style-tabs-5 .tabs-panel img{
 display:block;
 }
 
-.style-tabs-1 .tabs-panel h2,.style-tabs-2 .tabs-panel h2,.style-tabs-3 .tabs-panel h2,.style-tabs-4 .tabs-panel h2,.style-tabs-5 .tabs-panel h2,.style-tabs-6 .tabs-panel h2,.style-tabs-7 .tabs-panel h2,.style-tabs-1 .tabs-panel h3,.style-tabs-2 .tabs-panel h3,.style-tabs-3 .tabs-panel h3,.style-tabs-4 .tabs-panel h3,.style-tabs-5 .tabs-panel h3,.style-tabs-6 .tabs-panel h3,.style-tabs-7 .tabs-panel h3,.style-tabs-1 .tabs-panel h4,.style-tabs-2 .tabs-panel h4,.style-tabs-3 .tabs-panel h4,.style-tabs-4 .tabs-panel h4,.style-tabs-5 .tabs-panel h4,.style-tabs-6 .tabs-panel h4,.style-tabs-7 .tabs-panel h4,.style-tabs-1 .tabs-panel h5,.style-tabs-2 .tabs-panel h5,.style-tabs-3 .tabs-panel h5,.style-tabs-4 .tabs-panel h5,.style-tabs-5 .tabs-panel h5,.style-tabs-6 .tabs-panel h5,.style-tabs-7 .tabs-panel h5,.style-tabs-1 .tabs-panel h6,.style-tabs-2 .tabs-panel h6,.style-tabs-3 .tabs-panel h6,.style-tabs-4 .tabs-panel h6,.style-tabs-5 .tabs-panel h6,.style-tabs-6 .tabs-panel h6,.style-tabs-7 .tabs-panel h6,.style-tabs-1 .tabs-panel,.style-tabs-5 .tabs,.style-tabs-7 .tabs-panel .active,.wet-boew-share .bookmark_list img {
+.style-tabs-1 .tabs-panel h2,.style-tabs-2 .tabs-panel h2,.style-tabs-3 .tabs-panel h2,.style-tabs-4 .tabs-panel h2,.style-tabs-5 .tabs-panel h2,.style-tabs-6 .tabs-panel h2,.style-tabs-1 .tabs-panel h3,.style-tabs-2 .tabs-panel h3,.style-tabs-3 .tabs-panel h3,.style-tabs-4 .tabs-panel h3,.style-tabs-5 .tabs-panel h3,.style-tabs-6 .tabs-panel h3,.style-tabs-1 .tabs-panel h4,.style-tabs-2 .tabs-panel h4,.style-tabs-3 .tabs-panel h4,.style-tabs-4 .tabs-panel h4,.style-tabs-5 .tabs-panel h4,.style-tabs-6 .tabs-panel h4,.style-tabs-1 .tabs-panel h5,.style-tabs-2 .tabs-panel h5,.style-tabs-3 .tabs-panel h5,.style-tabs-4 .tabs-panel h5,.style-tabs-5 .tabs-panel h5,.style-tabs-6 .tabs-panel h5,.style-tabs-1 .tabs-panel h6,.style-tabs-2 .tabs-panel h6,.style-tabs-3 .tabs-panel h6,.style-tabs-4 .tabs-panel h6,.style-tabs-5 .tabs-panel h6,.style-tabs-6 .tabs-panel h6,.style-tabs-1 .tabs-panel,.style-tabs-5 .tabs,.wet-boew-share .bookmark_list img {
 border:0;
 }
 
@@ -143,16 +143,16 @@ background:#333;
 color:#fff;
 }
 
-.style-tabs-2 .tabs-content-pad a,.style-tabs-7 .tabs-content-pad a:visited,.style-tabs-7 .tabs-content-pad a:hover,.style-tabs-20 .tabs-content-pad a,.style-tabs-20 .tabs-content-pad a:visited,.style-tabs-20 .tabs-content-pad a:hover,.style-tabs-6 .tabs-content-pad a,.style-tabs-6 .tabs-content-pad a:visited,.style-tabs-6 .tabs-content-pad a:hover,.style-tabs-7 .tabs-content-pad a,.style-tabs-7 .tabs-content-pad a:visited,.style-tabs-7 .tabs-content-pad a:hover{
+.style-tabs-2 .tabs-content-pad a,.style-tabs-20 .tabs-content-pad a,.style-tabs-20 .tabs-content-pad a:visited,.style-tabs-20 .tabs-content-pad a:hover,.style-tabs-6 .tabs-content-pad a,.style-tabs-6 .tabs-content-pad a:visited,.style-tabs-6 .tabs-content-pad a:hover{
 color:#fff;
 }
 
-.style-tabs-2 .tabs-content-pad p,.style-tabs-7 .tabs-content-pad p{
+.style-tabs-2 .tabs-content-pad p{
 margin:0 0 0 10px;
 padding:0;
 }
 
-.style-tabs-2 li.style-tabs-7 li.tabs-toggle a:focus,.style-tabs-7 li.tabs-toggle a:active,.style-tabs-7 li.tabs-toggle a:hover,.style-tabs-6 li.style-tabs-6 li.tabs-toggle a:focus,.style-tabs-6 li.tabs-toggle a:active,.style-tabs-6 li.tabs-toggle a:hover,.style-tabs-7 li.tabs-.style-tabs-7 li.tabs-toggle a:focus,.style-tabs-7 li.tabs-toggle a:active,.style-tabs-7 li.tabs-toggle a:hover{
+.style-tabs-6 li.style-tabs-6 li.tabs-toggle a:focus,.style-tabs-6 li.tabs-toggle a:active,.style-tabs-6 li.tabs-toggle a:hover{
 margin-right:0;
 opacity:1;
 filter:alpha(opacity=100);
@@ -163,7 +163,7 @@ padding:2px 5px 2px 24px;
 position:static;
 }
 
-.style-tabs-2 .tabs-content-pad a:hover,.style-tabs-2 .tabs-content-pad a:focus,.style-tabs-20 .tabs-content-pad a:hover,.style-tabs-20 .tabs-content-pad a:focus,.style-tabs-7 .tabs-panel a:hover,.style-tabs-7 .tabs-panel a:focus,.style-tabs-7 .tabs-panel a:active{
+.style-tabs-2 .tabs-content-pad a:hover,.style-tabs-2 .tabs-content-pad a:focus,.style-tabs-20 .tabs-content-pad a:hover,.style-tabs-20 .tabs-content-pad a:focus{
 color:#295376!important;
 }
 
@@ -186,18 +186,18 @@ padding:0;
 padding:0;
 }
 
-.style-tabs-5 .tabs li,.style-tabs-5 .tabs li a,.style-tabs-7 .tabs span{
+.style-tabs-5 .tabs li,.style-tabs-5 .tabs li a{
 display:none!important;
 }
 
-.style-tabs-6 .tabs li.tabs-toggle a,.style-tabs-7 .tabs li.tabs-toggle a{
+.style-tabs-6 .tabs li.tabs-toggle a{
 height:auto;
 min-width:48px;
 text-align:center;
 margin:0;
 }
 
-.style-tabs-6 .tabs-toggle a:active,.style-tabs-6 .tabs-toggle a:focus,.style-tabs-7 .tabs-toggle a:active,.style-tabs-7 .tabs-toggle a:focus{
+.style-tabs-6 .tabs-toggle a:active,.style-tabs-6 .tabs-toggle a:focus{
 background-repeat:no-repeat!important;
 background-position:-1px 0!important;
 }
@@ -787,227 +787,6 @@ background-position:-1px 0!important;
 .tabs-style-6 .tabs-toggle a:active,.tabs-style-6 .tabs-toggle a:focus{
     background-repeat:no-repeat !important;
     background-position:-1px 0 !important;
-}
-
-/* style 7  For use with the Multimedia Player*/
-.tabs-style-7 {
-    height:250px;
-    overflow:hidden;
-    position:relative;
-    width:960px;
-    background:#fff;
-}
-
-.tabs-style-7 .tabs{
-    height:249px;
-    left:0;
-    right:inherit;
-    top:0;
-    overflow:hidden;
-    position:absolute;
-    z-index:100;
-    width:228px;
-    border:1px solid #ccc;
-    border-top:none }
-
-.tabs-style-7 .tabs span{
-    display:none !important;
-}
-
-.tabs-style-7 .tabs li{
-    background:transparent;
-    display:block;
-    border:none;
-    width:228px;
-}
-
-.tabs-style-7 .tabs li.active{
-    margin-right:0;
-    top:0;
-    background:#222;
-}
-
-.tabs-style-7 .tabs li.active span{
-    display:block!important;
-    font-weight: normal;
-    padding:3px;
-}
-
-.tabs-style-7 .tabs li a{
-    font-size: 95%;
-    color:#222 !important;
-    text-decoration: none !important;
-    display:block;
-    border:none;
-    text-decoration:none;
-    background-color:transparent;
-    background-image:none;
-    padding:5px 10px;
-}
-
-.tabs-style-7 .tabs li a span {
-    display: block;
-    padding-top: 2px;
-    font-size: 95% }
-
-.tabs-style-7 .tabs-toggle a {
-    color: #333 !important;
-    background-color:#eee;
-}
-
-.tabs-style-7 .tabs li a.active,.tabs-style-7 .tabs li a:active{
-    text-decoration:none;
-    color:#000;
-    font-weight: 900;
-    background-color:#ddd;
-    background-image:none;
-}
-
-.tabs-style-7 .tabs li a:hover,.tabs-style-7 .tabs li a:focus{
-    text-decoration:underline;
-    color:#000;
-    background-color:#ddd;
-    background-image:none;
-}
-
-.tabs-style-7 .tabs-panel{
-    overflow:hidden;
-    width:730px;
-    float:right;
-    margin:0;
-    padding:0;
-    border:none;
-}
-
-.tabs-style-7 .tabs-panel .active{
-    border:none;
-}
-
-.tabs-style-7 .tabs-roller{
-    background-color:transparent;
-    border-bottom: 2px solid #000;
-    top:auto;
-    bottom:0;
-    opacity:0.1;
-    filter:alpha(opacity=10);
-}
-/** we now style a border to give a small subtle line effect**/
-.tabs-style-7 .tabs-toggle a{
-    position:static;
-    margin-right:2px;
-    margin-top:10px;
-    border:1px solid #999;
-    background-repeat:no-repeat;
-    background-position:-1px 0;
-    background-color:#eee !important;
-}
-
-.tabs-style-7 img{
-    width:730px;
-    height:250px;
-    margin:0;
-    padding:0;
-    float:right;
-}
-
-.tabs-style-7 .tabs-content-pad{
-    position:absolute;
-    bottom:0px;
-    right:0px;
-    width:715px;
-    background:#111;
-    opacity:0.9;
-    filter:alpha(opacity=90);
-    color:#fff;
-    padding-right: 10px;
-    padding-left: 5px;
-    padding-bottom: 5px;
-    padding-top: 5px;
-}
-
-.tabs-style-7 .tabs-content-pad a,.tabs-style-7 .tabs-content-pad a:visited,.tabs-style-7 .tabs-content-pad a:hover{
-    color:#fff;
-}
-
-.tabs-style-7 .tabs-content-pad p{
-    margin:0 0 0 10px;
-    padding: 0;
-}
-
-.tabs-style-7 li.tabs-toggle a,.tabs-style-7 li.tabs-toggle a:focus,.tabs-style-7 li.tabs-toggle a:active,.tabs-style-7 li.tabs-toggle a:hover{
-    margin-right:0;
-    opacity:1;
-    filter:alpha(opacity=100);
-}
-
-.tabs-style-7 .tabs li.tabs-toggle{
-    display:block;
-    float:left;
-    position:relative;
-    left:10px;
-    top:10px;
-    height:auto;
-    width:auto;
-    border:none;
-    background-color:transparent;
-}
-
-.tabs-style-7 li.tabs-toggle a:active,.tabs-style-7 li.tabs-toggle a:hover{
-    background-color:#ddd !important;
-}
-
-.tabs-style-7 .tabs li.tabs-toggle a{
-    display:inline;
-    height:auto;
-    margin:0;
-    min-width:48px;
-    text-align:center;
-}
-
-.tabs-style-7 .tabs-panel a:hover,.tabs-style-7 .tabs-panel a:focus,.tabs-style-7 .tabs-panel a:active{
-    color: #295376 !important;
-}
-
-/*** 1200px ***/
-@media only screen and (min-width:1200px) {
-
-    .tabs-style-7{
-        width:1200px;
-    }
-
-    .tabs-style-7 .tabs-panel,.tabs-style-7 img{
-        width:890px;
-        height:auto;
-        margin-top:-10px;
-    }
-
-    .tabs-style-7 .tabs-content-pad{
-        width:875px;
-    }
-
-    .tabs-style-7 .tabs,.tabs-style-7 .tabs li{
-        width:308px;
-    }
-
-}
-
-/*** 768px ***/
-@media only screen and (max-width:959px) {
-
-    .tabs-style-7{
-        width:768px;
-    }
-
-    .tabs-style-7 .tabs-panel,.tabs-style-7 img{
-        width:538px;
-        height:auto;
-        background:#111;
-    }
-
-    .tabs-style-7 .tabs-content-pad{
-        width:523px;
-    }
-
 }
 
 /*pause and play effect*/
