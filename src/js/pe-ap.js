@@ -868,7 +868,7 @@
 					_node;
 				_node = $(this);
 				_fcall = _node.attr("class").replace(/^wet-boew-(\S*).*/i, "$1".toLowerCase());
-				if (typeof pe.fn[fcall] !== "undefined") {
+				if (typeof pe.fn[_fcall] !== "undefined") {
 					pe._execute(pe.fn[_fcall], _node);
 				}
 				// lets safeguard the execution to only functions we have
