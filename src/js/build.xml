@@ -35,7 +35,7 @@
         </copy>
     </target>
     
-    <target name="build-css" depends="-merge-css" />
+    <target name="build-css" depends="-base64-encode" />
     
     <!-- Build JS Tasks -->
     <target name="-build-pe" depends="-merge-workers">
@@ -55,9 +55,25 @@
     </target>
 
     <!--Build CSS Tasks -->
+    <target name="-base64-encode" depends="-merge-css">
+        <copy file="${build.dir}/premin/css/pe-ap.css" tofile="${build.dir}/premin/css/pe-ap-ie.css"/>
+        <copy todir="${build.dir}/premin/images">
+            <fileset dir="${src.dir}/images"/>
+        </copy>
+        <cssurlembed skipMissing="true">
+            <fileset dir="${build.dir}/premin/css/">
+                <include name="pe-ap.css"/>
+            </fileset>
+        </cssurlembed>
+    </target>
+    
     <target name="-merge-css">
-        <copy file="${src.dir}/css/javascript.css" toFile="${build.dir}/premin/css/pe-ap.css"/>
-        <copy file="${src.dir}/css/javascript.css" toFile="${build.dir}/premin/css/pe-ap-ie.css"/>
+        <concat dest="${build.dir}/premin/css/pe-ap.css" fixlastline="yes">
+            <fileset dir="${src.dir}/css">
+                <include name="*.css"/>
+                <exclude name="pe-ap*.css"/>
+            </fileset>
+        </concat>
     </target>
     
     <target name="clean">

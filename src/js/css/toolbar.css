@@ -1,0 +1,87 @@
+@charset "utf-8";
+/*!
+ * Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
+ * www.tbs.gc.ca/ws-nw/wet-boew/terms / www.sct.gc.ca/ws-nw/wet-boew/conditions
+*/
+.wet-boew-toolbar{
+    position:fixed;
+    bottom:0;
+    z-index:99999;
+    background:#ccc url(data:image/gif;base64,R0lGODlhAQAeAMQAANfX1+Pj493d3e3t7efn59zc3NDQ0Onp6dra2tnZ2eDg4NPT09bW1urq6uTk5NTU1OHh4e7u7tHR0evr687Oztvb2+jo6NjY2OXl5eLi4tLS0t/f3+zs7M/PzwAAAAAAACH5BAAAAAAALAAAAAABAB4AAAUYYDRwU3NYBOYEGaRsQlEhyQUwz6JJRkeFADs=) repeat-x 0 0;
+    border:1px solid #ccc;
+    left:0;
+    clear:both;
+    border-radius:3px 0 0 0;
+    -moz-border-radius:3px 0 0 0;
+    -webkit-border-radius:3px 0 0 0;
+    width:auto;
+    right:5px;
+    left:auto
+}
+
+.wet-boew-toolbar ul{
+    list-style-type:none;
+    border-top:1px solid #fff;
+    margin:0;
+    padding:0
+}
+
+.wet-boew-toolbar ul li{
+    position:relative;
+    margin:0;
+    padding:0
+}
+
+.wet-boew-toolbar a{
+    float:left;
+    height:22px;
+    text-decoration:none;
+    color:#333;
+    position:relative;
+    padding:2px 5px 0 25px;
+    text-shadow:0 1px 0 #fff
+}
+
+.wet-boew-toolbar form{
+    margin:0
+}
+
+.wet-boew-toolbar p{
+    margin:2px 0 0 5px
+}
+
+.wet-boew-toolbar label{
+    margin-right:5px
+}
+
+.wet-boew-toolbar input{
+    vertical-align:middle;
+    margin:0;
+    padding:1px 2px 2px
+}
+
+.wet-boew-toolbar input.toolbar-search-button{
+    margin-left:0;
+    background:#ccc
+}
+
+.wet-boew-toolbar .toolbar-top-page a{
+    background:transparent url('../images/top_of_page.png') no-repeat scroll 5px center;
+    border:0
+}
+
+.wet-boew-toolbar .toolbar-top-page{
+    float:right!important
+}
+
+.wet-boew-toolbar a.active,.wet-boew-toolbar a:focus,.wet-boew-toolbar a:hover{
+    background-color:#fff
+}
+
+*:first-child+html .wet-boew-toolbar{
+    width:140px
+}
+
+* html .wet-boew-toolbar .toolbar-top-page a,*:first-child+html .wet-boew-toolbar .toolbar-top-page a{
+    width:110px
+}
