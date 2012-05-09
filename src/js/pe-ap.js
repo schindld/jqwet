@@ -78,14 +78,20 @@
 				mb_dialogue += '<p id="jqm-mb-location-text"></p>';
                                 
                                 mb_dialogue += '<h2>' + $('#cn-psnb').find(':header').eq(0).html() + '</h2>';
-				mb_dialogue += '<ul data-role="listview" data-inset="true" data-theme=\"a\">';
+				//mb_dialogue += '<ul data-role="listview" data-inset="true" data-theme=\"a\">';
+                                mb_dialogue += '<div data-role=\"collapsible-set\">';
 				// top menu this is more than likely going to happen
-				$('#cn-psnb ul.mb-menu > li').each(function () {
-					var _elm = $(this).find('a').eq(0);
-					mb_dialogue += '<li><a  href="' + _elm.attr('href') + '">' + _elm.text() + '</a></li>';
-					//list.append(item);
+                                
+				$('#cn-psnb ul.mb-menu').clone().find('li > section').each(function () {
+                                        $this = $(this);
+                                        $this.find("h3").each(function(){
+                                            $(this).html($(this).text());
+                                        });
+                                        $this.find("ul").attr("data-role", "listview");
+                                        mb_dialogue += "<div data-role=\"collapsible\" data-theme=\"a\">" + $(this).html() + "</div>";
 				});
-				mb_dialogue += '</ul>';
+                                mb_dialogue += '</div>';
+				//mb_dialogue += '</ul>';
                                 
 				if ($('#cn-left-col').length > 0) {
 					// we have a submenu
