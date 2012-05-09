@@ -43,7 +43,7 @@
 			<file file="${src.dir}/pe-ap.js"/>
 			<file file="${build.dir}/workers.js"/>
 		</concat>
-		<!--<delete file="${build.dir}/workers.js"/>-->
+		<delete file="${build.dir}/workers.js"/>
 		<delete file="${build.dir}/dependencies.js"/>
 	</target>
 
@@ -90,11 +90,7 @@
 	</target>
 
 	<target name="clean">
-		<delete>
-			<fileset dir="${build.dir}">
-				<exclude name="lib/*.*"/>
-			</fileset>
-		</delete>
+		<delete dir="${build.dir}" />
 		<delete dir="${dist.dir}" />
 	</target>
 </project>
