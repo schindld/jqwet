@@ -106,7 +106,9 @@
 	</target>
 
 	<target name="-recurse">
-		<property name="regexp" value="@import\s*?url\(\s*?['&quot;](.*)?['&quot;]\s*?\)" />
+        <property name="charset_regexp" value="@charset\s*?['&quot;]utf-8['&quot;]\s*?;" />
+        <property name="url_regexp" value="url\(\s*?['&quot;]\s*?(.*)?['&quot;]\s*?\s*?\)" />
+        <property name="import_regexp" value="@import\s*?${url_regexp}\s*?;?" />
 		<fixcrlf file="${file.recurse}"/>
 		<!-- Removes the charset directive if not in a core file -->
 		<if>
@@ -114,18 +116,19 @@
 				<equals arg1="${topfile}" arg2="true"/>
 			</not>
 			<then>
-				<replace file="${file.recurse}" token="@charset &quot;utf-8&quot;;" value=" "/>
+                <replaceregexp file="${file.recurse}" match="${charset_regexp}" replace=""/>
 			</then>
 		</if>
 
 		<loadfile property="src" srcfile="${file.recurse}" encoding="utf8"/>
-		<for delimiter="${line.separator};" param="currline" list="${src}">
+        <!--Merge imported stylesheets-->
+        <for delimiter="${line.separator}" param="currline" list="${src}">
 			<sequential>
-				<propertyregex regexp="${regexp}" property="import" select="\0" input="@{currline}" global="true" casesensitive="true" override="true"/>
+                <propertyregex regexp="${import_regexp}" property="import" select="\0" input="@{currline}" global="true" casesensitive="true" override="true"/>
 				<if>
 					<isset property="import"/>
 					<then>
-						<propertyregex regexp="${regexp}" property="import.file.name" select="\1" input="${import}" casesensitive="true" override="true"/>
+                        <propertyregex regexp="${import_regexp}" property="import.file.name" select="\1" input="${import}" casesensitive="true" override="true"/>
 						<dirname property="import.file.root" file="${file.recurse}"/>
 						<property name="import.file" value="${import.file.root}/${import.file.name}"/>
 						<antcall target="-resolve-css-imports" inheritAll="false">
@@ -135,21 +138,20 @@
 						<loadfile property="imported" srcfile="${import.file}"/>
 						<replace file="${file.recurse}" token="${import}" value="${imported}"/>
 						<var name="import.file.root" unset="true"/>
+                        <var name="import.file.name" unset="true"/>
 						<var name="import.file" unset="true"/>
 						<var name="imported" unset="true"/>
+                        <var name="import" unset="true"/>
 					</then>
 				</if>
 			</sequential>
 		</for>
 		<var name="src" unset="true"/>
+        <var name="file.recurse" unset="true"/>
 	</target>
 
 	<target name="clean">
-		<delete>
-			<fileset dir="${build.dir}">
-				<exclude name="lib/*.*"/>
-			</fileset>
-		</delete>
+		<delete dir="${build.dir}" />
 		<delete dir="${dist.dir}" />
 	</target>
 </project>

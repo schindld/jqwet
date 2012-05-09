@@ -90,11 +90,7 @@
 	</target>
 
 	<target name="clean">
-		<delete>
-			<fileset dir="${build.dir}">
-				<exclude name="lib/*.*"/>
-			</fileset>
-		</delete>
+		<delete dir="${build.dir}" />
 		<delete dir="${dist.dir}" />
 	</target>
 </project>
