@@ -9,17 +9,17 @@
 
 	<target name="-init" depends=""> <!-- Future depends: -can-nodejs-lessc -->
 		<mkdir dir="${build.dir}"/>
+                <copy file="${src.dir}/css/util.css" tofile="${build.dir}/premin/css/util.css"/>
+                <copy todir="${build.dir}/images">
+                    <fileset dir="${src.dir}/images" />
+                </copy>
 	</target>
 
-	<target name = "-minify" depends="build-css">
+	<target name = "-minify" depends="">
 		<yui-compressor warn="false" munge="true" preserveAllSemiColons="false" fromDir="${build.dir}/premin" toDir="${build.dir}">
 			<include name="css/*.*" />
 		</yui-compressor>
 		<delete dir="${build.dir}/premin"/>
-	</target>
-
-	<target name="build-css" depends="">
-		<copy file="${src.dir}/css/util.css" tofile="${build.dir}/premin/css/util.css"/>
 	</target>
 
 	<!--Build CSS Tasks -->
