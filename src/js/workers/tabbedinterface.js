@@ -97,25 +97,27 @@
 				$(this).attr("aria-selected", "true");
 				return $("#" + $(this).attr("href").substring(1)).attr("aria-hidden", "false");
 			});
-			$nav.find("li a").bind("focus", function () {
-				return $(this).click();
-			});
-			$nav.find("li a").keyup(function (e) {
-				if (e.keyCode === 13 || e.keyCode === 32) {
-					var $current = $panels.filter(function () {
-							return $(this).is("." + opts.tabActiveClass);
-						});
-					$current.attr("tabindex", "0");
-					if (e.stopPropagation) {
-						e.stopImmediatePropagation();
-					} else {
-						e.cancelBubble = true;
+			if (!$.browser['mozilla']) {
+				$nav.find("li a").bind("focus", function () {
+					return $(this).click();
+				});
+				$nav.find("li a").keyup(function (e) {
+					if (e.keyCode === 13 || e.keyCode === 32) {
+						var $current = $panels.filter(function () {
+								return $(this).is("." + opts.tabActiveClass);
+							});
+						$current.attr("tabindex", "0");
+						if (e.stopPropagation) {
+							e.stopImmediatePropagation();
+						} else {
+							e.cancelBubble = true;
+						}
+						return setTimeout(function () {
+							return $current.focus();
+						}, 0);
 					}
-					return setTimeout(function () {
-						return $current.focus();
-					}, 0);
-				}
-			});
+				});
+			}
 			selectPrev = function ($tabs, $panels, opts, keepFocus) {
 				var $current,
 					$prev,
