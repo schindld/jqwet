@@ -6,9 +6,14 @@
     
     <target name="build">
         <echo level="info">
----Building jQuery Integreation project---
+---Building jQuery Integration project---
         </echo>
         <ant dir="${src.dir}/js" antfile="build.xml" inheritAll="false"/>
+
+        <echo level="info">
+---Building CSS Grid System project---
+        </echo>
+        <ant dir="${src.dir}/grids" antfile="build.xml" inheritAll="false"/>
         
         <echo level="info">
 ---Building GCWU Theme---
@@ -18,6 +23,7 @@
     
     <target name="clean">
         <ant dir="${src.dir}/js" target="clean" antfile="build.xml" inheritAll="false"/>
+		<ant dir="${src.dir}/grids" target="clean" antfile="build.xml" inheritAll="false"/>
         <ant dir="${src.dir}/theme-gcwu-fegc" target="clean" antfile="build.xml" inheritAll="false"/>
         <delete dir="${dist.dir}" />
     </target>

@@ -7,7 +7,7 @@
     position:fixed;
     bottom:0;
     z-index:99999;
-    background:#ccc url(data:image/gif;base64,R0lGODlhAQAeAMQAANfX1+Pj493d3e3t7efn59zc3NDQ0Onp6dra2tnZ2eDg4NPT09bW1urq6uTk5NTU1OHh4e7u7tHR0evr687Oztvb2+jo6NjY2OXl5eLi4tLS0t/f3+zs7M/PzwAAAAAAACH5BAAAAAAALAAAAAABAB4AAAUYYDRwU3NYBOYEGaRsQlEhyQUwz6JJRkeFADs=) repeat-x 0 0;
+    background:#ccc url(../images/toolbar/gradient.png) repeat-x 0 0;
     border:1px solid #ccc;
     left:0;
     clear:both;
@@ -66,7 +66,7 @@
 }
 
 .wet-boew-toolbar .toolbar-top-page a{
-    background:transparent url('../images/top_of_page.png') no-repeat scroll 5px center;
+    background:transparent url(../images/toolbar/top_of_page.png) no-repeat scroll 5px center;
     border:0
 }
 

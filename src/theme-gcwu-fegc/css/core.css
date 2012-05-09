@@ -9,8 +9,8 @@
 @import url('theme-gcwu-fegc.css');
 @import url('theme-gcwu-fegc-ie7.css');
 @import url('framework-responsive-theme-gcwu-fegc.css');
-@import url('../fip-pcim/css/fip-pcim.css');
-@import url('../fip-pcim/css/fip-pcim-ie7.css');
-@import url('../fip-pcim/css/fip-pcim-ie8.css');
+@import url('fip-pcim.css');
+@import url('fip-pcim-ie7.css');
+@import url('fip-pcim-ie8.css');
 @import url('megamenu.css');
 /* -----Build Include Section End----- */

@@ -9,6 +9,6 @@
 @import url('framework-responsive-theme-gcwu-fegc.css');
 @import url('sp-pe-theme-gcwu-fegc.css');
 @import url('sp-pe-theme-gcwu-fegc-ie7.css');
-@import url('../fip-pcim/css/sp-pe-fip-pcim.css');
-@import url('../fip-pcim/css/sp-pe-fip-pcim-ie7.css');
+@import url('sp-pe-fip-pcim.css');
+@import url('sp-pe-fip-pcim-ie7.css');
 /* -----Build Include Section End----- */
