@@ -32,6 +32,8 @@
                 </copy>
                 <filelist id="corefiles" dir="${build.dir}">
                     <file name="css/core.css"/>
+					<file name="css/core-sppe.css"/>
+					<file name="css/core-serv.css"/>
                     <file name="css/mobile.css"/>
 		</filelist>
 		<for param="css-file">
@@ -49,6 +51,8 @@
                 <delete>
                     <fileset dir="${build.dir}/css">
                         <exclude name="core.css"/>
+						<exclude name="core-sppe.css"/>
+						<exclude name="core-serv.css"/>
                         <exclude name="mobile.css"/>
                     </fileset>
                 </delete>
