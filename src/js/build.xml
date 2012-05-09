@@ -43,7 +43,7 @@
 			<file file="${src.dir}/pe-ap.js"/>
 			<file file="${build.dir}/workers.js"/>
 		</concat>
-		<!--<delete file="${build.dir}/workers.js"/>-->
+		<delete file="${build.dir}/workers.js"/>
 		<delete file="${build.dir}/dependencies.js"/>
 	</target>
 
