@@ -76,23 +76,8 @@
 				//mb_dialogue.append($('<div data-role="header"></div>').append($('#cn-psnb > :header').clone()));
 				mb_dialogue += '<div data-role="content" data-inset="true">';
 				mb_dialogue += '<p id="jqm-mb-location-text"></p>';
-				if ($('#cn-left-col').length > 0) {
-					// we have a submenu
-					sub = $('#cn-left-col .cn-left-col-default').html().replace(/<section>/gi, "").replace(/<\/section>/gi, "");
-					// lets work on the menu shift
-					/** sub = sub.replace(/<ul\b[^>]*"sub-nav"[^>]*>([\s\S]*?)<\/ul>/gmi, function(m, child){
-					var _internal = child;
-					_internal = _internal.replace(/<li.*?>/gmi,"").replace(/<\/li>/gmi,'').replace(/<a/gi,"<a class=\"ui-link\"  data-icon=\"arrow-r\"");
-					return "<div data-role=\"navbar\">" + _internal + "</div>";
-					});
-					 **/
-					sub = sub.replace(/<ul(.*?)>/gi, "<ul data-role=\"listview\"$1>"); //.replace(/<\/ul>/gi,"");
-					sub = sub.replace(/<h(.*?)>\s*<a/gmi, "<div data-role=\"navbar\"><h$1 data-role=\"listview\"><a class=\"ui-link\" data-icon=\"arrow-r\"  data-theme=\"b\"").replace(/<\/h(\d)>/gi, "</h$1></div>");
-					//sub = sub.replace(/<\/a>\s+<ul(.*?)>(.*?)<\/ul>/gmi, "</a><div data-role=\"navbar\">$2</div>");
-					//console.log(sub);
-					mb_dialogue += sub;
-				}
-				mb_dialogue += '<h2>' + $('#cn-psnb').find(':header').eq(0).html() + '</h2>';
+                                
+                                mb_dialogue += '<h2>' + $('#cn-psnb').find(':header').eq(0).html() + '</h2>';
 				mb_dialogue += '<ul data-role="listview" data-inset="true" data-theme=\"a\">';
 				// top menu this is more than likely going to happen
 				$('#cn-psnb ul.mb-menu > li').each(function () {
@@ -101,6 +86,32 @@
 					//list.append(item);
 				});
 				mb_dialogue += '</ul>';
+                                
+				if ($('#cn-left-col').length > 0) {
+					// we have a submenu
+                                        sub = '<h2>' + $('#cn-left-col').find(':header').eq(0).html() + '</h2>';
+                                        sub += '<div data-role="collapsible-set">'
+					
+                                        sub += $('#cn-left-col .cn-left-col-default').html().replace(/<section>/gi, "<section><div data-role=\"collapsible\">").replace(/<\/section>/gi, "</div></section>");
+                                        
+					// lets work on the menu shift
+					/** sub = sub.replace(/<ul\b[^>]*"sub-nav"[^>]*>([\s\S]*?)<\/ul>/gmi, function(m, child){
+					var _internal = child;
+					_internal = _internal.replace(/<li.*?>/gmi,"").replace(/<\/li>/gmi,'').replace(/<a/gi,"<a class=\"ui-link\"  data-icon=\"arrow-r\"");
+					return "<div data-role=\"navbar\">" + _internal + "</div>";
+					});
+					 **/
+                                        sub = sub.replace(/<h(.*?)>\s*<a/gmi, "<h$1><a class=\"ui-link\" data-icon=\"arrow-r\" data-theme=\"b\"");
+					sub = sub.replace(/<ul(.*?)>/gi, "<ul data-role=\"listview\"$1>").replace(/<\/ul>/gi,"</ul>");
+                                        
+                                        sub = sub.replace (/<div class=\"top-level\"/gmi, "<div data-role=\"button\" data-icon=\"arrow-r\" class=\"top-level\"")
+
+					//sub = sub.replace(/<\/a>\s+<ul(.*?)>(.*?)<\/ul>/gmi, "</a><div data-role=\"navbar\">$2</div>");
+					//console.log(sub);
+                                        sub += '</div>'
+					mb_dialogue += sub;
+				}
+				
 				mb_dialogue += '</div></div>';
 				pe.pagecontainer().append(mb_dialogue);
 				$('#cn-psnb-inner').remove();
