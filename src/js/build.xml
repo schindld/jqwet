@@ -23,11 +23,11 @@
 		<copy todir="${build.dir}">  
 			<resources>
 				<fileset dir="${src.dir}">
-					<include name="i18n/*"/>
-					<include name="images/*"/>
-					<include name="dependencies/*"/> 
-					<include name="polyfills/*"/>
-					<include name="jquery.mobile/*"/>
+					<include name="i18n/**"/>
+					<include name="images/**"/>
+					<include name="dependencies/**"/> 
+					<include name="polyfills/**"/>
+					<include name="jquery.mobile/**"/>
 					<include name="*.js"/>
 					<exclude name="pe-ap.js"/> 
 				</fileset>
