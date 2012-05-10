@@ -77,28 +77,41 @@
 				mb_dialogue += '<div data-role="content" data-inset="true">';
 				mb_dialogue += '<p id="jqm-mb-location-text"></p>';
                                 
-                                mb_dialogue += '<h2>' + $('#cn-psnb').find(':header').eq(0).html() + '</h2>';
+				mb_dialogue += '<h2>' + $('#cn-psnb').find(':header').eq(0).html() + '</h2>';
 				//mb_dialogue += '<ul data-role="listview" data-inset="true" data-theme=\"a\">';
-                                mb_dialogue += '<div data-role=\"collapsible-set\">';
+				mb_dialogue += '<div data-role=\"collapsible-set\">';
 				// top menu this is more than likely going to happen
                                 
-				$('#cn-psnb ul.mb-menu').clone().find('li > section').each(function () {
-                                        $this = $(this);
-                                        $this.find("h3").each(function(){
-                                            $(this).html($(this).text());
-                                        });
-                                        $this.find("ul").attr("data-role", "listview");
-                                        mb_dialogue += "<div data-role=\"collapsible\" data-theme=\"a\">" + $(this).html() + "</div>";
+				$('#cn-psnb ul.mb-menu').clone().children().children('div:first-child,h2,h3,h4,section').each(function () {
+					var $this = $(this);
+					if ($this.is('section')) {$this = $this.children('h2,h3,h4').eq(0);}				
+					$this.html($this.text());
+					if ($this.is('div')) {
+						mb_dialogue += "<div data-role=\"button\" data-icon=\"arrow-r\" data-corners=\"false\" class=\"top-level" + ($this.parent().is("li:first-child") ? " ui-corner-top":(($this.parent().is("li:last-child") ? " ui-corner-bottom":""))) + "\" data-theme=\"a\">" + $(this).html() + "</div>";
+					} else {
+						$this.parent().find("ul").attr("data-role", "listview");
+						$this.parent().find(".mb-sm div > a,.mb-sm h2,.mb-sm h3,.mb-sm h4").each(function () {
+							var $this_sub = $(this);
+							var $this_sub_parent = $this_sub.parent();
+							if ($this_sub_parent.is('div')) {
+								$this_sub_parent.html($this_sub_parent.text());
+								$this_sub_parent.attr('data-role','button').attr('data-icon','arrow-r').attr('data-corners','false').attr('data-theme','a').addClass('top-level' + ($this.parent().is("li:first-child") ? " ui-corner-top":(($this.parent().is("li:last-child") ? " ui-corner-bottom":""))));
+							} else if ($this_sub_parent.is('section')) {
+								$this_sub.html($this_sub.text());
+								$this_sub_parent.html("<div data-role=\"collapsible\" data-theme=\"a\">" + $this_sub_parent.html() + "</div>");
+							}
+						});
+						mb_dialogue += "<div data-role=\"collapsible\" data-theme=\"a\">" + $this.parent().html() + "</div>";
+					}
 				});
-                                mb_dialogue += '</div>';
+				mb_dialogue += '</div>';
 				//mb_dialogue += '</ul>';
                                 
 				if ($('#cn-left-col').length > 0) {
 					// we have a submenu
-                                        sub = '<h2>' + $('#cn-left-col').find(':header').eq(0).html() + '</h2>';
-                                        sub += '<div data-role="collapsible-set">'
-					
-                                        sub += $('#cn-left-col .cn-left-col-default').html().replace(/<section>/gi, "<section><div data-role=\"collapsible\">").replace(/<\/section>/gi, "</div></section>");
+					sub = '<h2>' + $('#cn-left-col').find(':header').eq(0).html() + '</h2>';
+					sub += '<div data-role="collapsible-set">'
+					sub += $('#cn-left-col .cn-left-col-default').html().replace(/<section>/gi, "<section><div data-role=\"collapsible\">").replace(/<\/section>/gi, "</div></section>");
                                         
 					// lets work on the menu shift
 					/** sub = sub.replace(/<ul\b[^>]*"sub-nav"[^>]*>([\s\S]*?)<\/ul>/gmi, function(m, child){
@@ -107,14 +120,13 @@
 					return "<div data-role=\"navbar\">" + _internal + "</div>";
 					});
 					 **/
-                                        sub = sub.replace(/<h(.*?)>\s*<a/gmi, "<h$1><a class=\"ui-link\" data-icon=\"arrow-r\" data-theme=\"b\"");
+					sub = sub.replace(/<h(.*?)>\s*<a/gmi, "<h$1><a class=\"ui-link\" data-icon=\"arrow-r\" data-theme=\"b\"");
 					sub = sub.replace(/<ul(.*?)>/gi, "<ul data-role=\"listview\"$1>").replace(/<\/ul>/gi,"</ul>");
-                                        
-                                        sub = sub.replace (/<div class=\"top-level\"/gmi, "<div data-role=\"button\" data-icon=\"arrow-r\" class=\"top-level\"")
+					sub = sub.replace (/<div class=\"top-level\"/gmi, "<div data-role=\"button\" data-icon=\"arrow-r\" class=\"top-level\"")
 
 					//sub = sub.replace(/<\/a>\s+<ul(.*?)>(.*?)<\/ul>/gmi, "</a><div data-role=\"navbar\">$2</div>");
 					//console.log(sub);
-                                        sub += '</div>'
+					sub += '</div>'
 					mb_dialogue += sub;
 				}
 				
