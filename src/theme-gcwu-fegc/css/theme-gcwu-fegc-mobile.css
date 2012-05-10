@@ -82,21 +82,23 @@ h2,h3,h4,h5,h6,p,blockquote,table,form,img,pre{margin-left:0;margin-right:0;text
 .no-js .cn-left-col-default li li{margin-left:0;border:none;list-style-type:none;padding:0;}
 .cn-invisible{position: absolute  !important; clip: rect(1px, 1px, 1px, 1px)  !important; height: 1px !important; width: 1px !important; overflow: hidden !important; margin: 0 !important;padding:0 !important;margin:0 !important;}
 
-#jqmobile-wet-boew-search h2,#jqmobile-wet-boew-menubar h2,#jqmobile-wet-boew-menubar h3, #jqmobile-wet-boew-menubar h4{border:none;}
-#jqmobile-wet-boew-menubar h3, #jqmobile-wet-boew-menubar h4{font-size:1em;}
+#jqmobile-wet-boew-search h2,#jqmobile-wet-boew-menubar h2,#jqmobile-wet-boew-menubar h3, #jqmobile-wet-boew-menubar h4,#jqmobile-wet-boew-menubar .top-level{border:none;}
+#jqmobile-wet-boew-menubar h3, #jqmobile-wet-boew-menubar h4, #jqmobile-wet-boew-menubar .top-level{font-size:1em;}
+#jqmobile-wet-boew-menubar h3 a:link, #jqmobile-wet-boew-menubar h4 a:link, #jqmobile-wet-boew-menubar .top-level a:link{text-decoration: none}
 #jqmobile-wet-boew-menubar h3.top-section{font-size:1.2em;}
 #jqmobile-wet-boew-menubar .ui-content .ui-listview {margin:0;}
-#jqmobile-wet-boew-menubar h3 .ui-btn-inner{white-space:normal;}#jqmobile-wet-boew-menubar h4 .ui-btn-inner{white-space:normal;}
-#jqmobile-wet-boew-menubar h3 .ui-btn-icon-top .ui-btn-inner,#jqmobile-wet-boew-menubar h4 .ui-btn-icon-top .ui-btn-inner{padding:0.6em 33px 0.7em 10px} 
-#jqmobile-wet-boew-menubar h3 .ui-icon-arrow-r{left:auto;right:10px;top:50%;margin-top:-9px;}
-#jqmobile-wet-boew-menubar h4 .ui-icon-arrow-r{left:auto;right:10px;top:50%;margin-top:-9px;}
-#jqmobile-wet-boew-menubar h3 .ui-btn,#jqmobile-wet-boew-menubar h4 .ui-btn{margin:0.7em 0 .2em;text-align:left;}
+#jqmobile-wet-boew-menubar h3 .ui-btn-inner,#jqmobile-wet-boew-menubar h4 .ui-btn-inner,#jqmobile-wet-boew-menubar .top-level .ui-btn-inner{white-space:normal;}
+#jqmobile-wet-boew-menubar h3 .ui-btn-icon-top .ui-btn-inner,#jqmobile-wet-boew-menubar h4 .ui-btn-icon-top .ui-btn-inner,#jqmobile-wet-boew-menubar .top-level .ui-btn-icon-top .ui-btn-inner{padding:0.6em 33px 0.7em 10px} 
+#jqmobile-wet-boew-menubar h3 .ui-icon-arrow-r,#jqmobile-wet-boew-menubar h4 .ui-icon-arrow-r,#jqmobile-wet-boew-menubar .top-level .ui-icon-arrow-r{left:auto;right:10px;top:50%;margin-top:-9px;}
+#jqmobile-wet-boew-menubar h3 .ui-btn,#jqmobile-wet-boew-menubar h4 .ui-btn,#jqmobile-wet-boew-menubar .top-level{margin:0;text-align:left;}
 #jqmobile-wet-boew-menubar .ui-content ul.ui-listview {margin-bottom:20px;}
 #jqmobile-wet-boew-menubar .ui-li{border-width:1px 1px 0 1px}
 #jqmobile-wet-boew-menubar .ui-corner-bottom {border-bottom-width:1px;}
 #jqmobile-wet-boew-menubar div + h2,#jqmobile-wet-boew-menubar ul + h2{border-top:3px groove #fff;padding-top:8px;margin-top:23px;color:#555;}
 #jqmobile-wet-boew-menubar .ui-content h2 + ul.ui-listview{margin-bottom:1em;}
 #jqmobile-wet-boew-menubar .top-section a{margin:0 0 5px;border-radius:0;-moz-border-radius:0;-webkit-border-radius:0;}
+#jqmobile-wet-boew-menubar .ui-collapsible-heading {margin:0;}
+#jqmobile-wet-boew-menubar .top-level.ui-btn-corner-all {border-radius:0.6em;}
 #cn-banner .ui-navbar li{float:right;}
 
 .intranet #cn-subsite{border-top:1px solid #CCC;clear:both;font-size:130%;text-shadow:1px 1px 1px #333;background:url("../images/cn-subsite-1.gif") repeat-x scroll 0 top #618000;}
@@ -115,8 +117,8 @@ h2,h3,h4,h5,h6,p,blockquote,table,form,img,pre{margin-left:0;margin-right:0;text
 #cn-intranetnb-inner ul{margin:0;float:right;}
 #cn-intranetnb-inner:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
 #cn-intranetnb-inner li{display:inline;float:left;padding:5px 0 5px 5px;}
-#cn-intranetnb-inner a{  background: none repeat scroll 0 0 #eee;border: 1px solid #ddd;border-radius: 2px 2px 2px 2px;color: #222;float: right;font-weight: 400;padding: 3px;text-decoration: none;}
-#cn-banner{background:#396B9E; background: -moz-linear-gradient(#5F9CC5, #396B9E) repeat scroll 0 0 #396B9E;-webkit-linear-gradient(#5F9CC5, #396B9E) repeat scroll 0 0 #396B9E;}
+#cn-intranetnb-inner a{background: none repeat scroll 0 0 #eee;border: 1px solid #ddd;border-radius: 2px 2px 2px 2px;color: #222;float: right;font-weight: 400;padding: 3px;text-decoration: none;}
+#cn-banner{background:#396B9E; background: -moz-linear-gradient(#5F9CC5, #396B9E) repeat scroll 0 0 #396B9E;background:-webkit-linear-gradient(#5F9CC5, #396B9E) repeat scroll 0 0 #396B9E;}
 
 #jqmobile-wet-boew-menubar #cn-bc-inner a {color: #295376;text-decoration: none;border-radius:0;-moz-border-radius:0;-webkit-border-radius:0;}
 #jqmobile-wet-boew-menubar #cn-bc-inner a:hover,#jqmobile-wet-boew-menubar #cn-bc-inner a:active{text-decoration:underline;}
