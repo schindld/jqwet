@@ -77,10 +77,32 @@
 				mb_dialogue += '<div data-role="content" data-inset="true">';
 				mb_dialogue += '<p id="jqm-mb-location-text"></p>';
                                 
-				mb_dialogue += '<h2>' + $('#cn-psnb').find(':header').eq(0).html() + '</h2>';
+                                if ($('#cn-left-col').length > 0) {
+					// we have a submenu
+					sub = '<h2>' + $('#cn-left-col').find(':header').eq(0).html() + '</h2>';
+					sub += '<div data-role="collapsible-set">'
+					sub += $('#cn-left-col .cn-left-col-default').html().replace(/<section>/gi, "<section><div data-role=\"collapsible\">").replace(/<\/section>/gi, "</div></section>");
+                                        
+					// lets work on the menu shift
+					/** sub = sub.replace(/<ul\b[^>]*"sub-nav"[^>]*>([\s\S]*?)<\/ul>/gmi, function(m, child){
+					var _internal = child;
+					_internal = _internal.replace(/<li.*?>/gmi,"").replace(/<\/li>/gmi,'').replace(/<a/gi,"<a class=\"ui-link\"  data-icon=\"arrow-r\"");
+					return "<div data-role=\"navbar\">" + _internal + "</div>";
+					});
+					 **/
+					sub = sub.replace(/<h(.*?)>\s*<a/gmi, "<h$1><a class=\"ui-link\" data-icon=\"arrow-r\" data-theme=\"b\"");
+					sub = sub.replace(/<ul(.*?)>/gi, "<ul data-role=\"listview\"$1>").replace(/<\/ul>/gi,"</ul>");
+					sub = sub.replace (/<div class=\"top-level\"/gmi, "<div data-role=\"button\" data-icon=\"arrow-r\" class=\"top-level\"")
+
+					//sub = sub.replace(/<\/a>\s+<ul(.*?)>(.*?)<\/ul>/gmi, "</a><div data-role=\"navbar\">$2</div>");
+					//console.log(sub);
+					sub += '</div>'
+					mb_dialogue += sub;
+				}
+                                
+                                mb_dialogue += '<h2>' + $('#cn-psnb').find(':header').eq(0).html() + '</h2>';
 				//mb_dialogue += '<ul data-role="listview" data-inset="true" data-theme=\"a\">';
 				mb_dialogue += '<div data-role=\"collapsible-set\">';
-				// top menu this is more than likely going to happen
                                 
 				$('#cn-psnb ul.mb-menu').clone().children().children('div:first-child,h2,h3,h4,section').each(function () {
 					var $this = $(this);
@@ -106,29 +128,6 @@
 				});
 				mb_dialogue += '</div>';
 				//mb_dialogue += '</ul>';
-                                
-				if ($('#cn-left-col').length > 0) {
-					// we have a submenu
-					sub = '<h2>' + $('#cn-left-col').find(':header').eq(0).html() + '</h2>';
-					sub += '<div data-role="collapsible-set">'
-					sub += $('#cn-left-col .cn-left-col-default').html().replace(/<section>/gi, "<section><div data-role=\"collapsible\">").replace(/<\/section>/gi, "</div></section>");
-                                        
-					// lets work on the menu shift
-					/** sub = sub.replace(/<ul\b[^>]*"sub-nav"[^>]*>([\s\S]*?)<\/ul>/gmi, function(m, child){
-					var _internal = child;
-					_internal = _internal.replace(/<li.*?>/gmi,"").replace(/<\/li>/gmi,'').replace(/<a/gi,"<a class=\"ui-link\"  data-icon=\"arrow-r\"");
-					return "<div data-role=\"navbar\">" + _internal + "</div>";
-					});
-					 **/
-					sub = sub.replace(/<h(.*?)>\s*<a/gmi, "<h$1><a class=\"ui-link\" data-icon=\"arrow-r\" data-theme=\"b\"");
-					sub = sub.replace(/<ul(.*?)>/gi, "<ul data-role=\"listview\"$1>").replace(/<\/ul>/gi,"</ul>");
-					sub = sub.replace (/<div class=\"top-level\"/gmi, "<div data-role=\"button\" data-icon=\"arrow-r\" class=\"top-level\"")
-
-					//sub = sub.replace(/<\/a>\s+<ul(.*?)>(.*?)<\/ul>/gmi, "</a><div data-role=\"navbar\">$2</div>");
-					//console.log(sub);
-					sub += '</div>'
-					mb_dialogue += sub;
-				}
 				
 				mb_dialogue += '</div></div>';
 				pe.pagecontainer().append(mb_dialogue);
@@ -145,7 +144,7 @@
 				_list = $('<ul></ul>').hide().append('<li><a data-rel="dialog" data-theme="b" data-icon="search" href="' + search_elm.find(':header a').attr('href') + '">' + search_elm.find(':header a').text() + "</a></li>").append('<li><a data-rel="dialog" data-theme="b"  data-icon="grid" href="' + $('#cn-psnb > :header').find('a').attr('href') + '">' + $('#cn-psnb > :header').find('a').text() + "</a></li>");
 				$('#cn-site-title').after($('<div data-role="navbar" data-iconpos="right"></div>').append(_list));
 				// transform the footer into mobile nav bar
-				links = $('#cn-sft-inner a').attr("data-theme", "b");
+				links = $('#cn-sft-inner #cn-ft-tctr a, #cn-sft-inner .col-head a').attr("data-theme", "b");
 				footer1 = $('<div data-role="navbar"><ul></ul></div>');
 				ul = footer1.children();
 				links.each(function () {
@@ -161,7 +160,8 @@
 						ul.append($('<li/>').append(this));
 					}
 				});
-				$('#cn-foot').replaceWith(footer1.children().after(footer2).end());
+				//$('#cn-foot').replaceWith(footer1.children().after(footer2).end());
+                                $('#cn-foot').replaceWith(footer1.children().end());
 				// jquery mobile has loaded
 				$(document).on("mobileinit", function () {
 					//$.mobile.loadingMessage = false;
@@ -428,7 +428,7 @@
 				 *       returns "/aboutcanada-ausujetcanada/hist/menu-eng.html"
 				 */
 				removehash: function () {
-					return this.source.replace(/#([A-Za-z0-9-_]+)/, "");
+					return this.source.replace(/#([A-Za-z0-9-_=&]+)/, "");
 				}
 			};
 		},
