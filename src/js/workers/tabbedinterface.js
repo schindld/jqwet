@@ -70,7 +70,8 @@
 				carousel : (/style-carousel/i.test(elm.attr('class'))) ? true : false,
 				autoPlay : (elm.hasClass("auto-play") ? true : false),
 				animate : (elm.hasClass("animate") || elm.hasClass("animate-slow") || elm.hasClass("animate-fast") ? true : false),
-				animationSpeed : (elm.hasClass("animate-slow") ? "slow" : (elm.hasClass("animate-fast") ? "fast" : "normal"))
+				animationSpeed : (elm.hasClass("animate-slow") ? "slow" : (elm.hasClass("animate-fast") ? "fast" : "normal")),
+				updateHash : false
 			};
 			$nav = elm.find(".tabs");
 			$tabs = $nav.find("li > a");
@@ -97,31 +98,40 @@
 				$(this).attr("aria-selected", "true");
 				return $("#" + $(this).attr("href").substring(1)).attr("aria-hidden", "false");
 			});
-			if (!$.browser['mozilla']) {
-				$nav.find("li a").bind("focus", function () {
-					return $(this).click();
-				});
-				$nav.find("li a").keyup(function (e) {
-					if (e.keyCode === 13 || e.keyCode === 32) {
-						var $current = $panels.filter(function () {
-								return $(this).is("." + opts.tabActiveClass);
-							});
-						$current.attr("tabindex", "0");
-						if (e.stopPropagation) {
-							e.stopImmediatePropagation();
-						} else {
-							e.cancelBubble = true;
-						}
-						return setTimeout(function () {
-							return $current.focus();
-						}, 0);
+			$nav.find("li a").bind("focus", function () {
+				$panels.stop(true, true);
+				$(this).click();
+			});
+			$nav.find("li a").keyup(function (e) {
+				if (e.keyCode === 13 || e.keyCode === 32) {
+					var $current = $panels.filter(function () {
+							return $(this).is("." + opts.tabActiveClass);
+						});
+					$current.attr("tabindex", "0");
+					if (e.stopPropagation) {
+						e.stopImmediatePropagation();
+					} else {
+						e.cancelBubble = true;
 					}
-				});
-			}
+					return setTimeout(function () {
+						return $current.focus();
+					}, 0);
+				}
+			});
+			elm.keyup(function (e) {
+				if (e.which === 37) { // left
+					selectPrev($tabs, $panels, opts, true);
+					e.preventDefault();
+				} else if (e.which === 39) { // right
+					selectNext($tabs, $panels, opts, true);
+					e.preventDefault();
+				}
+			});
 			selectPrev = function ($tabs, $panels, opts, keepFocus) {
 				var $current,
 					$prev,
 					cycleButton;
+				$panels.stop(true, true);
 				$current = $tabs.filter(function () {
 					return $(this).is("." + opts.tabActiveClass);
 				});
@@ -147,6 +157,7 @@
 				var $current,
 					$next,
 					cycleButton;
+				$panels.stop(true, true);
 				$current = $tabs.filter(function () {
 					return $(this).is("." + opts.tabActiveClass);
 				});
@@ -225,7 +236,7 @@
 				$nav.append($toggleRowPrev.append($toggleButtonPrev));
 				// lets the user jump to the previous tab by clicking on the PREV button
 				$toggleButtonPrev.click(function () {
-					selectPrev($tabs, $panels, opts);
+					selectPrev($tabs, $panels, opts, true);
 				});
 				//
 				//End PREV button
@@ -241,15 +252,9 @@
 				$nav.append($toggleRowNext.append($toggleButtonNext));
 				// lets the user jump to the next tab by clicking on the NEXT button
 				$toggleButtonNext.click(function () {
-					selectNext($tabs, $panels, opts);
+					selectNext($tabs, $panels, opts, true);
 				});
 				//End animation
-				elm.keydown(function (e) {
-					if (e.which === 37 || e.which === 39) {
-						selectPrev($tabs, $panels, opts);
-						e.preventDefault();
-					}
-				});
 				//
 				//End NEXT button
 				//
