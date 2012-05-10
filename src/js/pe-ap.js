@@ -144,7 +144,7 @@
 				_list = $('<ul></ul>').hide().append('<li><a data-rel="dialog" data-theme="b" data-icon="search" href="' + search_elm.find(':header a').attr('href') + '">' + search_elm.find(':header a').text() + "</a></li>").append('<li><a data-rel="dialog" data-theme="b"  data-icon="grid" href="' + $('#cn-psnb > :header').find('a').attr('href') + '">' + $('#cn-psnb > :header').find('a').text() + "</a></li>");
 				$('#cn-site-title').after($('<div data-role="navbar" data-iconpos="right"></div>').append(_list));
 				// transform the footer into mobile nav bar
-				links = $('#cn-sft-inner a').attr("data-theme", "b");
+				links = $('#cn-sft-inner #cn-ft-tctr a, #cn-sft-inner .col-head a').attr("data-theme", "b");
 				footer1 = $('<div data-role="navbar"><ul></ul></div>');
 				ul = footer1.children();
 				links.each(function () {
@@ -160,7 +160,8 @@
 						ul.append($('<li/>').append(this));
 					}
 				});
-				$('#cn-foot').replaceWith(footer1.children().after(footer2).end());
+				//$('#cn-foot').replaceWith(footer1.children().after(footer2).end());
+                                $('#cn-foot').replaceWith(footer1.children().end());
 				// jquery mobile has loaded
 				$(document).on("mobileinit", function () {
 					//$.mobile.loadingMessage = false;
