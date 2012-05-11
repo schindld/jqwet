@@ -322,7 +322,7 @@ background-position:-1px 0!important;
 
 .tabs-style-2 .tabs li a.active,.tabs-style-2 .tabs li a:hover, .tabs-style-2 .tabs li a:focus, .tabs-style-2 .tabs li a:active{
     border-bottom-width:0;
-    background-color:#333;
+    background:#333;
     color:#fff;
     padding-top:2px;
 }
@@ -344,6 +344,9 @@ background-position:-1px 0!important;
     border-bottom-width:1px;
     text-decoration:underline !important;
     color:#c00;
+}
+.tabs-style-2  .tabs-toggle a.tabs-prev:focus,.tabs-style-2  .tabs-toggle a.tabs-prev:active ,.tabs-style-2  .tabs-toggle a.tabs-prev:hover,.tabs-style-2  .tabs-toggle a.tabs-next:focus,.tabs-style-2  .tabs-toggle a.tabs-next:active ,.tabs-style-2  .tabs-toggle a.tabs-next:hover {
+	background-position: center 5px;
 }
 
 .embedded-grid,.embedded-grid .tabs-panel{
