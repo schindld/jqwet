@@ -5,6 +5,7 @@
 /*
  * Template for WET-BOEW v3.x plugins
  */
+/*global jQuery: false, pe: false*/
 (function ($) {
 	var _pe = window.pe || {
 		fn: {}
@@ -17,7 +18,6 @@
 		// Don't include a mobile function if your plugin shouldn't run in mobile mode.
 		mobile: function (elm) {
 			// If applicaple, convert html elements and attributes into the format that jQuery mobile expects.
-			
 			return elm;
 		},
 		_exec: function (elm) {
@@ -40,7 +40,6 @@
 				animationSpeed: (elm.hasClass("animate-slow") ? "slow" : (elm.hasClass("animate-fast") ? "fast" : "normal"))
 			};
 			// Do plugin stuff here...
-			
 			return elm;
 		} // end of exec
 	};
