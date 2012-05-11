@@ -61,7 +61,7 @@
 		 * @returns {void}
 		 */
 		_init: function () {
-			var mb_dialogue, sub, search_elm, s_dialogue, _list, links, footer1, footer2, ul, pefile, exclude;
+			var mb_dialogue, sub, search_elm, s_dialogue, _list, links, footer1, footer2, ul, pefile, exclude, $lch3;
 			// determine if this file is minified
 			pefile = pe.url(document.getElementById('progressive').src).file;
 			pe.suffix = pefile.substr(pefile.length - 7) === "-min.js" ? "-min" : "";
@@ -86,8 +86,13 @@
 					// we have a submenu
 					sub = '<h2>' + $('#cn-left-col').find(':header').eq(0).html() + '</h2>';
 					sub += '<div data-role="collapsible-set">';
-					sub += $('#cn-left-col .cn-left-col-default').html().replace(/<section>/gi, "<section><div data-role=\"collapsible\">").replace(/<\/section>/gi, "</div></section>");
+					sub += $('#cn-left-col .cn-left-col-default').html().replace(/<section>/gi, "<div data-role=\"collapsible\">").replace(/<\/section>/gi, "</div>");
 
+					$lch3 = $('#cn-left-col h3 + section');
+					if ($lch3.length === 1) {
+						$lch3.wrap('<div data-role=\"collapsible-set\">');
+					}
+					
 					// lets work on the menu shift
 					/** sub = sub.replace(/<ul\b[^>]*"sub-nav"[^>]*>([\s\S]*?)<\/ul>/gmi, function(m, child){
 					var _internal = child;
@@ -109,28 +114,37 @@
 				//mb_dialogue += '<ul data-role="listview" data-inset="true" data-theme=\"a\">';
 				mb_dialogue += '<div data-role=\"collapsible-set\">';
 
-				$('#cn-psnb ul.mb-menu').clone().children().children('div:first-child,h2,h3,h4,section').each(function () {
-					var $this = $(this);
-					if ($this.is('section')) {
-						$this = $this.children('h2,h3,h4').eq(0);
-					}
-					$this.html($this.text());
-					if ($this.is('div')) {
-						mb_dialogue += "<div data-role=\"button\" data-icon=\"arrow-r\" data-corners=\"false\" class=\"top-level" + ($this.parent().is("li:first-child") ? " ui-corner-top" : (($this.parent().is("li:last-child") ? " ui-corner-bottom" : ""))) + "\" data-theme=\"a\">" + $(this).html() + "</div>";
-					} else {
-						$this.parent().find("ul").attr("data-role", "listview");
-						$this.parent().find(".mb-sm div > a,.mb-sm h2,.mb-sm h3,.mb-sm h4").each(function () {
-							var $this_sub = $(this), $this_sub_parent = $this_sub.parent();
-							if ($this_sub_parent.is('div')) {
-								$this_sub_parent.html($this_sub_parent.text());
-								$this_sub_parent.attr('data-role', 'button').attr('data-icon', 'arrow-r').attr('data-corners', 'false').attr('data-theme', 'a').addClass('top-level' + ($this.parent().is("li:first-child") ? " ui-corner-top" : (($this.parent().is("li:last-child") ? " ui-corner-bottom" : ""))));
-							} else if ($this_sub_parent.is('section')) {
-								$this_sub.html($this_sub.text());
-								$this_sub_parent.html("<div data-role=\"collapsible\" data-theme=\"a\">" + $this_sub_parent.html() + "</div>");
-							}
-						});
-						mb_dialogue += "<div data-role=\"collapsible\" data-theme=\"a\">" + $this.parent().html() + "</div>";
-					}
+				$('#cn-psnb ul.mb-menu').clone().each(function () {
+					$(this).find('div[class^=span]').each(function () {
+						$(this).replaceWith($(this).html());
+					});
+					$(this).find('.mb-sm').each(function () {
+						$(this).html('<div data-role=\"collapsible-set\">' + $(this).html() + '</div)');
+					});
+					$(this).children().children('div:first-child,h2,h3,h4,section').each(function () {
+						var $this = $(this);
+						if ($this.is('section')) {
+							$this = $this.children('h2,h3,h4').eq(0);
+						}
+						$this.html($this.text());
+						if ($this.is('div')) {
+							mb_dialogue += "<div data-role=\"button\" data-icon=\"arrow-r\" data-corners=\"false\" class=\"top-level" + ($this.parent().is("li:first-child") ? " ui-corner-top" : (($this.parent().is("li:last-child") ? " ui-corner-bottom" : ""))) + "\" data-theme=\"a\">" + $(this).html() + "</div>";
+						} else {
+							$this.parent().find("ul").attr("data-role", "listview");
+							$this.parent().find(".mb-sm div > a,.mb-sm h2,.mb-sm h3,.mb-sm h4").each(function () {
+								var $this_sub = $(this), $this_sub_parent = $this_sub.parent();
+								if ($this_sub_parent.is('div')) {
+									$this_sub_parent.html($this_sub_parent.text());
+									$this_sub_parent.attr('data-role', 'button').attr('data-icon', 'arrow-r').attr('data-corners', 'false').attr('data-theme', 'a').addClass('top-level' + ($this.parent().is("li:first-child") ? " ui-corner-top" : (($this.parent().is("li:last-child") ? " ui-corner-bottom" : ""))));
+								} else if ($this_sub_parent.is('section')) {
+									$this_sub.html($this_sub.text());
+									$this_sub_parent.wrap("<div data-role=\"collapsible\" data-theme=\"a\">");
+									$this_sub_parent.parent().html($this_sub_parent.html());
+								}
+							});
+							mb_dialogue += "<div data-role=\"collapsible\" data-theme=\"a\">" + $this.parent().html() + "</div>";
+						}
+					});
 				});
 				mb_dialogue += '</div>';
 				//mb_dialogue += '</ul>';
@@ -204,17 +218,6 @@
 			}
 			// add the css
 			pe.add.css(pe.add.liblocation + 'css/pe-ap' + (pe.ie < 9 && pe.ie > 0 ? "-ie" : "") + pe.suffix + '.css');
-
-			/** Fixes focus issues with anchors in some browsers **/
-			//Move the focus to the anchored element on page load
-			exclude = ":not(a[href], input, button, textarea)";
-			if (window.location.hash) {
-				$("#" + (window.location.hash).slice(1) + exclude).attr("tabindex", "-1").focus();
-			}
-			//Move the focus to the anchored element on selecting a link to in page anchor
-			$("a[href^='#']").click(function () {
-				$("#" + $(this).attr("href").slice(1) + exclude).attr("tabindex", "-1").focus();
-			});
 		},
 		/**
 		 * @namespace pe.depends

@@ -541,9 +541,9 @@
         text-align:left;
     }
 
-    #jqmobile-wet-boew-menubar .ui-content ul.ui-listview {
+   /* #jqmobile-wet-boew-menubar .ui-content ul.ui-listview {
         margin-bottom:20px;
-    }
+    }*/
 
     #jqmobile-wet-boew-menubar .ui-li{
         border-width:1px 1px 0 1px;
