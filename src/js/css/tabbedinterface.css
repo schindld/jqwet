@@ -18,6 +18,9 @@
     -webkit-border-radius:2px 2px 0 0;
     border-radius:2px 2px 0 0;
 }
+.ie7 .tabs li{
+	display:inline;
+}
 
 .tabs li a{
 	background:url(../images/tabs/gradient.png) repeat-x 0 0;
@@ -462,6 +465,10 @@ background-position:-1px 0!important;
 .tabs-style-3 li.tabs-toggle{
     width:auto;
 }
+.ie7 .tabs-style-3 li.tabs-toggle{
+    width:2em;
+	margin-right:3px;
+}
 
 .tabs-style-3 .tabs li.tabs-toggle a{
     float:right;
@@ -501,6 +508,9 @@ background-position:-1px 0!important;
 
 .tabs-style-4 .tabs li.tabs-toggle {
     display:inline-block;
+}
+.ie7 .tabs-style-4 .tabs li.tabs-toggle {
+    display:inline;
 }
 
 .tabs-style-4 .tabs li a {
@@ -596,6 +606,9 @@ background-position:-1px 0!important;
 
 .tabs-style-5 .tabs li.tabs-toggle{
     display:inline-block!important;
+}
+.ie7 .tabs-style-5 .tabs li.tabs-toggle{
+    display:inline!important;
 }
 
 .tabs-style-5 .tabs li.tabs-toggle a{
