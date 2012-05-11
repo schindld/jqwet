@@ -278,7 +278,7 @@
 
     // Find panel with `id` matching value
     plugin.matchInPanel = function(hash) {
-      return ( hash ? plugin.panels.filter(':has(' + hash + ')').first() : [] );
+      return ( hash.length > 1 ? plugin.panels.filter(':has(' + hash + ')').first() : [] );
     };
 
     // Select matching tab when URL hash changes
