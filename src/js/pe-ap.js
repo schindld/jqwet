@@ -87,12 +87,7 @@
 					sub = '<h2>' + $('#cn-left-col').find(':header').eq(0).html() + '</h2>';
 					sub += '<div data-role="collapsible-set">';
 					sub += $('#cn-left-col .cn-left-col-default').html().replace(/<section>/gi, "<div data-role=\"collapsible\">").replace(/<\/section>/gi, "</div>");
-
-					$lch3 = $('#cn-left-col h3 + section');
-					if ($lch3.length === 1) {
-						$lch3.wrap('<div data-role=\"collapsible-set\">');
-					}
-					
+				
 					// lets work on the menu shift
 					/** sub = sub.replace(/<ul\b[^>]*"sub-nav"[^>]*>([\s\S]*?)<\/ul>/gmi, function(m, child){
 					var _internal = child;
