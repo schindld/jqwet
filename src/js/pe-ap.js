@@ -61,10 +61,10 @@
 		 * @returns {void}
 		 */
 		_init: function () {
-			var mb_dialogue, sub, search_elm, s_dialogue, _list, links, footer1, footer2, ul;
+			var mb_dialogue, sub, search_elm, s_dialogue, _list, links, footer1, footer2, ul, pefile, exclude;
 			// determine if this file is minified
-			file = pe.url(document.getElementById('progressive').src).file;
-			pe.suffix = file.substr(file.length - 7) === "-min.js" ? "-min" : "";
+			pefile = pe.url(document.getElementById('progressive').src).file;
+			pe.suffix = pefile.substr(pefile.length - 7) === "-min.js" ? "-min" : "";
 			// get the localization files
 			pe.add.language(pe.language);
 			// add polyfills if nessecary;
@@ -204,6 +204,17 @@
 			}
 			// add the css
 			pe.add.css(pe.add.liblocation + 'css/pe-ap' + (pe.ie < 9 && pe.ie > 0 ? "-ie" : "") + pe.suffix + '.css');
+
+			/** Fixes focus issues with anchors in some browsers **/
+			//Move the focus to the anchored element on page load
+			exclude = ":not(a[href], input, button, textarea)";
+			if (window.location.hash) {
+				$("#" + (window.location.hash).slice(1) + exclude).attr("tabindex", "-1").focus();
+			}
+			//Move the focus to the anchored element on selecting a link to in page anchor
+			$("a[href^='#']").click(function () {
+				$("#" + $(this).attr("href").slice(1) + exclude).attr("tabindex", "-1").focus();
+			});
 		},
 		/**
 		 * @namespace pe.depends
