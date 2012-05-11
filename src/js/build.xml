@@ -24,10 +24,6 @@
 		<copy todir="${build.dir}">  
 			<resources>
 				<fileset dir="${src.dir}">
-<<<<<<< HEAD
-=======
-					<include name="i18n/**"/>
->>>>>>> 8c75b8a50e15c253f4e005205e4306afc3dd3a83
 					<include name="images/**"/>
 					<include name="dependencies/**"/> 
 					<include name="polyfills/**"/>
