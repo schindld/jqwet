@@ -5,6 +5,7 @@
 /*
  * Tabbed interface plugin
  */
+/*global jQuery: false, pe: false*/
 (function ($) {
 	var _pe = window.pe || {
 		fn : {}
@@ -25,7 +26,7 @@
 			$panels = elm.find(".tabs-panel").children();
 			// Create the accordion structure to move the content to.
 			$accordion = $('<div data-role="collapsible-set"/>');
-			for (i = 0; i < $tabs.length; i++) {
+			for (i = 0; i < $tabs.length; i += 1) {
 				$collapsible = $('<div data-role="collapsible" data-theme="b" data-content-theme="b"/>');
 				$collapsible.append('<h1>' + $tabs.eq(i).text() + '</h1>');
 				$collapsible.append($panels.eq(i).html());
@@ -185,10 +186,9 @@
 					cycle($tabs, $panels, opts);
 					$toggleButton.removeClass(start["class"]).addClass(stop["class"]).html(stop.text + "<span class='cn-invisible'>" + stop["hidden-text"] + "</span>").attr("aria-pressed", true);
 					return $(".cn-invisible", $toggleButton).text(stop["hidden-text"]);
-				} else {
-					if ($toggleRow.data("state") === "started") {
-						return stopCycle();
-					}
+				}
+				if ($toggleRow.data("state") === "started") {
+					return stopCycle();
 				}
 			};
 			if (opts.autoHeight) {
@@ -325,4 +325,4 @@
 	window.pe = _pe;
 	return _pe;
 }
-	(jQuery));
+(jQuery));
