@@ -5,6 +5,7 @@
 /*
  * Chart  functionality WET
  */
+/*global jQuery: false*/
 (function ($) {
     var _pe = window.pe || {
         fn: {}
@@ -46,4 +47,4 @@
     };
     window.pe = _pe;
     return _pe;
-})(jQuery);
+}(jQuery));

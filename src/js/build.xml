@@ -14,6 +14,7 @@
 	<target name = "-minify" depends="build-js, build-css">
 		<yui-compressor warn="false" munge="true" preserveAllSemiColons="false" fromDir="${build.dir}/premin" toDir="${build.dir}">
 			<include name="*.*" />
+			<include name="i18n/*.*" />
 			<include name="css/*.*" />
 		</yui-compressor>
 		<delete dir="${build.dir}/premin"/>
@@ -23,13 +24,19 @@
 		<copy todir="${build.dir}">  
 			<resources>
 				<fileset dir="${src.dir}">
-					<include name="i18n/**"/>
 					<include name="images/**"/>
 					<include name="dependencies/**"/> 
 					<include name="polyfills/**"/>
 					<include name="jquery.mobile/**"/>
 					<include name="*.js"/>
 					<exclude name="pe-ap.js"/> 
+				</fileset>
+			</resources>  
+		</copy>
+		<copy todir="${build.dir}/premin">  
+			<resources>
+				<fileset dir="${src.dir}">
+					<include name="i18n/**"/>
 				</fileset>
 			</resources>  
 		</copy>

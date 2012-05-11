@@ -5,6 +5,7 @@
 /*
  * Floating toolbar
  */
+/*global jQuery: false, pe: false*/
 (function ($) {
     var _pe = window.pe || {
         fn: {}
@@ -35,4 +36,4 @@
     };
     window.pe = $.extend(true, window.pe, _pe);
     return window.pe;
-})(jQuery);
+}(jQuery));

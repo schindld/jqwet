@@ -10,6 +10,7 @@
 /*
  * pe, a progressive javascript library agnostic framework
  */
+/*global ResizeEvents: false, jQuery: false, wet_boew_properties: false, file: false*/
 (function ($) {
 	var pe, _pe;
 	/**
@@ -27,6 +28,7 @@
 		 * @type {string} Page language, defaults to fra if not available
 		 */
 		language: ($("html").attr("lang") ? ($("html").attr("lang").indexOf("en") === 0 ? "eng" : "fra") : $("meta[name='dc.language'], meta[name='dcterms.language']").attr("content")),
+		suffix: "",
 		/**
 		 * Detects the doctype of the document (loosely)
 		 * @function
@@ -59,7 +61,10 @@
 		 * @returns {void}
 		 */
 		_init: function () {
-			var mb_dialogue, sub, search_elm, s_dialogue, _list, links, footer1, footer2, ul, file, suffix;
+			var mb_dialogue, sub, search_elm, s_dialogue, _list, links, footer1, footer2, ul;
+			// determine if this file is minified
+			file = pe.url(document.getElementById('progressive').src).file;
+			pe.suffix = file.substr(file.length - 7) === "-min.js" ? "-min" : "";
 			// get the localization files
 			pe.add.language(pe.language);
 			// add polyfills if nessecary;
@@ -76,13 +81,13 @@
 				//mb_dialogue.append($('<div data-role="header"></div>').append($('#cn-psnb > :header').clone()));
 				mb_dialogue += '<div data-role="content" data-inset="true">';
 				mb_dialogue += '<p id="jqm-mb-location-text"></p>';
-                                
-                                if ($('#cn-left-col').length > 0) {
+
+				if ($('#cn-left-col').length > 0) {
 					// we have a submenu
 					sub = '<h2>' + $('#cn-left-col').find(':header').eq(0).html() + '</h2>';
-					sub += '<div data-role="collapsible-set">'
+					sub += '<div data-role="collapsible-set">';
 					sub += $('#cn-left-col .cn-left-col-default').html().replace(/<section>/gi, "<section><div data-role=\"collapsible\">").replace(/<\/section>/gi, "</div></section>");
-                                        
+
 					// lets work on the menu shift
 					/** sub = sub.replace(/<ul\b[^>]*"sub-nav"[^>]*>([\s\S]*?)<\/ul>/gmi, function(m, child){
 					var _internal = child;
@@ -91,33 +96,34 @@
 					});
 					 **/
 					sub = sub.replace(/<h(.*?)>\s*<a/gmi, "<h$1><a class=\"ui-link\" data-icon=\"arrow-r\" data-theme=\"b\"");
-					sub = sub.replace(/<ul(.*?)>/gi, "<ul data-role=\"listview\"$1>").replace(/<\/ul>/gi,"</ul>");
-					sub = sub.replace (/<div class=\"top-level\"/gmi, "<div data-role=\"button\" data-icon=\"arrow-r\" class=\"top-level\"")
+					sub = sub.replace(/<ul(.*?)>/gi, "<ul data-role=\"listview\"$1>").replace(/<\/ul>/gi, "</ul>");
+					sub = sub.replace(/<div class=\"top-level\"/gmi, "<div data-role=\"button\" data-icon=\"arrow-r\" class=\"top-level\"");
 
 					//sub = sub.replace(/<\/a>\s+<ul(.*?)>(.*?)<\/ul>/gmi, "</a><div data-role=\"navbar\">$2</div>");
 					//console.log(sub);
-					sub += '</div>'
+					sub += '</div>';
 					mb_dialogue += sub;
 				}
-                                
-                                mb_dialogue += '<h2>' + $('#cn-psnb').find(':header').eq(0).html() + '</h2>';
+
+				mb_dialogue += '<h2>' + $('#cn-psnb').find(':header').eq(0).html() + '</h2>';
 				//mb_dialogue += '<ul data-role="listview" data-inset="true" data-theme=\"a\">';
 				mb_dialogue += '<div data-role=\"collapsible-set\">';
-                                
+
 				$('#cn-psnb ul.mb-menu').clone().children().children('div:first-child,h2,h3,h4,section').each(function () {
 					var $this = $(this);
-					if ($this.is('section')) {$this = $this.children('h2,h3,h4').eq(0);}				
+					if ($this.is('section')) {
+						$this = $this.children('h2,h3,h4').eq(0);
+					}
 					$this.html($this.text());
 					if ($this.is('div')) {
-						mb_dialogue += "<div data-role=\"button\" data-icon=\"arrow-r\" data-corners=\"false\" class=\"top-level" + ($this.parent().is("li:first-child") ? " ui-corner-top":(($this.parent().is("li:last-child") ? " ui-corner-bottom":""))) + "\" data-theme=\"a\">" + $(this).html() + "</div>";
+						mb_dialogue += "<div data-role=\"button\" data-icon=\"arrow-r\" data-corners=\"false\" class=\"top-level" + ($this.parent().is("li:first-child") ? " ui-corner-top" : (($this.parent().is("li:last-child") ? " ui-corner-bottom" : ""))) + "\" data-theme=\"a\">" + $(this).html() + "</div>";
 					} else {
 						$this.parent().find("ul").attr("data-role", "listview");
 						$this.parent().find(".mb-sm div > a,.mb-sm h2,.mb-sm h3,.mb-sm h4").each(function () {
-							var $this_sub = $(this);
-							var $this_sub_parent = $this_sub.parent();
+							var $this_sub = $(this), $this_sub_parent = $this_sub.parent();
 							if ($this_sub_parent.is('div')) {
 								$this_sub_parent.html($this_sub_parent.text());
-								$this_sub_parent.attr('data-role','button').attr('data-icon','arrow-r').attr('data-corners','false').attr('data-theme','a').addClass('top-level' + ($this.parent().is("li:first-child") ? " ui-corner-top":(($this.parent().is("li:last-child") ? " ui-corner-bottom":""))));
+								$this_sub_parent.attr('data-role', 'button').attr('data-icon', 'arrow-r').attr('data-corners', 'false').attr('data-theme', 'a').addClass('top-level' + ($this.parent().is("li:first-child") ? " ui-corner-top" : (($this.parent().is("li:last-child") ? " ui-corner-bottom" : ""))));
 							} else if ($this_sub_parent.is('section')) {
 								$this_sub.html($this_sub.text());
 								$this_sub_parent.html("<div data-role=\"collapsible\" data-theme=\"a\">" + $this_sub_parent.html() + "</div>");
@@ -128,7 +134,7 @@
 				});
 				mb_dialogue += '</div>';
 				//mb_dialogue += '</ul>';
-				
+
 				mb_dialogue += '</div></div>';
 				pe.pagecontainer().append(mb_dialogue);
 				$('#cn-psnb-inner').remove();
@@ -161,7 +167,7 @@
 					}
 				});
 				//$('#cn-foot').replaceWith(footer1.children().after(footer2).end());
-                                $('#cn-foot').replaceWith(footer1.children().end());
+				$('#cn-foot').replaceWith(footer1.children().end());
 				// jquery mobile has loaded
 				$(document).on("mobileinit", function () {
 					//$.mobile.loadingMessage = false;
@@ -197,10 +203,7 @@
 				});
 			}
 			// add the css
-			file = pe.url(document.getElementById('progressive').src).file;
-			suffix = file.substr(file.length - 7) === "-min.js" ? "-min" : "";
-			suffix = (pe.ie < 9 && pe.ie > 0 ? "-ie" : "") + suffix;
-			pe.add.css(pe.add.liblocation + 'css/pe-ap' + suffix + '.css');
+			pe.add.css(pe.add.liblocation + 'css/pe-ap' + (pe.ie < 9 && pe.ie > 0 ? "-ie" : "") + pe.suffix + '.css');
 		},
 		/**
 		 * @namespace pe.depends
@@ -242,7 +245,7 @@
 				// lets bind a scan function to the drones property
 				$(document).on('wet-boew-dependency-loaded', function () {
 					var i, d;
-					for (i = 0, d = pe.depends.on.length; i < d; i++) {
+					for (i = 0, d = pe.depends.on.length; i < d; i += 1) {
 						pe.depends.on[i](i);
 					}
 				});
@@ -361,7 +364,7 @@
 					var key, ret, s, seg, _i, _len;
 					ret = {};
 					seg = a.search.replace(/^\?/, '').split('&');
-					for (_i = 0, _len = seg.length; _i < _len; _i++) {
+					for (_i = 0, _len = seg.length; _i < _len; _i += 1) {
 						key = seg[_i];
 						if (key) {
 							s = key.split('=');
@@ -571,25 +574,20 @@
 			convert: function (d) {
 				if (d.constructor === Date) {
 					return d;
-				} else {
-					if (d.constructor === Array) {
-						return new Date(d[0], d[1], d[2]);
-					} else {
-						if (d.constructor === Number) {
-							return new Date(d);
-						} else {
-							if (d.constructor === String) {
-								return new Date(d);
-							} else {
-								if (typeof d === "object") {
-									return new Date(d.year, d.month, d.date);
-								} else {
-									return NaN;
-								}
-							}
-						}
-					}
 				}
+				if (d.constructor === Array) {
+					return new Date(d[0], d[1], d[2]);
+				}
+				if (d.constructor === Number) {
+					return new Date(d);
+				}
+				if (d.constructor === String) {
+					return new Date(d);
+				}
+				if (typeof d === "object") {
+					return new Date(d.year, d.month, d.date);
+				}
+				return NaN;
 			},
 			/**
 			 * Compares two dates (input can be any type supported by the convert function). NOTE: This function uses pe.date.isFinite, and the code inside isFinite does an assignment (=).
@@ -607,9 +605,8 @@
 			compare: function (a, b) {
 				if (isFinite(a = this.convert(a).valueOf()) && isFinite(b = this.convert(b).valueOf())) {
 					return (a > b) - (a < b);
-				} else {
-					return NaN;
 				}
+				return NaN;
 			},
 			/**
 			 * Checks if date in d is between dates in start and end. NOTE: This function uses pe.date.isFinite, and the code inside isFinite does an assignment (=).
@@ -623,9 +620,8 @@
 			in_range: function (d, start, end) {
 				if (isFinite(d = this.convert(d).valueOf()) && isFinite(start = this.convert(start).valueOf()) && isFinite(end = this.convert(end).valueOf())) {
 					return start <= d && d <= end;
-				} else {
-					return NaN;
 				}
+				return NaN;
 			},
 			/**
 			 * Cross-browser safe way of translating a date to iso format
@@ -645,9 +641,8 @@
 				date = this.convert(d);
 				if (timepresent) {
 					return date.getFullYear() + "-" + pe.string.pad(date.getMonth() + 1, 2, "0") + "-" + pe.string.pad(date.getDate(), 2, "0") + " " + pe.string.pad(date.getHours(), 2, "0") + ":" + pe.string.pad(date.getMinutes(), 2, "0");
-				} else {
-					return date.getFullYear() + "-" + pe.string.pad(date.getMonth() + 1, 2, "0") + "-" + pe.string.pad(date.getDate(), 2, "0");
 				}
+				return date.getFullYear() + "-" + pe.string.pad(date.getMonth() + 1, 2, "0") + "-" + pe.string.pad(date.getDate(), 2, "0");
 			}
 		},
 		/**
@@ -820,7 +815,7 @@
 				 * @return {void}
 				 */
 				language: function (lang) {
-					var url = pe.add.liblocation + "i18n/" + lang.substring(0, 2) + ".js";
+					var url = pe.add.liblocation + "i18n/" + lang.substring(0, 2) + pe.suffix + ".js";
 					pe.add._load(url);
 				},
 				/**
@@ -834,7 +829,7 @@
 				js: function (js, fn) {
 					var i;
 					js = pe.add.depends(js); // lets translate this to an array
-					for (i = 0; i < js.length; i++) {
+					for (i = 0; i < js.length; i += 1) {
 						if (!pe.depends.is(js[i])) {
 							pe.add._load(js[i]);
 						}
@@ -842,7 +837,7 @@
 					// now create the binding for dependencies
 					pe.depends.on[pe.depends.on.length] = function (index) {
 						var execute = true;
-						for (i = 0; i < js.length; i++) {
+						for (i = 0; i < js.length; i += 1) {
 							if (!pe.depends.is(js[i])) {
 								execute = false;
 							}
@@ -903,7 +898,7 @@
 			// globals
 			if (settings) {
 				// loop throught globals adding functions
-				for (i = 0; i < settings.globals.length; i++) {
+				for (i = 0; i < settings.globals.length; i += 1) {
 					pe._execute(pe.fn[settings.globals[i]], document);
 				}
 			}

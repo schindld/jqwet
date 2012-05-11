@@ -33,7 +33,7 @@
     background:#fff;
     position:relative;
     top:1px;
-    border:solid 1px #cccc;
+    border:solid 1px #ccc;
     border-bottom:none;
 }
 
@@ -718,7 +718,7 @@ background-position:-1px 0!important;
 
 .tabs-style-6 .tabs-roller{
     background-color:#FFF;
-    opacity:0.1px;
+    opacity:0.1;
     filter:alpha(opacity=10);
     right:20px;
 }

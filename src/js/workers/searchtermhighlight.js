@@ -5,60 +5,62 @@
 /*
  * Search term highlighting functionality 
  */
+/*global jQuery: false, pe: false, dictionary: false*/
 (function ($) {
-    var _pe = window.pe || {
-        fn: {}
-    }; /* local reference */
-    _pe.fn.searchtermhighlight = {
-        type: 'plugin',
-        _exec: function (elm) {
-            var $this = $(elm),
-            settings = {
-                 termlength : pe.parameter('minlength',$this) || 3,
-                 passed: pe.url(document.location).param || ""
-                };
-            //console.log('minlength :: ' + pe.parameter('minlength',$this));
-            // console.log('limit :: ' + pe.parameter('limit',$this));
-            //  console.log('unknown :: ' + pe.parameter('unknown',$this));
-            //var dictionary = {
-            //    label: (PE.language == "eng") ? 'Search for term(s):' : 'Recherche de terme(s):',
-            //    noMatch: (PE.language == "eng") ? 'No match found' : 'Aucune correspondance trouvée',
-            //    oneMatch: (PE.language == "eng") ? '1 match found' : '1 correspondance trouvée',
-            //    multiMatch: (PE.language == "eng") ? ' matches found' : ' correspondances trouvées'
-            //}
-            var terms = (typeof passed === "string" ) ? settings.passed : settings.passed.terms ;
-            form = $('<form class="wet-boew-termSearch"><label for="term">' + pe.dic.get('%search-for-terms') + '</label> <input type="text" id="term" name="term" value="' + terms + '" role="textbox" aria-multiline="false" />&#160;<span class="matches-found" role="status" aria-live="polite" aria-relevant="additions text"></span></form>');
-            $elm.before(form);
-            // Event handling
-            form.on("change keypress click", "input", function (event) {
-                setTimeout(function () {
-                    var terms = $(event.delegateTarget).find("input[type=text]").attr("value");
-                    var target = $(event.delegateTarget).next();
-                    if (terms.length >= settings.minLength) {
-                        clearHighlightedTerms(target);
-                        highlightTerms(terms, target, settings);
-                    } else {
-                        clearHighlightedTerms(target);
-                    }
-                }, 50);
-            })
-            //Prevents the form from submitting
-            form.submit(function () {
-                return false;
-            });
-            $elm.bind("searchComplete", function (event, matchesCount) {
-                var message;
-                if (matchesCount < 1) {
-                    message = dictionary.noMatch
-                } else if (matchesCount === 1) {
-                    message = dictionary.oneMatch
-                } else {
-                    message = matchesCount + dictionary.multiMatch
-                }
-                $(event.target).prev().find(".matches-found").text(message);
-            });
-            //Initialize with query parameter
-            if (terms.length >= settings.minLength) highlightTerms(terms, $(this), settings);
+	var _pe = window.pe || {
+		fn: {}
+	}; /* local reference */
+	_pe.fn.searchtermhighlight = {
+		type: 'plugin',
+		_exec: function (elm) {
+			var terms, target, form, $this = $(elm), settings = {
+				termlength : pe.parameter('minlength', $this) || 3,
+				passed: pe.url(document.location).param || ""
+			};
+			//console.log('minlength :: ' + pe.parameter('minlength',$this));
+			// console.log('limit :: ' + pe.parameter('limit',$this));
+			//  console.log('unknown :: ' + pe.parameter('unknown',$this));
+			//var dictionary = {
+			//    label: (PE.language == "eng") ? 'Search for term(s):' : 'Recherche de terme(s):',
+			//    noMatch: (PE.language == "eng") ? 'No match found' : 'Aucune correspondance trouvée',
+			//    oneMatch: (PE.language == "eng") ? '1 match found' : '1 correspondance trouvée',
+			//    multiMatch: (PE.language == "eng") ? ' matches found' : ' correspondances trouvées'
+			//}
+			terms = (typeof settings.passed === "string") ? settings.passed : settings.passed.terms;
+			form = $('<form class="wet-boew-termSearch"><label for="term">' + pe.dic.get('%search-for-terms') + '</label> <input type="text" id="term" name="term" value="' + terms + '" role="textbox" aria-multiline="false" />&#160;<span class="matches-found" role="status" aria-live="polite" aria-relevant="additions text"></span></form>');
+			$this.before(form);
+			// Event handling
+			form.on("change keypress click", "input", function (event) {
+				setTimeout(function () {
+					terms = $(event.delegateTarget).find("input[type=text]").attr("value");
+					target = $(event.delegateTarget).next();
+					if (terms.length >= settings.minLength) {
+						clearHighlightedTerms(target);
+						highlightTerms(terms, target, settings);
+					} else {
+						clearHighlightedTerms(target);
+					}
+				}, 50);
+			});
+			//Prevents the form from submitting
+			form.submit(function () {
+				return false;
+			});
+			$this.bind("searchComplete", function (event, matchesCount) {
+				var message;
+				if (matchesCount < 1) {
+					message = dictionary.noMatch;
+				} else if (matchesCount === 1) {
+					message = dictionary.oneMatch;
+				} else {
+					message = matchesCount + dictionary.multiMatch;
+				}
+				$(event.target).prev().find(".matches-found").text(message);
+			});
+			//Initialize with query parameter
+			if (terms.length >= settings.minLength) {
+				highlightTerms(terms, $(this), settings);
+			}
 /*
 * highlightTerms
 *
@@ -73,33 +75,33 @@
 *
 */
 
-            function highlightTerms(searchTerms, target, settings) {
-                var matches = 0;
-                var searchTerms = searchTerms.replace(/^\s+|\s+$/g, '');
-                searchTerms = searchTerms.replace(/\|+/g, ''); // don't let them use the | symbol
-                // --------------------------------------------------------------------------------------------
-                // Split the data into an array so that we can exclude anything smaller than the minimum length
-                var arrTerms = searchTerms.split(' ');
-                if (arrTerms.length > 0) {
-                    var searchTerms = '';
-                    for (i = 0; i < arrTerms.length; i++) {
-                        if (arrTerms[i].length >= settings.minLength) {
-                            searchTerms += arrTerms[i] + " ";
-                        }
-                    }
-                    searchTerms = searchTerms.replace(/^\s+|\s+$|\"|\(|\)/g, '');
-                }
-                searchTerms = searchTerms.replace(/\s+/g, '|'); // OR each value
-                searchTerms = "(?=([^>]*<))([\\s'])?(" + searchTerms + ")(?!>)"; // Make sure that we're not checking for terms within a tag; only the text outside of tags.
-                // --------------------------------------------------------------------------------------------
-                var newText = target.html().replace(new RegExp(searchTerms, "gi"), function (match, grp1, grp2, grp3) {
-                    matches++;
-                    return grp2 + '<span class="wet-boew-highlight-term">' + grp3 + '</span>';
-                });
-                target.trigger("searchComplete", [matches])
-                target.html(newText);
-                return null;
-            }; // end of highlightTerms
+			function highlightTerms(searchTerms, target, settings) {
+				var arrTerms, newText, i, matches = 0;
+				searchTerms = searchTerms.replace(/^\s+|\s+$/g, '');
+				searchTerms = searchTerms.replace(/\|+/g, ''); // don't let them use the | symbol
+				// --------------------------------------------------------------------------------------------
+				// Split the data into an array so that we can exclude anything smaller than the minimum length
+				arrTerms = searchTerms.split(' ');
+				if (arrTerms.length > 0) {
+					searchTerms = '';
+					for (i = 0; i < arrTerms.length; i += 1) {
+						if (arrTerms[i].length >= settings.minLength) {
+							searchTerms += arrTerms[i] + " ";
+						}
+					}
+					searchTerms = searchTerms.replace(/^\s+|\s+$|\"|\(|\)/g, '');
+				}
+				searchTerms = searchTerms.replace(/\s+/g, '|'); // OR each value
+				searchTerms = "(?=([^>]*<))([\\s'])?(" + searchTerms + ")(?!>)"; // Make sure that we're not checking for terms within a tag; only the text outside of tags.
+				// --------------------------------------------------------------------------------------------
+				newText = target.html().replace(new RegExp(searchTerms, "gi"), function (match, grp1, grp2, grp3) {
+					matches += 1;
+					return grp2 + '<span class="wet-boew-highlight-term">' + grp3 + '</span>';
+				});
+				target.trigger("searchComplete", [matches]);
+				target.html(newText);
+				return null;
+			} // end of highlightTerms
 /*
 * clearHighlightedTerms
 *
@@ -110,16 +112,16 @@
 *
 */
 
-            function clearHighlightedTerms(target) {
-                target.find('span.wet-boew-highlight-term').each(function () {
-                    var text = $(this).text();
-                    $(this).replaceWith(text);
-                });
-                target.prev().find(".matches-found").text("");
-            }; // end of clearHighlightedTerms
-            return this;
-        } // end of exec
-    };
-    window.pe = _pe;
-    return _pe;
-})(jQuery);
+			function clearHighlightedTerms(target) {
+				target.find('span.wet-boew-highlight-term').each(function () {
+					var text = $(this).text();
+					$(this).replaceWith(text);
+				});
+				target.prev().find(".matches-found").text("");
+			} // end of clearHighlightedTerms
+			return this;
+		} // end of exec
+	};
+	window.pe = _pe;
+	return _pe;
+}(jQuery));

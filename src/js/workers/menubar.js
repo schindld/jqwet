@@ -5,6 +5,7 @@
  /*
   * Menu bar plugin
   */
+/*global jQuery: false, pe:false */
 (function ($) {
 	var _pe = window.pe || {
 		fn : {}
@@ -305,7 +306,7 @@
 								match = true;
 								break;
 							}
-							i++;
+							i += 1;
 						}
 					}
 					if (!match) {

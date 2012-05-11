@@ -5,6 +5,7 @@
 /*
 ----- Dictionary (il8n) ---
  */
+/*global jQuery: false, pe: false */
 (function ($) {
 	var _pe = window.pe || {
 		fn : {}
@@ -15,12 +16,12 @@
 				(typeof state === "string" && state !== "") << 1 | // eg. 000 or 010 ie. 0 or 2
 				(typeof mixin === "string" && mixin !== "") << 2; // eg. 000 or 100 ie. 0 or 4
 			switch (truthiness) {
-			case 1: // only key was provided.
-				return this.ind[key];
-			case 3: // key and state were provided.
-				return this.ind[key][state];
-			case 7: // key, state, and mixin were provided.
-				return this.ind[key][state].replace('[MIXIN]', mixin);
+			case 1:
+				return this.ind[key]; // only key was provided.
+			case 3:
+				return this.ind[key][state]; // key and state were provided.
+			case 7:
+				return this.ind[key][state].replace('[MIXIN]', mixin); // key, state, and mixin were provided.
 			default:
 				return "";
 			}
